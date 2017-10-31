@@ -16,9 +16,19 @@ This is my first blog entry I wil briefly outline the progress I have made thus 
 
 I have completed most of my functional specification, with only some diagrams left to be done.
 Furthermore these are some additional comments on my progress:
-  - I have set up my virtual development environment, by depoyin a dell server running ESXi 6.5
-  - On it I have depolyed a Windows 2016 Server running Web Services
+  - I have set up my virtual development environment, by depoyin a dell server running ESXi 6.5.
+  - On it I have depolyed a Windows 2016 Server running Web Services.
   - Remote VPN access has been set up to the server over a Juniper Networks SRX300 Firewall. 
-  - I have been regularly eeting with my supervisor each week
+  - I have been regularly meting with my supervisor each week.
   - Currently I have migrated to using trello as a project planning and Scrum Development Platform.
 ![trello](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/trello.png)
+
+
+### Application UI Designed (31/10/17)
+
+  - I have completed the design of the responsive Web-UI.  
+  - The Functional Specification has been submitted.
+  - I am meeting with my supervisor on a weekly basis. 
+  - I deployed the Andular front-end platform to the web-server.
+  - ![sytem-design](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/ui.png)
+    
