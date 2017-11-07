@@ -32,3 +32,8 @@ Furthermore these are some additional comments on my progress:
   - I deployed the Andular front-end platform to the web-server.
   - ![sytem-design](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/ui.png)
     
+### Website Deployment (31/10/17)
+  - I have deployed an Angular webite on the server.
+  - The login and registration screens have been created.
+  - The site-to-site VPN connection between Agile Networks and my local network have been built.
+  - ![vpn](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/vpn.png)
