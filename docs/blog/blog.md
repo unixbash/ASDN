@@ -36,4 +36,4 @@ Furthermore these are some additional comments on my progress:
   - I have deployed an Angular webite on the server.
   - The login and registration screens have been created.
   - The site-to-site VPN connection between Agile Networks and my local network have been built.
-  - ![vpn](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/vpn.png)
+  - ![vpn](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/VPN.png)
