@@ -37,3 +37,9 @@ Furthermore these are some additional comments on my progress:
   - The login and registration screens have been created.
   - The site-to-site VPN connection between Agile Networks and my local network have been built.
   - ![vpn](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/VPN.png)
+
+### Website Development (20/11/17)
+  - The website has been mostly developed.
+  - It has been developed using Angular 4, Bootstrap and many other dependencies. 
+  - As it is still in development, the compiled version of it has not been pushed to GitHub. 
+  - ![vpn](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/build.png)
