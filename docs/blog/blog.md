@@ -43,3 +43,9 @@ Furthermore these are some additional comments on my progress:
   - It has been developed using Angular 4, Bootstrap and many other dependencies. 
   - As it is still in development, the compiled version of it has not been pushed to GitHub. 
   - ![vpn](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/build.png)
+
+### Reconfiguring the test network (12/12/17)
+  - I have had to reconfigure the VPN connection to the test network, as it would not allow some types of traffic through.
+  - I have also expanded the lab to include devices from different networks. 
+  - The automated VPN build script had to be changed to accomodate the above changes. 
+  - ![vpn](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/net.jpg)
