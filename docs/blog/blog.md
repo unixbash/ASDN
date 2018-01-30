@@ -42,5 +42,17 @@ Furthermore these are some additional comments on my progress:
   - The website has been mostly developed.
   - It has been developed using Angular 4, Bootstrap and many other dependencies. 
   - As it is still in development, the compiled version of it has not been pushed to GitHub. 
-  -![net](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/build.png)
+![net](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/build.png)
+
+### Reconfiguring the test network (12/12/17)
+  - I have had to reconfigure the VPN connection to the test network, as it would not allow some types of traffic through.
+  - I have also expanded the lab to include devices from different networks. 
+  - The automated VPN build script had to be changed to accomodate the above changes. 
+![vpn](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/net.jpg)
+
+### Website Testing (30/01/18)
+  - The website front-end is mostly complete.
+  - I have deployed and used the sonarqube test server, and ran some code coverage and unit tests. 
+  - Only the final version of website design has been pushed to Git. 
+![sonar](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/sonar.png)
 
