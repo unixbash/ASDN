@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background: url("/assets/background.png") no-repeat center center fixed;
+    background-size: cover;
+}
+
+[hidden] { display: none !important;}
+
+.nopadding {
+    padding: 0 !important;
+}
+
+.nomargin {
+    margin: 0 !important; 
+}
+
+input, .input-group-addon {
+    border-radius: 0 !important;
+}
+
+.fa {
+    color: #2e6da4;
+}
+
+.text-centered{
+    text-align: center;
+}
+
+.centered {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.white {
+    color: white;
+}
