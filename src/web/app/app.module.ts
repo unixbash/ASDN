@@ -19,10 +19,10 @@ import { LoadedRouterConfig } from '@angular/router/src/config';
 import { AlertModule } from 'ngx-bootstrap';
 
 const appRoutes:Routes = [
-  {path:'', component:UserComponent},
+  {path:'', redirectTo:'/login', pathMatch:'full'},
+  {path:'login', component:LoginComponent, data: { title: 'ASDN - Login' }},
   {path:'dashboard', component:DashboardComponent, data: { title: 'ASDN - Dashboard' }},
-  {path:'account', component:AccountComponent, data: { title: 'ASDN - Account' }},
-  {path:'login', component:LoginComponent}
+  {path:'account', component:AccountComponent, data: { title: 'ASDN - Account' }}
 ];
 
 @NgModule({
@@ -38,16 +38,10 @@ const appRoutes:Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot([
-      {
-        path:'',
-        component: LoginComponent
-      },
-      {
-      path:'dashboard',
-      component: DashboardComponent
-      }
-    ])
+    RouterModule.forRoot(
+      appRoutes,
+      {enableTracing:true}
+    )
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

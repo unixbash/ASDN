@@ -10,9 +10,8 @@
   display: inline-block;
 }
 
-.top-bar {
-  background-color: #00bcd4;
-  height: 10px;
+.fa {
+  color: #2e6da4;
 }
 
 .mission-stetement {
