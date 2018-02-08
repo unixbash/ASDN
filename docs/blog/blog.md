@@ -56,3 +56,8 @@ Furthermore these are some additional comments on my progress:
   - Only the final version of website design has been pushed to Git. 
 ![sonar](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/sonar.png)
 
+### Core Application Development and Testing (08/02/18)
+  - I have changed the platform architecture to run on Tomcat, using Maven as well as Swagger.
+  - Integration between the database, front end and is done in Java (using Spring).
+  - This process will allow for data to be passed between Angular and Spring (where they are turned into Java Classes).
+![swagger](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/swagger.png)
