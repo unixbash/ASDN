@@ -1,54 +1,14 @@
-# My Project Title
+# ASDN - Automated Software Defined Networking
 
-This is a template for CA400 projects.  Please read these instructions carefully.
+## Introduction
 
-This file is written in
-[markdown](https://guides.github.com/features/mastering-markdown/).  Markdown
-is a suitable format for documents stored in git repositories.
-
-## Instructions
-
-You *must* do the following:
-
-1 - Fork this repo.
-
-2 - Rename your fork using the format (all lower case letters)
-
-    2018-ca400-username
-
-replacing `username` with your School of Computing login name.
-
-For example, if Stephen Blott were to be doing a fourth-year project, he would rename
-his repo as:
-
- 2018-ca400-sblott
-
-You can rename your repo by selecting *Edit Project* from the drop-down menu
-(with a gear icon) on the top right of your project's home page.  Change the
-*Project name* field **and** the *Path*.
-
-You should also update the *Project description*.
-
-3 - This directory has two sub-directories.
-
-- All of your source code should be placed in the `src` sub-directory.
-
-- All of your documentation should be placed in the `docs` sub-directory.
-
-- Your project blog should be placed in the `blog` sub-directory. 
+The project being developed is a network automation platform which will initially aid and eventually replace network engineers in configuring and making changes on a live network. This will subsequently reduce operating costs as well as the possibility of human introduced errors. The devices this platform will communicate with include, but are not limited to switches, routers and firewalls. These are not consumer, but industry grade networking appliances, ranging from thousands to hundreds of thousands of euro in value.
 
 
-4 - There is further important documentation in the `docs` directory.  Read that next.
+## Code Samples
 
-When you are have followed all of these instructions and are sure that you
-understand what is expected, you may replace the contents of this file with a
-brief description of your project (two or three paragraphs).
+> You've gotten their attention in the introduction, now show a few code examples. So they get a visualization and as a bonus, make them copy/paste friendly.
 
-## Additional Resources
+## Installation
 
-- Git [cheat sheet](https://gitlab.computing.dcu.ie/sblott/local-gitlab-documentation/blob/master/cheat-sheet.md)
-- Gitlab [CI environment](https://gitlab.computing.dcu.ie/sblott/docker-ci-environment) and it's [available software](https://gitlab.computing.dcu.ie/sblott/docker-ci-environment/blob/master/Dockerfile)
-- Example projects with CI configured:
-   * [Python](https://gitlab.computing.dcu.ie/sblott/test-project-python)
-   * [Java](https://gitlab.computing.dcu.ie/sblott/test-project-java)
-   * [MySql](https://gitlab.computing.dcu.ie/sblott/test-project-mysql)
+> The installation instructions are low priority in the readme and should come at the bottom. The first part answers all their objections and now that they want to use it, show them how.
