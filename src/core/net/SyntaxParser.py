@@ -1,36 +1,39 @@
 from comms.Communication import send_command
-from lxml import etree
-from xml.etree.ElementTree import ElementTree
+from utility.util import *
 
-def getRootNode(commandOutput):
+import json
+
+def getNode(term, initialString):
+    commandOutput = send_command(term, initialString)
     leafs = []
-    for leaf in commandOutput.splitlines():
+    parsedOutput = commandOutput.splitlines()
+    for leaf in parsedOutput:
         if not ("show" in leaf or "Possible" in leaf):
             leafs.append(leaf.strip().split(" ")[0].rstrip())
-            if('^' in leaf or "asdn" in leaf):
+            #Check if valid
+            if ('<[Enter]>' in leaf or "|" in leaf):
+                leafs.pop()
+                leafs.remove('')
+
+            #Check if complete
+            if('^' in leaf or ">" in leaf):
                 leafs.pop()
                 leafs.remove('')
                 return leafs
 
 def parseDeviceSyntax(term, initialString):
 
-    searchCommand = "show "
-    helper = " | display xml"
-    commandOutput = send_command(term, initialString)
-    leafs = getRootNode(commandOutput)
+    data = {}
+    list_append(data, expandList(term, initialString, data))
 
-    #Generate the XML structure
-    root = etree.Element('root')
-    tree = ElementTree(root)
+    # Generate the JSON structure
+    with open('structure.txt', 'w') as outfile:
+        json_data = json.dump(data, outfile)
 
-    # pretty string
-    s = etree.tostring(root, pretty_print=True)
+#Recursive function --> parsing the entire device operational hierarchy
+def expandList(term, initialString, data):
+    leafs = list(filter(None, getNode(term, initialString + " ?")))
 
-    for leaf in leafs:
-        comand = searchCommand + leaf + " ?"
-        # node = getRootNode(send_command(term,comand)).encode("utf-8")
-        root.append(etree.Element(leaf))
-
-    #s = etree.tostring(root, pretty_print=True)
-    tree.write(open('person.xml', 'wb'))
-    #print(s)
+    if (len(leafs) > 0):
+        for leaf in leafs:
+            return expandList(term, initialString + " " + leaf, data)

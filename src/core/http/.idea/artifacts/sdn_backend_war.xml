@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="sdn-backend:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="sdn-backend-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="sdn-backend:war exploded" />
-    </root>
-  </artifact>
-</component>

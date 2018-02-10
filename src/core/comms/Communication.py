@@ -1,7 +1,5 @@
-import pymysql
 import time
 import paramiko
-import xmltodict
 
 def checkConsoleConnection(conAddr,conUsr,pwd):
     try:
