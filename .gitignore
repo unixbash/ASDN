@@ -2,3 +2,6 @@
 
 # Ignore java .class files.
 *.class
+
+#Ignore pycache directories
+__pycache__

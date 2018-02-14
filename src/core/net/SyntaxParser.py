@@ -1,8 +1,21 @@
 from comms.Communication import send_command
-from utility.util import *
+from net.DictionaryNester import generateStructure
+from utility.LinkedList import *
 
-import json
+#Command class
+class Command:
+    index = 0
+    value = ""
 
+    def __init__(self, index, value):
+        self.index = index
+        self.value = value
+
+#Global Variables
+data = []
+commandTree = UnorderedList()
+
+#Gets formatted output from the device
 def getNode(term, initialString):
     commandOutput = send_command(term, initialString)
     leafs = []
@@ -11,29 +24,42 @@ def getNode(term, initialString):
         if not ("show" in leaf or "Possible" in leaf):
             leafs.append(leaf.strip().split(" ")[0].rstrip())
             #Check if valid
-            if ('<[Enter]>' in leaf or "|" in leaf):
-                leafs.pop()
-                leafs.remove('')
+            if ('<[Enter]>' in leaf
+                    or "|" in leaf
+                    or '^' in leaf
+                    or 'syntax' in leaf):
+                if(leafs):
+                    leafs.pop()
 
             #Check if complete
-            if('^' in leaf or ">" in leaf):
-                leafs.pop()
-                leafs.remove('')
+            if(">" in leaf):
+                if (leafs):
+                    leafs.pop()
                 return leafs
+
+#Start the tree generation process
+def startTree(term, initialString):
+    leafs = list(filter(None, getNode(term, initialString + " ?")))
+
+    for i in range(len(leafs)):
+        makeTree(term, Command(i, initialString + " " + leafs[i]))
+
+def makeTree(term, command):
+    leafs = list(filter(None, getNode(term, command.value + " ?")))
+
+    if len(leafs) < 1:
+        return command
+    else:
+        for i in range(len(leafs)):
+            newCommand = makeTree(term, Command(i, command.value + " " + leafs[i]))
+            commandTree.add(newCommand)
+            data.append(newCommand.value)
+
+        commandTree.clear()
+        return command
+
 
 def parseDeviceSyntax(term, initialString):
 
-    data = {}
-    list_append(data, expandList(term, initialString, data))
-
-    # Generate the JSON structure
-    with open('structure.txt', 'w') as outfile:
-        json_data = json.dump(data, outfile)
-
-#Recursive function --> parsing the entire device operational hierarchy
-def expandList(term, initialString, data):
-    leafs = list(filter(None, getNode(term, initialString + " ?")))
-
-    if (len(leafs) > 0):
-        for leaf in leafs:
-            return expandList(term, initialString + " " + leaf, data)
+    startTree(term, initialString)
+    generateStructure(data)

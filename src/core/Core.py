@@ -1,5 +1,5 @@
-from net.SyntaxParser import *
 from comms.Communication import *
+from net.SyntaxParser import parseDeviceSyntax
 
 hostname = "10.10.10.110"
 username = "asdn"
@@ -13,3 +13,6 @@ initialString = "show"
 parseDeviceSyntax(term,initialString)
 
 closeConnection(ssh)
+
+#tree = getJSON()
+print("done")
