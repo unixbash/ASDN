@@ -1,6 +1,7 @@
 from comms.Communication import send_command
 from net.DictionaryNester import generateStructure
 from utility.LinkedList import *
+from utility.Util import isAscii
 
 #Command class
 class Command:
@@ -21,15 +22,17 @@ def getNode(term, initialString):
     leafs = []
     parsedOutput = commandOutput.splitlines()
     for leaf in parsedOutput:
-        if not ("show" in leaf or "Possible" in leaf):
+        if not ("?" in leaf
+                or "Possible" in leaf
+                or "|" in leaf
+                or '^' in leaf
+                or '<' in leaf
+                or 'syntax' in leaf
+                or 'missing' in leaf
+                or 'valid' in leaf
+                or not isAscii(leaf)
+                or len(leaf) < 1):
             leafs.append(leaf.strip().split(" ")[0].rstrip())
-            #Check if valid
-            if ('<[Enter]>' in leaf
-                    or "|" in leaf
-                    or '^' in leaf
-                    or 'syntax' in leaf):
-                if(leafs):
-                    leafs.pop()
 
             #Check if complete
             if(">" in leaf):
@@ -39,12 +42,18 @@ def getNode(term, initialString):
 
 #Start the tree generation process
 def startTree(term, initialString):
-    leafs = list(filter(None, getNode(term, initialString + " ?")))
+    if(initialString==""):
+        helper = "?"
+    else:
+        helper = " ?"
+
+    leafs = list(filter(None, getNode(term, initialString + helper)))
 
     for i in range(len(leafs)):
         makeTree(term, Command(i, initialString + " " + leafs[i]))
 
 def makeTree(term, command):
+    print(command.value)
     leafs = list(filter(None, getNode(term, command.value + " ?")))
 
     if len(leafs) < 1:

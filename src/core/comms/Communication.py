@@ -1,5 +1,6 @@
 import time
 import paramiko
+import xmltodict
 
 def checkConsoleConnection(conAddr,conUsr,pwd):
     try:
@@ -10,6 +11,19 @@ def checkConsoleConnection(conAddr,conUsr,pwd):
         return True
     except:
         return False
+
+def getXML(xml, attr):
+    try:
+        xml = xml.split("<rpc-reply")[1]
+        xml = "<rpc-reply" + xml
+        xml = xml.split("</rpc-reply>")[0]
+        xml += "</rpc-reply>"
+        xmlDict = xmltodict.parse(xml)
+        for elem in xmlDict:
+            return elem[attr]
+    except:
+        return "Parsing error."
+
 
 def send_command(term, cmd):
     term.send(cmd + "\n")
@@ -46,7 +60,10 @@ def establishConnection(hostname, username, password):
 
 def establishShell(ssh):
     term = ssh.invoke_shell()
+    #To allow the program to read all output at once
     send_command(term, "set cli screen-length 0")
+    #To avoid the device cropping the ouptut width, which produces non-standard characters (eg )
+    send_command(term, "set cli screen-width 1024")
     return term
 
 def closeConnection(connection):

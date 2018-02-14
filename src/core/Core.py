@@ -8,7 +8,7 @@ password = "ASDN2018"
 ssh = establishConnection(hostname, username, password)
 term = establishShell(ssh)
 
-initialString = "show"
+initialString = ""
 
 parseDeviceSyntax(term,initialString)
 

@@ -1,3 +1,2 @@
-def list_append(lst, item):
-  lst.append(item)
-  return lst
+def isAscii(text):
+    return all(ord(char) < 128 for char in text)
