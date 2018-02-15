@@ -25,7 +25,7 @@ def getXML(xml, attr):
         return "Parsing error."
 
 
-def send_command(term, cmd):
+def execute_command(term, cmd):
     term.send(cmd + "\n")
     time.sleep(3)
     # bitsize to ensure correct buffer
@@ -34,23 +34,41 @@ def send_command(term, cmd):
     output = output.decode("utf-8")
     return output
 
+def send_command(term, cmd):
+    if (cmd == "" or cmd[-1] == "/"):
+        helper = "?"
+    else:
+        helper = " ?"
+
+    term.send(cmd + helper)
+    time.sleep(1)
+    # bitsize to ensure correct buffer
+    output = term.recv(188388)
+    # Convert byte output to string
+    output = output.decode("utf-8")
+    clearScreen(term)
+    return output
+
+def clearScreen(term):
+    execute_command(term, '\x18')
+
 def waitForTerm(term, timeToWait, promptToWaitFor):
     timesChecked = 1
     ready = False
     while (not ready):
         time.sleep(timeToWait)
-        answer = send_command(term, "")
+        answer = execute_command(term, "")
         print(answer)
         if (promptToWaitFor in answer):
             ready = True
         timesChecked = timesChecked + 1
 
 def waitForLogin(term,pswd):
-    send_command(term, "root")
+    execute_command(term, "root")
     time.sleep(2)
-    send_command(term, pswd)
+    execute_command(term, pswd)
     time.sleep(2)
-    send_command(term, "cli")
+    execute_command(term, "cli")
 
 def establishConnection(hostname, username, password):
     ssh = paramiko.SSHClient()
@@ -61,9 +79,9 @@ def establishConnection(hostname, username, password):
 def establishShell(ssh):
     term = ssh.invoke_shell()
     #To allow the program to read all output at once
-    send_command(term, "set cli screen-length 0")
+    execute_command(term, "set cli screen-length 0")
     #To avoid the device cropping the ouptut width, which produces non-standard characters (eg )
-    send_command(term, "set cli screen-width 1024")
+    execute_command(term, "set cli screen-width 1024")
     return term
 
 def closeConnection(connection):

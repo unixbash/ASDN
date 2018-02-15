@@ -1,19 +1,19 @@
 from comms.Communication import send_command
 from net.DictionaryNester import generateStructure
 from utility.LinkedList import *
-from utility.Util import isAscii
+from utility.Util import *
 
 #Command class
 class Command:
-    index = 0
     value = ""
+    isExecutable = False
 
-    def __init__(self, index, value):
-        self.index = index
+    def __init__(self, value):
         self.value = value
+        self.isExecutable = False
 
 #Global Variables
-data = []
+data = {}
 commandTree = UnorderedList()
 
 #Gets formatted output from the device
@@ -32,37 +32,44 @@ def getNode(term, initialString):
                 or 'valid' in leaf
                 or not isAscii(leaf)
                 or len(leaf) < 1):
-            leafs.append(leaf.strip().split(" ")[0].rstrip())
+                commandValue = leaf.strip().split(" ")[0].rstrip()
+                leafs.append(Command(commandValue))
 
-            #Check if complete
-            if(">" in leaf):
-                if (leafs):
-                    leafs.pop()
-                return leafs
+        if("<[Enter]>" in leaf):
+            setExecutable(initialString)
+
+        #Check if complete
+        if(">" in leaf):
+            if (leafs):
+                leafs.pop()
+            return leafs
+
+def setExecutable(command):
+    currentCommand = data[command]
+    currentCommand.isExecutable = True
+    data[command] = currentCommand
 
 #Start the tree generation process
 def startTree(term, initialString):
-    if(initialString==""):
-        helper = "?"
-    else:
-        helper = " ?"
-
-    leafs = list(filter(None, getNode(term, initialString + helper)))
+    leafs = list(filter(None, getNode(term, initialString)))
 
     for i in range(len(leafs)):
-        makeTree(term, Command(i, initialString + " " + leafs[i]))
+         data[leafs[i].value]=leafs[i]
+         makeTree(term, Command(initialString + " " + leafs[i].value))
 
 def makeTree(term, command):
-    print(command.value)
-    leafs = list(filter(None, getNode(term, command.value + " ?")))
+    leafs = list(filter(None, getNode(term, command.value)))
 
     if len(leafs) < 1:
         return command
     else:
         for i in range(len(leafs)):
-            newCommand = makeTree(term, Command(i, command.value + " " + leafs[i]))
+            currentCommand = Command(command.value + " " + leafs[i].value)
+            data[currentCommand.value]=currentCommand
+            newCommand = makeTree(term, currentCommand)
             commandTree.add(newCommand)
-            data.append(newCommand.value)
+            data[newCommand.value]=newCommand
+            print(newCommand.value + ": " + str(newCommand.isExecutable))
 
         commandTree.clear()
         return command
@@ -71,4 +78,4 @@ def makeTree(term, command):
 def parseDeviceSyntax(term, initialString):
 
     startTree(term, initialString)
-    generateStructure(data)
+    generateStructure(dictToList(data))
