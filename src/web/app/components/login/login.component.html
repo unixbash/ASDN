@@ -25,14 +25,15 @@
 					</div>
 			</div>
 
+			<!--LOGIN-->
 			<div [hidden]="!showlogin" class="main-center">  	
-				<form class="form-horizontal" method="post" action="#">
+				<form class="form-horizontal" id="login-form">
 					
 					<div class="form-group">
 						<label for="email" class="control-label white">Email</label>
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-								<input type="email" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+								<input type="email" class="form-control" name="loginEmail" id="loginEmail" placeholder="Enter your Email"/>
 							</div>
 					</div>
 
@@ -40,7 +41,7 @@
 						<label for="password" class="control-label white">Password</label>
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-								<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+								<input type="password" class="form-control" name="logiPwd" id="loginPwd" placeholder="Enter your Password"/>
 							</div>
 					</div>
 
@@ -49,8 +50,8 @@
 					</div>
 
 					<div class="restrict">
-							<button routerLink="/dashboard" type="button" class="btn btn-primary btn-lg btn-block login-button centered">Login</button>
-					</div>
+							<button type="submmit" class="btn btn-primary btn-lg btn-block login-button centered">Login</button>
+						</div>
 
 					<div class="row text-centered">
 						<a class="white" href="#" data-toggle="modal" data-target="#login-modal">Forgot Password</a>
@@ -59,8 +60,9 @@
 				</form>
 			</div>
 
+			<!--REGISTER-->
 			<div [hidden]="!showRegister" class="main-center">  
-				<form class="form-horizontal" method="post" action="#">
+				<form class="form-horizontal" id="register-form">
 					
 					<div class="form-group">
 						<label for="name" class="control-label white">First Name</label>				

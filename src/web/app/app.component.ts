@@ -1,10 +1,22 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+@Component({
+  selector: 'app-nav',
+  templateUrl: './components/nav/nav.component.html',
+  styleUrls: ['./components/nav/nav.component.css']
+})
+
 export class AppComponent {
   title = 'ASDN';
+  greeting = {};
+  constructor(private http: HttpClient) {
+    http.get('resource').subscribe(data => this.greeting = data);
+  }
 }

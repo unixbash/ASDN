@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { UserService } from '../../services/user-service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +14,21 @@ export class LoginComponent implements OnInit {
   public showRegister = false;
   public loginColor = "#337ab7";
   public registerColor = "#00bcd4";
+  public user:User;
 
-  constructor() { }
+  constructor(private userService:UserService) { }
+
+  
+  loginUser(loginEmail:string, loginPassword:string) {
+    User user = new User;
+    
+    this.userService.getUser(email)
+    .subscribe(
+      user => {
+        this.user = user
+      });
+      err => console.log(err);
+  }
 
   ngOnInit() {}
 

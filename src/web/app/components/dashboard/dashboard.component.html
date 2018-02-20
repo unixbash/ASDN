@@ -1,48 +1,6 @@
 <div class="dashboard-container fill">
 
-    <div class="col-md-2 col-xs-3 dashboard-nav fill">
-        <div class="row">
-            <a href="/dashboard"><img class="col-sm-12 logo" src="/assets/asdn.png" alt="logo"></a>    
-        </div>
-
-        <hr class="row col-xs-12">
-
-        <div class="clearfix"></div>
-
-        <div class="row top-nav">
-            <nav class="navbar" role="navigation">
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a class="white" href="#"><i class="fa fa-tachometer fa" aria-hidden="true"></i> DASHBOARD</a>
-                        </li>
-                        <li>
-                            <a class="white" href="#"><i class="fa fa-sitemap fa" aria-hidden="true"></i> NETWORK</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-
-        <div class="row bottom-nav col-xs-12 nopadding">
-            <nav class="navbar" role="navigation">
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                    <li class="">
-                        <a class="white" href="#"> <i class="fa fa-question-circle-o fa" aria-hidden="true"></i> HELP</a>
-                    </li>
-                    <li>
-                        <a class="white" href="#"> <i class="fa fa-user fa" aria-hidden="true"></i> ACCOUNT</a>
-                    </li>
-                    <li class="">
-                        <a class="white" href="#"> <i class="fa fa-gear fa" aria-hidden="true"></i> SETTINGS</a>
-                    </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-
-    </div>
+    <app-nav></app-nav>
 
     <div class="col-md-10 col-xs-9 dashboard-screen">
         
@@ -54,7 +12,10 @@
                         <h3>Device Availability</h3>
                     </div>
                     <div class="row">
-                        <div id="chart_div"></div>
+                        <div id="siteOne"></div>
+                    </div>
+                    <div class="row">
+                        <div id="siteTwo"></div>
                     </div>
                 </div>
 

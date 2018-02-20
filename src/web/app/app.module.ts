@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -17,6 +18,8 @@ import { Component } from '@angular/core/src/metadata/directives';
 import { LoadedRouterConfig } from '@angular/router/src/config';
 
 import { AlertModule } from 'ngx-bootstrap';
+import { UserService } from './services/user-service';
+import { NavComponent } from './components/nav/nav.component';
 
 const appRoutes:Routes = [
   {path:'', redirectTo:'/login', pathMatch:'full'},
@@ -32,18 +35,20 @@ const appRoutes:Routes = [
     NetworkComponent,
     LoginComponent,
     DashboardComponent,
-    AccountComponent
+    AccountComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
       {enableTracing:true}
     )
   ],
-  providers: [DataService],
+  providers: [DataService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
