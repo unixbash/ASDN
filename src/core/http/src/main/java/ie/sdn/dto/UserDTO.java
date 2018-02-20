@@ -4,6 +4,8 @@ public class UserDTO {
 
     private String id;
     private String name;
+    private String pwd;
+    private String role;
 
     public UserDTO() {
     }
@@ -22,5 +24,22 @@ public class UserDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

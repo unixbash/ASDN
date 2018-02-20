@@ -1,7 +1,11 @@
-# Add files names (and patterns) you want git to ignore here.
-
-# Ignore java .class files.
+# Compiled class file
 *.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
 
 #Ignore pycache and .idea directories
 __pycache__
