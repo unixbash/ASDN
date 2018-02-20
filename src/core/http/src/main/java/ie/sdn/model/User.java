@@ -12,6 +12,12 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 
+
+/*
+* SecConfig
+* BackendAuthProvider
+* AuthObj
+* */
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
@@ -20,15 +26,23 @@ public class User implements UserDetails {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private String id;
+
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "email", nullable = false)
+    private String email;
+
     @Column(name = "pwd", nullable = false)
     private String pwd;
+
     @Column(name = "role", nullable = false)
     private String role;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
@@ -117,5 +131,13 @@ public class User implements UserDetails {
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -29,6 +29,20 @@ public class UserController {
         return userRepository.findAll();
     }
 
+    @PostMapping(value = "/login")
+    @ResponseBody
+    public UserDTO loginUser(Authentication auth) {
+        if (auth.isAuthenticated()) {
+            String email = (String) auth.getDetails();
+            User user = userRepository.findByEmail(email);
+            UserDTO userDTO = new UserDTO();
+            userDTO.setEmail(email);
+            return userDTO;
+        }
+
+        return null;
+    }
+
     @GetMapping(value = "/{id}")
     @ResponseBody
     public UserDTO getUser(@PathVariable String id, Authentication auth) {
@@ -80,7 +94,7 @@ public class UserController {
     public UserDTO deleteUser(@PathVariable String id) {
         User user = userRepository.findById(id);
         //update the flag as delete or outright delte with .delete(user)
-        userRepository.save(user);
+        userRepository.delete(user);
         return null;
     }
 

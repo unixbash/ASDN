@@ -4,11 +4,11 @@ public class UserDTO {
 
     private String id;
     private String name;
+    private String email;
     private String pwd;
     private String role;
 
-    public UserDTO() {
-    }
+    public UserDTO() {}
 
     public String getId() {
         return id;
@@ -26,7 +26,6 @@ public class UserDTO {
         this.name = name;
     }
 
-
     public String getPwd() {
         return pwd;
     }
@@ -41,5 +40,13 @@ public class UserDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
