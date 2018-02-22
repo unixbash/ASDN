@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService:UserService) { }
 
-  
+  /*
   loginUser(loginEmail:string, loginPassword:string) {
     User user = new User;
-    
+
     this.userService.getUser(email)
     .subscribe(
       user => {
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       });
       err => console.log(err);
   }
-
+  */
   ngOnInit() {}
 
   showLoginBtn() {

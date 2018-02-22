@@ -43,3 +43,11 @@ input, .input-group-addon {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 }
+
+input[type=password] {
+    height: 34px !important;
+}
+
+a:hover, a:active, a:visited, a:after, a:link, a:focus {
+    text-decoration: none !important;
+}

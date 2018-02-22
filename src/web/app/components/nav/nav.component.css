@@ -1,6 +1,9 @@
 /*--- Navigation ---*/
 .dashboard-nav {
     background-color: #607d8b;
+    position: fixed;
+    top: 0;
+    widows: 100%;
 }
 
 .logo {

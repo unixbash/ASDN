@@ -20,12 +20,17 @@ import { LoadedRouterConfig } from '@angular/router/src/config';
 import { AlertModule } from 'ngx-bootstrap';
 import { UserService } from './services/user-service';
 import { NavComponent } from './components/nav/nav.component';
+import { HelpComponent } from './components/help/help.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 const appRoutes:Routes = [
   {path:'', redirectTo:'/login', pathMatch:'full'},
   {path:'login', component:LoginComponent, data: { title: 'ASDN - Login' }},
   {path:'dashboard', component:DashboardComponent, data: { title: 'ASDN - Dashboard' }},
-  {path:'account', component:AccountComponent, data: { title: 'ASDN - Account' }}
+  {path:'network', component:NetworkComponent, data: { title: 'ASDN - Network' }},
+  {path:'help', component:HelpComponent, data: { title: 'ASDN - Help' }},
+  {path:'account', component:AccountComponent, data: { title: 'ASDN - Account' }},
+  {path:'settings', component:SettingsComponent, data: { title: 'ASDN - Settings' }}
 ];
 
 @NgModule({
@@ -36,7 +41,9 @@ const appRoutes:Routes = [
     LoginComponent,
     DashboardComponent,
     AccountComponent,
-    NavComponent
+    NavComponent,
+    HelpComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
