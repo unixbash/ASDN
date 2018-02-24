@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
@@ -22,11 +22,13 @@ import { UserService } from './services/user-service';
 import { NavComponent } from './components/nav/nav.component';
 import { HelpComponent } from './components/help/help.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { WizzardComponent } from './components/wizzard/wizzard.component';
 
 const appRoutes:Routes = [
   {path:'', redirectTo:'/login', pathMatch:'full'},
   {path:'login', component:LoginComponent, data: { title: 'ASDN - Login' }},
   {path:'dashboard', component:DashboardComponent, data: { title: 'ASDN - Dashboard' }},
+  {path:'wizzard', component:DashboardComponent, data: { title: 'ASDN - Wizzard' }},
   {path:'network', component:NetworkComponent, data: { title: 'ASDN - Network' }},
   {path:'help', component:HelpComponent, data: { title: 'ASDN - Help' }},
   {path:'account', component:AccountComponent, data: { title: 'ASDN - Account' }},
@@ -43,12 +45,14 @@ const appRoutes:Routes = [
     AccountComponent,
     NavComponent,
     HelpComponent,
-    SettingsComponent
+    SettingsComponent,
+    WizzardComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes,

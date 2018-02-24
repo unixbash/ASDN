@@ -13,10 +13,10 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./components/nav/nav.component.css']
 })
 
-export class AppComponent {
-  title = 'ASDN';
-  greeting = {};
-  constructor(private http: HttpClient) {
-    http.get('resource').subscribe(data => this.greeting = data);
-  }
-}
+@Component({
+  selector: 'app-wizzard',
+  templateUrl: './components/wizzard/wizzard.component.html',
+  styleUrls: ['./components/wizzard/wizzard.component.css']
+})
+
+export class AppComponent {}

@@ -6,11 +6,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./dashboard.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class DashboardComponent implements OnInit {
 
+export class DashboardComponent implements OnInit {
+  
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }
