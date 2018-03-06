@@ -3,17 +3,16 @@ package ie.sdn.controller;
 import ie.sdn.dto.UserDTO;
 import ie.sdn.model.User;
 import ie.sdn.repository.UserRepository;
+//import ie.sdn.service.EmailService;
+import ie.sdn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 
 @Controller
 @RequestMapping("/user")
@@ -23,18 +22,17 @@ public class UserController {
     UserRepository userRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    UserService userService;
 
-    @GetMapping()
-    List<User> getUsers() {
-        return userRepository.findAll();
-    }
 
     @PostMapping(value = "/login")
     @ResponseBody
     public UserDTO loginUser(Authentication auth) {
         if (auth.isAuthenticated()) {
             String email = (String) auth.getDetails();
-            User user = userRepository.findByEmail(email);
+            //User user = userRepository.findByEmail(email);
+
             UserDTO userDTO = new UserDTO();
             userDTO.setEmail(email);
             return userDTO;
@@ -54,7 +52,7 @@ public class UserController {
             userDTO.setName(user.getName());
             return userDTO;
         } else if ("ADMIN".equals(account.getRole())) {
-             User user = getUsers().stream()
+             User user = userService.getUsers().stream()
                     .filter(currentId -> currentId.equals(id))
                     .findAny().orElse(null);
 
@@ -73,6 +71,10 @@ public class UserController {
 
         User user = new User();
         user.setName(userToCreate.getName());
+        //Send confirmation email to the new user
+        user.setEmail(userToCreate.getEmail());
+        //emailService.sendRegEmail(userToCreate.getEmail());
+
         user.setPwd(passwordEncoder.encode(userToCreate.getPwd()));
         user.setRole("USER");
         user = userRepository.save(user);
@@ -97,5 +99,4 @@ public class UserController {
         userRepository.delete(user);
         return null;
     }
-
 }

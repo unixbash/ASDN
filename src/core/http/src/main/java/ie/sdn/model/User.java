@@ -1,15 +1,10 @@
 package ie.sdn.model;
 
-import ie.sdn.service.UserService;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import static org.springframework.security.core.authority.AuthorityUtils.createAuthorityList;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Date;
 
 
@@ -20,7 +15,7 @@ import java.util.Date;
 * */
 @Entity
 @Table(name = "user")
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -30,7 +25,7 @@ public class User implements UserDetails {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "pwd", nullable = false)
@@ -38,6 +33,9 @@ public class User implements UserDetails {
 
     @Column(name = "role", nullable = false)
     private String role;
+
+    @Column(name = "netId", unique = true)
+    private String netId;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -58,6 +56,14 @@ public class User implements UserDetails {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -74,57 +80,6 @@ public class User implements UserDetails {
         this.updatedAt = updatedAt;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return createAuthorityList();
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getPwd() {
         return pwd;
     }
@@ -139,5 +94,21 @@ public class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getNetId() {
+        return netId;
+    }
+
+    public void setNetId(String netId) {
+        this.netId = netId;
     }
 }

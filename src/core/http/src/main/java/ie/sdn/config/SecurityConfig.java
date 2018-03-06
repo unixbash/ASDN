@@ -15,8 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
-@EnableWebSecurity
+
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -31,8 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(GET, "/*").permitAll()
-                .antMatchers(GET, "/user").hasAuthority("ROLE_ADMIN")
+                .antMatchers(GET, "/user/*").access("hasRole('USER') or hasRole('ADMIN')")
+                .and().formLogin().loginPage("/")
+                .usernameParameter("email").passwordParameter("password")
                 .and().httpBasic()
+                .and().exceptionHandling().accessDeniedPage("/acc")
                 .and().csrf().disable();
     }
 
@@ -41,3 +45,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 }
+

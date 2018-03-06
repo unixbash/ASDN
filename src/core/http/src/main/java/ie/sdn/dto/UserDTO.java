@@ -7,6 +7,7 @@ public class UserDTO {
     private String email;
     private String pwd;
     private String role;
+    private String netId;
 
     public UserDTO() {}
 
@@ -49,4 +50,8 @@ public class UserDTO {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getNetId() { return netId; }
+
+    public void setNetId(String netId) { this.netId = netId; }
 }

@@ -24,7 +24,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row activity-container">
                     <hr class="row col-xs-12 top-bar">
                     <div class="row heading text-centered white">
                         <h3>Network Activity</h3>
@@ -40,8 +40,33 @@
                     <div class="row heading text-centered white">
                         <h3>Configuration Changes</h3>
                     </div>
-                    <div class="row">
-
+                    <div class="row config-changes">
+                        <div class="col-xs-2">
+                            <div class="row white text-centered config-heading">
+                                <h3>Select device:</h3>
+                            </div>
+                            <div class="row config-container">
+                                <div *ngFor="let device of devices; let i = index">
+                                    <button class="btn btn-primary btn-lg btn-block btn-device">{{ device.name }}</button> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+                            <div class="row white text-centered config-heading">
+                                <h3>Last version:</h3>
+                            </div>
+                            <div class="row config-container">
+                                <pre>{{oldConfig}}</pre>
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+                            <div class="row white text-centered config-heading">
+                                <h3>Current version:</h3>
+                            </div>
+                            <div class="row config-container">
+                                <pre>{{newConfig}}</pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

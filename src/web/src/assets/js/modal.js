@@ -11,7 +11,3 @@ $(window).on('load',function(){
         $('#ipsecModal').modal('show');
     });
 });
-
-
-
-

@@ -9,9 +9,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @PropertySource("classpath:sdn.properties")
 public class PropertiesConfig {
 
-    public PropertiesConfig() {
-
-    }
+    public PropertiesConfig() { }
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer

@@ -23,6 +23,10 @@ body {
     width: 75%;
 }
 
+.devices-container, .activity-container, .configuration-container{
+    margin-bottom: 50px;
+}
+
 .avail-chart {
     width: 50%;
     height: 300px;
@@ -32,7 +36,28 @@ body {
 
 .activ-chart {
     width: 100%;
-    height: 300px;
     float: left;
     overflow: hidden;
+}
+
+.config-changes {
+    height: 300px;
+}
+
+.config-heading {
+    background-color: #8aa0ab;
+    border: solid 1px lightgray;
+}
+
+.config-container {
+    background-color: white;
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 500px;
+    border: solid 1px lightgray;
+}
+
+.btn-device {
+    border-radius: 0;
+
 }

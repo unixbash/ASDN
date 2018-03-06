@@ -1,4 +1,4 @@
-window.onload  = function() {
+function initCharts() {
   //Check if elements exist
   var check = document.getElementsByName("siteOne");
 
@@ -118,7 +118,7 @@ window.onload  = function() {
       ]);
 
       var options = {
-        hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+        hAxis: {title: 'Month',  titleTextStyle: {color: '#333'}},
         vAxis: {title: 'Mb/s', minValue: 0}
       };
 
@@ -136,7 +136,7 @@ window.onload  = function() {
       ]);
 
       var options = {
-        hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+        hAxis: {title: 'Month',  titleTextStyle: {color: '#333'}},
         vAxis: {title: 'Mb/s', minValue: 0}
       };
 
@@ -146,4 +146,3 @@ window.onload  = function() {
     }
   }
 }
-
