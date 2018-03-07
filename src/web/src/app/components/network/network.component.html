@@ -34,8 +34,14 @@
                         </h4>
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="panel-body">
-                            Test1
+                        <div class="panel-body text-centered">
+                            <span *ngFor="let port of ports; let i = index">
+                                <br *ngIf="i % 8 == 0">
+                                <div class="port-container">
+                                    <img class="device-port" alt="port-{{port.name}}" src="{{port.portStatus}}">
+                                    <p>{{port.name}}</p>
+                                </div>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -84,8 +90,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>

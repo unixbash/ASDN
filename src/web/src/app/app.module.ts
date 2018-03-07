@@ -23,6 +23,9 @@ import { NavComponent } from './components/nav/nav.component';
 import { HelpComponent } from './components/help/help.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { WizzardComponent } from './components/wizzard/wizzard.component';
+import { QuestionService } from './services/question.service';
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
+import { DynamicFormQuestionComponent } from './components/dynamic-form-question/dynamic-form-question.component';
 
 const appRoutes:Routes = [
   {path:'', redirectTo:'/login', pathMatch:'full'},
@@ -32,7 +35,8 @@ const appRoutes:Routes = [
   {path:'network', component:NetworkComponent, data: { title: 'ASDN - Network' }},
   {path:'help', component:HelpComponent, data: { title: 'ASDN - Help' }},
   {path:'account', component:AccountComponent, data: { title: 'ASDN - Account' }},
-  {path:'settings', component:SettingsComponent, data: { title: 'ASDN - Settings' }}
+  {path:'settings', component:SettingsComponent, data: { title: 'ASDN - Settings' }},
+  {path:'forms', component:DynamicFormQuestionComponent, data: { title: 'ASDN - Forms' }}
 ];
 
 @NgModule({
@@ -46,7 +50,9 @@ const appRoutes:Routes = [
     NavComponent,
     HelpComponent,
     SettingsComponent,
-    WizzardComponent
+    WizzardComponent,
+    DynamicFormQuestionComponent,
+    DynamicFormComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +65,7 @@ const appRoutes:Routes = [
       {enableTracing:true}
     )
   ],
-  providers: [DataService, UserService],
+  providers: [DataService, UserService, QuestionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
