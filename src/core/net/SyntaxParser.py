@@ -25,24 +25,30 @@ def getNode(term, initialString):
         if not ("?" in leaf
                 or "Possible" in leaf
                 or "|" in leaf
-                or '^' in leaf
-                or '<' in leaf
                 or 'syntax' in leaf
                 or 'missing' in leaf
                 or 'valid' in leaf
+                or '<' in leaf
                 or not isAscii(leaf)
                 or len(leaf) < 1):
                 commandValue = leaf.strip().split(" ")[0].rstrip()
                 leafs.append(Command(commandValue))
 
+        #Check if the command is executable
         if("<[Enter]>" in leaf):
             setExecutable(initialString)
+            #leafs.pop()
 
-        #Check if complete
-        if(">" in leaf):
-            if (leafs):
-                leafs.pop()
+        #Check if and error is thrown
+        if ('^' in leaf):
+            leafs = []
             return leafs
+
+    #Check if complete
+    if(">" in leaf):
+        if (leafs):
+            leafs.pop()
+        return leafs
 
 def setExecutable(command):
     currentCommand = data[command]
@@ -55,7 +61,7 @@ def startTree(term, initialString):
 
     for i in range(len(leafs)):
          data[leafs[i].value]=leafs[i]
-         makeTree(term, Command(initialString + " " + leafs[i].value))
+         makeTree(term, Command(leafs[i].value))
 
 def makeTree(term, command):
     leafs = list(filter(None, getNode(term, command.value)))

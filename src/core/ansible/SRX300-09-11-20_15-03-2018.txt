@@ -1,0 +1,21 @@
+---
+- name: SRX300-09-11-20_15-03-2018
+hosts: SRX300
+roles: 
+- Juniper.junos
+connection: local
+gather_facts: no
+- name: Checking NETCONF connectivity
+wait_for:
+host: "{{ inventory_hostname }}"
+port: 830
+timeout: 5
+- name: Merge configuration data from a file and commit
+juniper_junos_config:
+load: "merge"
+format: "text"
+src: "build_conf/{{ inventory_hostname }}/junos-config.conf"
+comment: "Automated ASDN Configuration"
+register: response
+- name: Print the response
+debug: /n var: response
