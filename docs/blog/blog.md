@@ -61,3 +61,9 @@ Furthermore these are some additional comments on my progress:
   - Integration between the database, front end and is done in Java (using Spring).
   - This process will allow for data to be passed between Angular and Spring (where they are turned into Java Classes).
 ![swagger](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/swagger.png)
+
+### Core dependency changes (20/03/18)
+  - After extensive research, I have decided to change some of the core dependencies I am using to communicate with the network devices as well as to generate configuration files. Instead of developing my own solution for this problem, I have found a library called [Jinja2](http://jinja.pocoo.org/docs/2.10/), that can be integrated with Ansible. 
+  - I have started doing unit tests on some of the complete modules used for generating the device hierarchy. 
+  - On the server side, I have moved from a Windows Server 2016 VM to a Ubuntu Server VM. There are a number of reasons for the change, some include a much more lightweight and portable OS, increased default security parameters as well as being able to provide more services, such as being an POP3 or SMTP server. 
+  - I have also registered a [domain name](https://asdn.ie) which is secured using an SSL certificate. 
