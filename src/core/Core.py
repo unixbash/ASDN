@@ -1,7 +1,4 @@
-from comms.Communication import *
-from net.SyntaxParser import parseDeviceSyntax
-from net.DictionaryNester import generateStructure
-from net.VpnGenerator import IKE
+from ansible.AnsibleGenerator import addAnsibleHost
 from utility.ConfigFileGenerator import generateConfig
 
 hostname = "10.10.10.110"
@@ -12,9 +9,11 @@ password = "ASDN2018"
 #term = establishShell(ssh)
 
 initialString = "show"
-hosts=["SRX300"]
+hosts=["10.10.10.110"]
 tasks=["checkNetConf", "commitAndConfirm"]
-generateConfig(hosts,tasks )
+#Add Hosts if not present
+addAnsibleHost(hosts)
+generateConfig(hosts,tasks)
 #parseDeviceSyntax(term,initialString)
 #generateStructure(parseDeviceSyntax)
 

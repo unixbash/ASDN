@@ -15,7 +15,7 @@ def readTextFile(fileName):
             result.remove(x)
     return list(filter(None, result));
 
-def writeTextFile(fileName, data):
-    configFile = open(fileName+".txt", "w")
+def writeTextFile(fileName, ext, data):
+    configFile = open(fileName+ext, "w")
     configFile.write(data)
     configFile.close()

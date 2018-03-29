@@ -44,8 +44,8 @@ public class UserController {
     @GetMapping(value = "/{id}")
     @ResponseBody
     public UserDTO getUser(@PathVariable String id, Authentication auth) {
-        final User account = (User) auth.getPrincipal();
-        if (account.getId() == id) {
+        final User account = userRepository.findByEmail(auth.getName());
+        if (account.getId().equals(id)) {
             User user = userRepository.findById(id);
             UserDTO userDTO = new UserDTO();
             userDTO.setId(user.getId());
