@@ -1,0 +1,15 @@
+---
+- hosts: {{host}}
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  tasks:
+    name {{ name }}
+    command {{ command }}
+    register: response
+
+    - name: debug
+      debug:
+        var: response.stdout_lines

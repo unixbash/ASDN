@@ -67,3 +67,10 @@ Furthermore these are some additional comments on my progress:
   - I have started doing unit tests on some of the complete modules used for generating the device hierarchy. 
   - On the server side, I have moved from a Windows Server 2016 VM to a Ubuntu Server VM. There are a number of reasons for the change, some include a much more lightweight and portable OS, increased default security parameters as well as being able to provide more services, such as being an POP3 or SMTP server. 
   - I have also registered a [domain name](https://asdn.ie) which is secured using an SSL certificate. 
+
+### Fixing Ansible Deployment Issues (31/03/18)
+  - After deploying and testing the automation library for Juniper provided by Ansible, I have encountered many know issues and had to fix them during the setup phase. Below are some examples:
+  -- Deploying a Yaml template file results in "[Errno 2] No such file or directory" - this is fixable by editing the $PATH system variable.
+  -- After initially connecting to a device, the following appears "unknown host key", which is resolved by changing the default Ansible configuration file, the error occurs, as no device has a local DNS record available.
+  -- Netconify (a python sub library used by the Juniper Ansible modules) failed, as it was unable to detect a /dev/ttyUSB0 driver, therefore not opening an SSH connection to a device. The fix for this issue took several hours and steps such as rolling back the server VM image to a know good version and downgrading to an older Ansible version, which doesn't require the /dev/ttyUSB0 driver. The developers assumed that every device will have a USB port, however the VM I deployed does not, therefore I found there this was set in the netconify library:
+  ![netconify](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/netconify.png)

@@ -1,17 +1,21 @@
-from comms.Communication import establishConnection, establishShell, closeConnection, execute_command
+import time
+import datetime
+from jinja2 import Environment, FileSystemLoader
 
-def addAnsibleHost(hostNames):
-    hostname = "10.10.10.25"
-    username = "asdn"
-    password = "ASDN2018"
+def generateYaml(device, command):
 
-    ssh = establishConnection(hostname, username, password)
-    term = establishShell(ssh)
+    #Set timestamp
+    ts = time.time()
+    tStamp = datetime.datetime.fromtimestamp(ts).strftime('-%H-%M-%S_%d-%m-%Y')
+    fileName = "ansible/yaml/generated/" + device.hostname + tStamp
 
-    for hostName in hostNames:
-        listOfHosts = execute_command(term, "cat /etc/ansible/hosts")
-        if hostName not in listOfHosts:
-            out = execute_command(term, 'echo \"' + hostName + '\"' + '>>/etc/ansible/hosts')
-            print(out)
+    #Load template
+    env = Environment(loader = FileSystemLoader('ansible/yaml'), trim_blocks=True, lstrip_blocks=True)
+    template = env.get_template('skeleton.yaml')
 
-    closeConnection(ssh)
+    #Render the template
+    f = open(fileName, 'w')
+    f.write(template.render(host=device.hostname,
+                          name=command.commandType+command.commandAction,
+                          command=command.commandAction))
+    f.close()
