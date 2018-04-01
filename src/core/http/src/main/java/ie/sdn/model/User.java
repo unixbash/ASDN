@@ -7,12 +7,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
-
-/*
-* SecConfig
-* BackendAuthProvider
-* AuthObj
-* */
 @Entity
 @Table(name = "user")
 public class User {
@@ -21,6 +15,14 @@ public class User {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private String id;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -34,16 +36,6 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role;
 
-    @Column(name = "netId", unique = true)
-    private String netId;
-
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
-
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
 
     public User() {
     }
@@ -68,16 +60,8 @@ public class User {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public Date getUpdatedAt() {
         return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public String getPwd() {
@@ -104,11 +88,4 @@ public class User {
         this.role = role;
     }
 
-    public String getNetId() {
-        return netId;
-    }
-
-    public void setNetId(String netId) {
-        this.netId = netId;
-    }
 }
