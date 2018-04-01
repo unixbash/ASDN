@@ -19,3 +19,12 @@ def writeTextFile(fileName, ext, data):
     configFile = open(fileName+ext, "w")
     configFile.write(data)
     configFile.close()
+
+def findBetween(str, delimeter):
+    result = ""
+    start = str.index(delimeter)
+    end = str.index(delimeter, start+1)
+
+    for i in range(start+1, end):
+        result += str[i]
+    return result
