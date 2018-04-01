@@ -1,5 +1,6 @@
 from ansible.AddHosts import addAnsibleHost
 from ansible.AnsibleGenerator import generateYaml
+from net.NetworkTopology import scan
 from utility.ConfigFileGenerator import generateConfig
 from models.Device import Device
 from models.Command import Command
@@ -18,6 +19,7 @@ tasks=["checkNetConf", "commitAndConfirm"]
 #Add Hosts if not present
 #addAnsibleHost(device)
 generateYaml(device,command)
+#scan("10.10.10.0/24", "ens32")
 #parseDeviceSyntax(term,initialString)
 #generateStructure(parseDeviceSyntax)
 
