@@ -27,13 +27,13 @@
 
 			<!--LOGIN-->
 			<div [hidden]="!showlogin" class="main-center">  	
-				<form class="form-horizontal" id="login-form">
+				<form class="form-horizontal" #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" id="loginForm">
 					
 					<div class="form-group">
 						<label for="email" class="control-label white">Email</label>
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-							<input type="email" ngModel name="loginEmail" class="form-control"  id="loginEmail" placeholder="Enter your Email"/>
+							<input type="email" name="loginEmail" ngModel required #loginEmail="ngModel" class="form-control"  id="loginEmail" placeholder="Enter your Email"/>
 						</div>
 					</div>
 
@@ -41,17 +41,17 @@
 						<label for="password" class="control-label white">Password</label>
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-							<input type="password" ngModel name="logiPwd" class="form-control"  id="loginPwd" placeholder="Enter your Password"/>
+							<input type="password" name="loginPwd" ngModel required #loginPwd="ngModel" class="form-control"  id="loginPwd" placeholder="Enter your Password"/>
 						</div>
 					</div>
 
 					<div class="text-centered">
-							<div class="g-recaptcha" data-sitekey="6Lcg4DkUAAAAACs2YF9IdSTA56tuJh8Wfj8aHsQs"></div>  
+						<div class="g-recaptcha" data-sitekey="6Lcg4DkUAAAAACs2YF9IdSTA56tuJh8Wfj8aHsQs"></div>  
 					</div>
 
 					<div class="restrict">
-							<button type="submmit" class="btn btn-primary btn-lg btn-block login-button centered"><a class="white" href="/dashboard">Login</a></button> 
-						</div>
+						<button type="submit" class="btn btn-primary btn-lg btn-block login-button centered">Login</button>
+					</div>
 
 					<div class="row text-centered">
 						<a class="white" href="#" data-toggle="modal" data-target="#login-modal">Forgot Password</a>
@@ -62,13 +62,13 @@
 
 			<!--REGISTER-->
 			<div [hidden]="!showRegister" class="main-center">  
-				<form class="form-horizontal" id="register-form">
+				<form class="form-horizontal" #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)" id="registerForm">
 					
 					<div class="form-group">
 						<label for="name" class="control-label white">First Name</label>				
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-							<input type="text" ngModel name="fName" class="form-control"  id="fName"  placeholder="Enter your First Name"/>
+							<input type="text" name="fName" ngModel required #fName="ngModel" class="form-control"  id="fName"  placeholder="Enter your First Name"/>
 						</div>
 					</div>
 
@@ -76,15 +76,15 @@
 						<label for="name" class="control-label white">Last Name</label>							
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-							<input type="text" ngModel name="fName" class="form-control" name="lName" id="lName"  placeholder="Enter your Last Name"/>
+							<input type="text" name="lName" ngModel required #lName="ngModel" class="form-control" name="lName" id="lName"  placeholder="Enter your Last Name"/>
 						</div>
-						</div>
+					</div>
 
 					<div class="form-group">
 						<label for="email" class="control-label white">Email</label>						
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-							<input type="email" ngModel name="email" class="form-control"  id="email"  placeholder="Enter your Email"/>
+							<input type="email" name="email" ngModel required #email="ngModel" class="form-control"  id="email"  placeholder="Enter your Email"/>
 						</div>
 					</div>
 
@@ -92,7 +92,7 @@
 						<label for="password" class="control-label white">Password</label>						
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-							<input type="password" ngModel name="password" class="form-control" id="password"  placeholder="Enter your Password"/>
+							<input type="password" name="password" ngModel required #password="ngModel" class="form-control" id="password"  placeholder="Enter your Password"/>
 						</div>
 					</div>
 
@@ -100,18 +100,17 @@
 						<label for="confirm" class="control-label white">Confirm Password</label>						
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-							<input type="password" ngModel name="confirm" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+							<input type="password" name="confirm" ngModel required #confirm="ngModel" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
 						</div>
 					</div>
 
 					<div class="text-centered">
-							<div class="g-recaptcha" data-sitekey="6Lcg4DkUAAAAACs2YF9IdSTA56tuJh8Wfj8aHsQs"></div>  
+						<div class="g-recaptcha" data-sitekey="6Lcg4DkUAAAAACs2YF9IdSTA56tuJh8Wfj8aHsQs"></div>  
 					</div>
 
 					<div class="restrict">
-							<button type="button" class="btn btn-primary btn-lg btn-block login-button centered">Register</button>
+						<button type="submit" class="btn btn-primary btn-lg btn-block login-button centered">Register</button>
 					</div>
-					
 				</form>
 			</div>
 

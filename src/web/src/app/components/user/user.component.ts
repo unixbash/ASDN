@@ -8,12 +8,10 @@ import { Title } from '@angular/platform-browser/src/browser/title';
   styleUrls: ['./user.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class UserComponent implements OnInit {
+export class UserComponent {
 
-  userID:number;
   firstName:string;
   lastName:string;
-  companyName:string;
   email:string;
   passwords:string[];
   posts:Post[];
@@ -22,19 +20,7 @@ export class UserComponent implements OnInit {
     
   }
 
-  ngOnInit() {
-    //console.log("ngOnInit initialised");
-    this.firstName = "Filip";
-    this.userID = 20;
-    this.email = "filip.nikolic@agilenetworks.ie";
-    this.passwords = ["password123","password321"];
-
-    
-  }
-
-  register() {
-    console.log("Registered");
-  }
+  ngOnInit() {}
   
 }
 

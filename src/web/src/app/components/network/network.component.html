@@ -35,13 +35,20 @@
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                         <div class="panel-body text-centered">
-                            <span *ngFor="let port of ports; let i = index">
-                                <br *ngIf="i % 8 == 0">
-                                <div class="port-container">
-                                    <img class="device-port" alt="port-{{port.name}}" src="{{port.portStatus}}">
-                                    <p>{{port.name}}</p>
-                                </div>
-                            </span>
+                            <div class="device">    
+                                <h3>SRX1500</h3>
+
+                                <span class="port-iter" *ngFor="let port of ports; let i = index">
+                                    <br *ngIf="i % 8 == 0">
+                                    <div class="port-container">
+                                        <img class="device-port" alt="port-{{port.name}}" src="{{port.portImg}}">
+                                        <p>{{port.name}}</p>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="text">{{port.portStatus}}</div>
+                                    </div>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>

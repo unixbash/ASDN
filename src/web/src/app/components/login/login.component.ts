@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, NgModule } from '@angular/core';
 import { UserService } from '../../services/user-service';
 import { User } from '../../models/user';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { User } from '../../models/user';
   styleUrls: ['./login.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   public showlogin = true;
   public showRegister = false;
@@ -16,21 +17,37 @@ export class LoginComponent implements OnInit {
   public registerColor = "#00bcd4";
   public user:User;
 
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService) {}
 
-  /*
-  loginUser(loginEmail:string, loginPassword:string) {
-    User user = new User;
+  ngOnInit() {
+    this.user = new User();
+  }
 
-    this.userService.getUser(email)
+  onLogin(loginForm: NgForm) {
+    this.user.email = loginForm.value.loginEmail;
+    this.user.pwd = loginForm.value.loginPwd;
+
+    this.userService.loginUser(this.user)
     .subscribe(
       user => {
         this.user = user
       });
       err => console.log(err);
   }
-  */
-  ngOnInit() {}
+
+  onRegister(registerForm: NgForm) {
+    //this.user.name = registerForm.value.fName;
+    //this.user.email = registerForm.value.email;
+    //this.user.pwd = registerForm.value.password;
+    /*
+    this.userService.registerUser(this.user)
+    .subscribe(
+      user => {
+        this.user = user
+      });
+      err => console.log(err);
+    */
+  }
 
   showLoginBtn() {
     this.showlogin = true;
@@ -45,5 +62,4 @@ export class LoginComponent implements OnInit {
     this.loginColor="#00bcd4";
     this.registerColor = "#337ab7";
   }
-
 }

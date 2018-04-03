@@ -13,32 +13,33 @@ export class QuestionService {
 
     let questions: QuestionBase<any>[] = [
 
-      new DropdownQuestion({
-        key: 'brave',
-        label: 'Bravery Rating',
-        options: [
-          {key: 'solid',  value: 'Solid'},
-          {key: 'great',  value: 'Great'},
-          {key: 'good',   value: 'Good'},
-          {key: 'unproven', value: 'Unproven'}
-        ],
-        order: 3
-      }),
-
       new TextboxQuestion({
-        key: 'firstName',
-        label: 'First name',
-        value: 'Bombasto',
-        required: true,
+        key: 'caseTitle',
+        label: 'Case Title',
+        value: '',
         order: 1
       }),
 
-      new TextboxQuestion({
-        key: 'emailAddress',
-        label: 'Email',
-        type: 'email',
+      new DropdownQuestion({
+        key: 'severity',
+        label: 'Severity',
+        options: [
+          {key: 'l1',  value: 'Level 1 - Critical Production Impact'},
+          {key: 'l2',  value: 'Level 2 - High Production Impact'},
+          {key: 'l3',  value: 'Level 3 - Internal Development Impact'},
+          {key: 'l4',  value: 'Level 4 - Low/No Operational Impact'}
+        ],
         order: 2
-      })
+      }),
+
+      new TextboxQuestion({
+        key: 'Description',
+        label: 'Description',
+        order: 3
+      }),
+
+      
+
     ];
 
     return questions.sort((a, b) => a.order - b.order);

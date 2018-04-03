@@ -1,12 +1,13 @@
 <div [formGroup]="form">
   <label [attr.for]="question.key">{{question.label}}</label>
   
-  <div [ngSwitch]="question.controlType">
-  
-    <input *ngSwitchCase="'textbox'" [formControlName]="question.key"
+  <div class="input-group" [ngSwitch]="question.controlType">
+    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+    <input class="form-control" *ngSwitchCase="'textbox'" placeholder="{{question.label}}" [formControlName]="question.key"
             [id]="question.key" [type]="question.type">
   
-    <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key">
+    <select class="form-control" [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key">
+      <option value="" selected disabled>Select...</option>
       <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
     </select>
   

@@ -12,7 +12,6 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import { DataService } from './services/data.service';
-import { AccountComponent } from './components/account/account.component';
 import { componentFactoryName } from '@angular/compiler';
 import { Component } from '@angular/core/src/metadata/directives';
 import { LoadedRouterConfig } from '@angular/router/src/config';
@@ -34,7 +33,6 @@ const appRoutes:Routes = [
   {path:'wizzard', component:DashboardComponent, data: { title: 'ASDN - Wizzard' }},
   {path:'network', component:NetworkComponent, data: { title: 'ASDN - Network' }},
   {path:'help', component:HelpComponent, data: { title: 'ASDN - Help' }},
-  {path:'account', component:AccountComponent, data: { title: 'ASDN - Account' }},
   {path:'settings', component:SettingsComponent, data: { title: 'ASDN - Settings' }},
   {path:'forms', component:DynamicFormQuestionComponent, data: { title: 'ASDN - Forms' }}
 ];
@@ -46,7 +44,6 @@ const appRoutes:Routes = [
     NetworkComponent,
     LoginComponent,
     DashboardComponent,
-    AccountComponent,
     NavComponent,
     HelpComponent,
     SettingsComponent,
