@@ -16,7 +16,6 @@ import { componentFactoryName } from '@angular/compiler';
 import { Component } from '@angular/core/src/metadata/directives';
 import { LoadedRouterConfig } from '@angular/router/src/config';
 
-import { AlertModule } from 'ngx-bootstrap';
 import { UserService } from './services/user-service';
 import { NavComponent } from './components/nav/nav.component';
 import { HelpComponent } from './components/help/help.component';
@@ -59,7 +58,7 @@ const appRoutes:Routes = [
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
-      {enableTracing:true}
+      {enableTracing:false}
     )
   ],
   providers: [DataService, UserService, QuestionService],

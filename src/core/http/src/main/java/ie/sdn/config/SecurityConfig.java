@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 
 
 @Configuration
@@ -30,14 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable().authorizeRequests()
+                .antMatchers(POST, "/*").permitAll()
+                .antMatchers(PUT, "/*").permitAll()
                 .antMatchers(GET, "/*").permitAll()
-                .antMatchers(GET, "/user/*").access("hasRole('USER') or hasRole('ADMIN')")
-                .and().formLogin().loginPage("/")
-                .usernameParameter("email").passwordParameter("password")
-                .and().httpBasic()
-                .and().exceptionHandling().accessDeniedPage("/acc")
-                .and().csrf().disable();
+                .antMatchers(GET, "/user/*").access("hasAuthority('USER') or hasAuthority('ADMIN')")
+                .and().httpBasic();
     }
 
     @Bean

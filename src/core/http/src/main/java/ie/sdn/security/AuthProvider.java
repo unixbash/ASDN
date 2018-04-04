@@ -1,8 +1,11 @@
 package ie.sdn.security;
 
-import ie.sdn.controller.UserController;
-import ie.sdn.dto.UserDTO;
+import ie.sdn.enums.TokenStatus;
+import ie.sdn.model.Authority;
+import ie.sdn.model.User;
+import ie.sdn.model.UserToken;
 import ie.sdn.repository.UserRepository;
+import ie.sdn.repository.UserTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 
@@ -12,10 +15,6 @@ import java.util.List;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class AuthProvider  implements AuthenticationProvider{
@@ -26,7 +25,7 @@ public class AuthProvider  implements AuthenticationProvider{
     @Autowired
     UserRepository userRepository;
     @Autowired
-    UserController userController;
+    UserTokenRepository userTokenRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -39,22 +38,26 @@ public class AuthProvider  implements AuthenticationProvider{
         final String userPassword = authentication.getCredentials().toString();
 
         //UserDTO logedIn = userController.loginUser(authentication);
-        List<GrantedAuthority> grantedAuths = new ArrayList<>();
-        UserDetails principal = new User(userEmail, userPassword, grantedAuths);
+        List<Authority> grantedAuths = new ArrayList<>();
 
 
         if(userPassword != null) {
             //get user from db
-            ie.sdn.model.User user = userRepository.findByEmail(userEmail);
+            User user = userRepository.findByEmail(userEmail);
             //validate password is ok --> hash what comes in and match against hash password stored
             //If validated then check the roles, if the role is ok then return the auth object
             //else return null
             if (user != null) {
                 if (passwordEncoder.matches(userPassword, user.getPwd() )) {
                     //UserDTO logedIn = userController.loginUser(authentication);
-                    grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
-                    final Authentication auth = new UsernamePasswordAuthenticationToken(principal, userPassword, grantedAuths);
-                    return auth;
+                    grantedAuths.add(new Authority("USER"));
+                    return new UsernamePasswordAuthenticationToken(userEmail, userPassword, grantedAuths);
+                }
+                //Passwords may not match but are they a token we have given them?
+                if(isCurrentToken(user.getId(),userPassword)){
+                    //UserDTO logedIn = userController.loginUser(authentication);
+                    grantedAuths.add(new Authority("USER"));
+                    return new UsernamePasswordAuthenticationToken(userEmail, userPassword, grantedAuths);
                 }
 
             /*
@@ -68,11 +71,19 @@ public class AuthProvider  implements AuthenticationProvider{
             }
         }
 
-        return new UsernamePasswordAuthenticationToken(principal, userPassword, grantedAuths);
+        return new UsernamePasswordAuthenticationToken(userEmail, userPassword, grantedAuths);
     }
 
     @Override
     public boolean supports(final Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
+    }
+
+    private boolean isCurrentToken(String userId, String potentialToken){
+        UserToken userToken = userTokenRepository.findFirstByUserIdOrderByCreatedAtDesc(userId);
+        if(userToken != null) {
+            return userToken.getToken().equals(potentialToken) && userToken.getStatus().equals(TokenStatus.ACTIVE.toString());
+        }
+        return false;
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, NgModule }
 import { UserService } from '../../services/user-service';
 import { User } from '../../models/user';
 import {NgForm} from '@angular/forms';
+import { UserToken } from '../../models/usertoken';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent {
   public loginColor = "#337ab7";
   public registerColor = "#00bcd4";
   public user:User;
+  public userToken:UserToken;
 
   constructor(private userService:UserService) {}
 
@@ -29,24 +31,31 @@ export class LoginComponent {
 
     this.userService.loginUser(this.user)
     .subscribe(
-      user => {
-        this.user = user
+      userToken => {
+        this.userToken = userToken;
+        console.log(userToken);
+        if(userToken != null){
+          window.location.href='http://localhost:4200/dashboard';
+        }
       });
       err => console.log(err);
   }
 
   onRegister(registerForm: NgForm) {
-    //this.user.name = registerForm.value.fName;
-    //this.user.email = registerForm.value.email;
-    //this.user.pwd = registerForm.value.password;
-    /*
+    this.user.name = registerForm.value.fName;
+    this.user.email = registerForm.value.email;
+    this.user.pwd = registerForm.value.password;
+
     this.userService.registerUser(this.user)
     .subscribe(
       user => {
         this.user = user
+        if(user != null){
+          window.location.href='http://localhost:4200/';
+        }
       });
       err => console.log(err);
-    */
+    
   }
 
   showLoginBtn() {

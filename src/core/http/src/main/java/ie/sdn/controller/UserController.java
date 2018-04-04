@@ -1,9 +1,13 @@
 package ie.sdn.controller;
 
 import ie.sdn.dto.UserDTO;
+import ie.sdn.dto.UserTokenDTO;
+import ie.sdn.enums.TokenStatus;
 import ie.sdn.model.User;
+import ie.sdn.model.UserToken;
 import ie.sdn.repository.UserRepository;
 //import ie.sdn.service.EmailService;
+import ie.sdn.repository.UserTokenRepository;
 import ie.sdn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -11,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -21,23 +25,50 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
     @Autowired
+    UserTokenRepository userTokenRepository;
+    @Autowired
     PasswordEncoder passwordEncoder;
     @Autowired
     UserService userService;
 
 
-    @PostMapping(value = "/login")
+    @GetMapping(value = "/login")
     @ResponseBody
-    public UserDTO loginUser(Authentication auth) {
-        if (auth.isAuthenticated()) {
-            String email = (String) auth.getDetails();
-            //User user = userRepository.findByEmail(email);
+    public UserTokenDTO loginUser(Authentication auth) {
+        String email = auth.getName();
+        User user = userRepository.findByEmail(email);
 
-            UserDTO userDTO = new UserDTO();
-            userDTO.setEmail(email);
-            return userDTO;
+        //TODO Generate a token and save it on the DB, give that token back to the user
+        String token = UUID.randomUUID().toString();
+        UserToken userToken = new UserToken();
+        userToken.setToken(token);
+        userToken.setUserId(user.getId());
+
+        //Invalidate any token currently there
+        UserToken currentToken = userTokenRepository.findFirstByUserIdOrderByCreatedAtDesc(user.getId());
+        if(currentToken != null){
+            currentToken.setStatus(TokenStatus.INACTIVE.toString());
+            userTokenRepository.save(currentToken);
         }
+        //Save the new token
+        userToken = userTokenRepository.save(userToken);
 
+        return new UserTokenDTO(userToken);
+    }
+
+    @GetMapping(value = "/logout")
+    @ResponseBody
+    public UserTokenDTO logoutUser(Authentication auth) {
+        String email = auth.getName();
+        User user = userRepository.findByEmail(email);
+
+        //Invalidate any token currently there
+        UserToken currentToken = userTokenRepository.findFirstByUserIdOrderByCreatedAtDesc(user.getId());
+        if(currentToken != null){
+            currentToken.setStatus(TokenStatus.INACTIVE.toString());
+            userTokenRepository.save(currentToken);
+            return new UserTokenDTO(currentToken);
+        }
         return null;
     }
 
