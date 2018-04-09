@@ -1,0 +1,17 @@
+---
+- hosts: srx
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: generic
+      junos_command:
+        commands: show chassis routing-engine
+
+      register: response
+
+    - name: debug
+      debug:
+        var: response.stdout_lines

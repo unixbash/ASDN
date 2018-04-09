@@ -1,3 +1,5 @@
+import re, string
+
 def isAscii(text):
     return all(ord(char) < 128 for char in text)
 
@@ -28,3 +30,19 @@ def findBetween(str, delimeter):
     for i in range(start+1, end):
         result += str[i]
     return result
+
+def removeNonAlphaNum(text):
+    regex = re.compile('[^a-zA-Z0-9]')
+    return regex.sub(' ', text)
+
+def find(src, target, all):
+    result=[]
+    lines = src.split('\n')
+    for line in lines:
+        if (target in line):
+            result.append((line.replace(target, "")).strip())
+            if(not all):
+                return result[0]
+
+    return result
+

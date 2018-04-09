@@ -6,9 +6,17 @@
   gather_facts: no
 
   tasks:
-    name {{ name }}
-    command {{ command }}
-    register: response
+    - name: {{ name }}
+      {{ commType }}:
+      {% if name == "generic" %}
+        commands: {{args}}
+      {% else %}
+        {% for arg in args %}
+        {{arg}}
+        {% endfor %}
+      {% endif %}
+
+      register: response
 
     - name: debug
       debug:
