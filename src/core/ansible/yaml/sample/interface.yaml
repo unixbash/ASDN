@@ -18,13 +18,13 @@
     name: ge-0/0/1
     enabled: True
 
-- name: Deactivate interface config
+- name: Deactivate interface settings
   junos_interface:
     name: ge-0/0/1
     state: present
     active: False
 
-- name: Activate interface config
+- name: Activate interface settings
   net_interface:
     name: ge-0/0/1
     state: present

@@ -2,7 +2,7 @@ import time
 import datetime
 
 from utility.Util import writeTextFile
-from config.ConfigurationTasks import Tasks
+from settings.ConfigurationTasks import Tasks
 
 def generateConfig(hostnames, taskList):
     for host in hostnames:

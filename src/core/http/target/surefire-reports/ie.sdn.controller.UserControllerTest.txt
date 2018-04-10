@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ie.sdn.controller.UserControllerTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.165 sec - in ie.sdn.controller.UserControllerTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.14 sec - in ie.sdn.controller.UserControllerTest

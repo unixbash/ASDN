@@ -14,9 +14,9 @@ class IKE:
             "authentication-algorithm":"", "encryption-algorithm":"", "dh-group":"",
             "mode":"", "pre-shared-key":""}
     def __init__(self, term):
-        configData = readTextFile("config/config.txt")
+        configData = readTextFile("settings/settings.txt")
 
-        #Assign the above values to the ones provided by the config file
+        #Assign the above values to the ones provided by the settings file
         for param in configData:
             paramName=param.split(":")[0]
             currentParam = param.split(":")[1]

@@ -1,0 +1,76 @@
+{
+  "show": {
+    "agent": {
+      "sensors": {
+        
+      }
+    },
+    "access-cac": {
+      "session": {
+        
+      },
+      "pool": {
+        "summary": {
+          
+        }
+      }
+    },
+    "accounting": {
+      "pending-accounting-stops": {
+        
+      },
+      "profile": {
+        
+      },
+      "records": {
+        
+      }
+    },
+    "app-engine": {
+      "information": {
+        
+      },
+      "status": {
+        
+      },
+      "route-table": {
+        
+      },
+      "processes": {
+        "compute-node": {
+          
+        },
+        "compute-cluster": {
+          
+        },
+        "missing": {
+          
+        }
+      },
+      "virtual-machine": {
+        "instance": {
+          
+        }
+      },
+      "routing-instance": {
+        "compute-clusters": {
+          
+        },
+        "virtual-machines": {
+          
+        }
+      },
+      "resource-usage": {
+        
+      },
+      "packages": {
+        "remote": {
+          
+        },
+        "system": {
+          
+        }
+      }
+    }
+  }
+}

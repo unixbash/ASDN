@@ -13,7 +13,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
 '''
-file = "lib/device-structure15-23-55_14-02-2018.txt"
+file = "hierarchy/device-structure15-23-55_14-02-2018.txt"
 names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
 dataset = pandas.read_json(file, names=names)
 '''

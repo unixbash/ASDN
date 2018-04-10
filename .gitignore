@@ -42,3 +42,6 @@ yarn-error.log
 
 # rollup-test output
 /modules/rollup-test/dist/
+
+# ignore settings file
+settings.xml

@@ -1,4 +1,9 @@
-import re, string
+import itertools
+import re
+import pymysql
+
+from settings.GetSettings import Database
+
 
 def isAscii(text):
     return all(ord(char) < 128 for char in text)
@@ -32,7 +37,7 @@ def findBetween(str, delimeter):
     return result
 
 def removeNonAlphaNum(text):
-    regex = re.compile('[^a-zA-Z0-9]')
+    regex = re.compile('[^a-zA-Z0-9\-\/]')
     return regex.sub(' ', text)
 
 def find(src, target, all):
@@ -40,9 +45,28 @@ def find(src, target, all):
     lines = src.split('\n')
     for line in lines:
         if (target in line):
-            result.append((line.replace(target, "")).strip())
+            result.append(removeNonAlphaNum(line).strip())
             if(not all):
-                return result[0]
+                return removeNonAlphaNum(line.replace(target, "")).strip()
 
     return result
 
+def executeSql(sql, args):
+    try:
+        db = Database()
+        conn = pymysql.connect(
+            host=db.getHost(), user=db.getUname(), passwd=db.getPwd(), db=db.getDb())
+        cursor = conn.cursor()
+
+        in_p = ', '.join(itertools.repeat('%s', len(args)))
+        sql = sql % in_p
+        cursor.execute(sql, args)
+        conn.commit()
+
+    except Exception as e:
+        print("Error connecting to the database: " + str(e))
+        if not cursor is None:
+            cursor.close()
+        if not conn is None:
+            conn.close()
+        return "Error"

@@ -9,23 +9,19 @@ from models.Device import Device
 from models.Command import Command
 from utility.Util import findBetween
 
-hostname = "10.10.10.110"
-username = "asdn"
-password = "ASDN2018"
-
 #ssh = establishConnection(hostname, username, password)
 #term = establishShell(ssh)
 
 initialString = "show"
 args1 = ["name: ge-0/0/1", "description: interface-access"]
 device = Device("srx", "10.10.10.110")
-command = Command("generic", "show chassis routing-engine")
+command = Command("generic", "show interfaces terse")
 tasks=["checkNetConf", "commitAndConfirm"]
 #Add Hosts if not present
 #getEncryptedPass(term, "ASDN2018")
 #addAnsibleHost(device)
 #generateYaml(device,command)
-getDeviceStatus(device)
+#getDeviceStatus(device)
 #scan("10.10.10.0/24", "ens32")
 #parseDeviceSyntax(term,initialString)
 #generateStructure(parseDeviceSyntax)

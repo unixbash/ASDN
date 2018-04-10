@@ -1,6 +1,6 @@
 class Command:
     allCommandTypes = {"generic":"junos_command", "aggregation":"junos_linkagg",
-                       "config":"junos_config", "interfaceL1":"junos_interface",
+                       "settings":"junos_config", "interfaceL1":"junos_interface",
                        "interfaceL2":"junos_l2_interface", "interfaceL3":"junos_l3_interface",
                        "install":"junos_package", "lldp":"junos_lldp_interface",
                        "routing":"junos_static_route", "services":"junos_system",
