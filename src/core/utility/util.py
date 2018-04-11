@@ -1,8 +1,9 @@
-import itertools
+import io
 import re
+import itertools
 import pymysql
-
-from settings.GetSettings import Database
+from ftplib import FTP
+from settings.GetSettings import Database, FtpServer
 
 
 def isAscii(text):
@@ -60,8 +61,10 @@ def executeSql(sql, args):
 
         in_p = ', '.join(itertools.repeat('%s', len(args)))
         sql = sql % in_p
-        cursor.execute(sql, args)
+        response = cursor.execute(sql, args)
         conn.commit()
+
+        return response
 
     except Exception as e:
         print("Error connecting to the database: " + str(e))
@@ -70,3 +73,13 @@ def executeSql(sql, args):
         if not conn is None:
             conn.close()
         return "Error"
+
+def uploadFile(file, fileName, path):
+    # Log into FTP
+    ftpConnection = FtpServer()
+    ftp = FTP(ftpConnection.getHost())
+    ftp.login(ftpConnection.getUname(), ftpConnection.getPwd())
+    ftp.cwd(path)
+
+    ftp.storbinary('STOR ' + fileName, io.BytesIO(file.encode('utf-8')))
+    ftp.quit()

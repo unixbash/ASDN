@@ -1,6 +1,9 @@
 import time
 import paramiko
 import xmltodict
+from paramiko import SSHClient, AutoAddPolicy
+
+from settings.GetSettings import Server
 
 def checkConsoleConnection(conAddr,conUsr,pwd):
     try:
@@ -25,16 +28,16 @@ def getXML(xml, attr):
         return "Parsing error."
 
 
-def execute_command(term, cmd):
+def executeCommand(term, cmd):
     term.send(cmd + "\n")
-    time.sleep(3)
+    time.sleep(1)
     # bitsize to ensure correct buffer
     output = term.recv(188388)
     # Convert byte output to string
     output = output.decode("utf-8")
     return output
 
-def send_command(term, cmd):
+def sendCommand(term, cmd):
     if (cmd == "" or cmd[-1] == "/"):
         helper = "?"
     else:
@@ -50,25 +53,25 @@ def send_command(term, cmd):
     return output
 
 def clearScreen(term):
-    execute_command(term, '\x18')
+    executeCommand(term, '\x18')
 
 def waitForTerm(term, timeToWait, promptToWaitFor):
     timesChecked = 1
     ready = False
     while (not ready):
         time.sleep(timeToWait)
-        answer = execute_command(term, "")
+        answer = executeCommand(term, "")
         print(answer)
         if (promptToWaitFor in answer):
             ready = True
         timesChecked = timesChecked + 1
 
 def waitForLogin(term,pswd):
-    execute_command(term, "root")
+    executeCommand(term, "root")
     time.sleep(2)
-    execute_command(term, pswd)
+    executeCommand(term, pswd)
     time.sleep(2)
-    execute_command(term, "cli")
+    executeCommand(term, "cli")
 
 def establishConnection(hostname, username, password):
     ssh = paramiko.SSHClient()
@@ -76,13 +79,39 @@ def establishConnection(hostname, username, password):
     ssh.connect(hostname, 22, username, password)
     return ssh
 
-def establishShell(ssh):
+def establishShell(ssh, server):
     term = ssh.invoke_shell()
-    #To allow the program to read all output at once
-    execute_command(term, "set cli screen-length 0")
-    #To avoid the device cropping the ouptut width, which produces non-standard characters (eg )
-    execute_command(term, "set cli screen-width 1024")
+    if not server:
+        #To allow the program to read all output at once
+        executeCommand(term, "set cli screen-length 0")
+        #To avoid the device cropping the ouptut width, which produces non-standard characters (eg )
+        executeCommand(term, "set cli screen-width 1024")
     return term
 
 def closeConnection(connection):
     connection.close()
+
+#Different SSH command Execution pattern than networking devices
+def executeOnServer(command):
+    result = bytes('', 'utf-8')
+    server = Server()
+    ssh = SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect(server.getHost(), username=server.getUname(), password=server.getPwd(), port=22, look_for_keys=False,)
+
+    ssh_transp = ssh.get_transport()
+    chan = ssh_transp.open_session()
+    chan.exec_command(command)
+
+    #Continuous reading of data output
+    while True:
+        time.sleep(3)
+        while chan.recv_ready():
+            result += chan.recv(18388)
+        while chan.recv_stderr_ready():
+            result += chan.recv_stderr(18388)
+        if chan.exit_status_ready():
+            break
+    ssh_transp.close()
+
+    return result.decode('utf-8')

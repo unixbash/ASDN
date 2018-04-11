@@ -56,6 +56,32 @@ class Server:
         except Exception as e:
             print(e)
 
+    def getHost(self):
+        return self.__host
+
+    def getUname(self):
+        return self.__uname
+
+    def getPwd(self):
+        return self.__pwd
+
+class FtpServer:
+    __host = ""
+    __uname = ""
+    __pwd = ""
+
+    def __init__(self):
+        try:
+            with open("settings/settings.xml") as file:
+                settingsDict = xmltodict.parse(file.read())
+
+            self.__host = (settingsDict['settings']['ftp-details']['host'])
+            self.__uname = (settingsDict['settings']['ftp-details']['uname'])
+            self.__pwd = (settingsDict['settings']['ftp-details']['pwd'])
+
+            file.close()
+        except Exception as e:
+            print(e)
 
     def getHost(self):
         return self.__host

@@ -8,7 +8,7 @@ import json
 def checkMacFile(macAddr):
     macAddr = macAddr[:7]
     try:
-        with open('utility/mac_addresses.csv', 'r', encoding='utf-8') as f:
+        with open('assets/mac_addresses.csv', 'r', encoding='utf-8') as f:
             for line in f:
                 comma = line.index(",")
                 prefix = line[:comma]

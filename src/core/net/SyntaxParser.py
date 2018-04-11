@@ -1,4 +1,4 @@
-from comms.Communication import send_command
+from comms.Communication import sendCommand
 from net.DictionaryNester import generateStructure
 from utility.LinkedList import *
 from utility.Util import *
@@ -18,7 +18,7 @@ commandTree = UnorderedList()
 
 #Gets formatted output from the device
 def getNode(term, initialString):
-    commandOutput = send_command(term, initialString)
+    commandOutput = sendCommand(term, initialString)
     leafs = []
     parsedOutput = commandOutput.splitlines()
     for leaf in parsedOutput:

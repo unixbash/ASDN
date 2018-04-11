@@ -1,4 +1,4 @@
-from comms.Communication import establishConnection, establishShell, closeConnection, execute_command
+from comms.Communication import establishConnection, establishShell, closeConnection, executeCommand
 from settings.GetSettings import Server
 from utility.Util import executeSql
 import uuid
@@ -44,9 +44,9 @@ class Device:
     #Check if the device is in the database
     def isInDB(self, address):
         sql = 'SELECT id FROM device WHERE address=%s'
-        deviceAddress = executeSql(sql, [address])
+        isPresent = executeSql(sql, [address])
 
-        if deviceAddress == address:
+        if isPresent== 1:
             return True
         else:
             return False
@@ -56,15 +56,15 @@ class Device:
         server = Server()
 
         ssh = establishConnection(server.getHost(), server.getUname(), server.getPwd())
-        term = establishShell(ssh)
+        term = establishShell(ssh, False)
 
         hostToAdd = self.hostname + " ansible_port=22 ansible_host=" + self.address + " ansible_user=" \
                     + server.getUname() + " ansible_ssh_pass=" + server.getPwd()
 
-        listOfHosts = execute_command(term, "cat /etc/ansible/hosts")
+        listOfHosts = executeCommand(term, "cat /etc/ansible/hosts")
         # Check if the hosts or duplicate addresses don't currently exist on the server
 
         if self.hostname not in listOfHosts and self.address not in listOfHosts:
-            out = execute_command(term, 'echo \"' + hostToAdd + '\"' + ' >> /etc/ansible/hosts')
+            out = executeCommand(term, 'echo \"' + hostToAdd + '\"' + ' >> /etc/ansible/hosts')
 
         closeConnection(ssh)

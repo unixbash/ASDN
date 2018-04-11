@@ -1,5 +1,5 @@
-from ansible.AnsibleGenerator import generateYaml
-from comms.Communication import execute_command
+from ansible.AnsibleEngine import generateYaml
+from comms.Communication import executeCommand
 from comms.Communication import getXML
 from utility.Util import find
 

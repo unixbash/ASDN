@@ -1,7 +1,9 @@
 import time
 import datetime
 from jinja2 import Environment, FileSystemLoader
-from subprocess import call
+from comms.Communication import executeOnServer
+from utility.Util import uploadFile
+
 
 
 def generateYaml(device, command):
@@ -9,19 +11,20 @@ def generateYaml(device, command):
     #Set timestamp
     ts = time.time()
     tStamp = datetime.datetime.fromtimestamp(ts).strftime('-%H-%M-%S_%d-%m-%Y')
-    fileName = "ansible/yaml/generated/" + device.hostname + tStamp + ".yaml"
+    path = "ansible/yaml/generated/"
+    fileName = device.hostname + tStamp + ".yaml"
+    fullFileName = path + fileName
 
     #Load template
     env = Environment(loader = FileSystemLoader('ansible/yaml'), trim_blocks=True, lstrip_blocks=True)
     template = env.get_template('skeleton.yaml')
 
-    #Render the template
-    f = open(fileName, 'w')
-    f.write(template.render(host=device.hostname,
+    file = template.render( host=device.hostname,
                             name=command.commandName,
                             args=command.commandArgs,
-                            commType=command.commandType))
-    f.close()
+                            commType=command.commandType)
 
     #Execute YAML
-    #return call(["ansible-playbook", fileName])
+    uploadFile(file, fileName, path)
+    return executeOnServer("export ANSIBLE_HOST_KEY_CHECKING=False\n" +
+                           "ansible-playbook " + "/home/asdn/" + fullFileName)

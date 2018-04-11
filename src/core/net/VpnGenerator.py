@@ -1,4 +1,4 @@
-from comms.Communication import execute_command
+from comms.Communication import executeCommand
 from utility.Util import readTextFile
 
 class StaticConfig:
@@ -24,11 +24,11 @@ class IKE:
 
     def sendIKE(self, param, term):
         proposalPrefix = "set security ike proposal"
-        execute_command(term, proposalPrefix + " " +
-                        self.data["name"]
-                        + " " +
-                        self.data[param]
-                        )
+        executeCommand(term, proposalPrefix + " " +
+                       self.data["name"]
+                       + " " +
+                       self.data[param]
+                       )
 
     def applyIKE(self, term):
 

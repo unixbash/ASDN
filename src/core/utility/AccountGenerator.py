@@ -1,23 +1,23 @@
-from comms.Communication import execute_command, execute_command, waitForTerm
+from comms.Communication import executeCommand, executeCommand, waitForTerm
 from utility.Util import findBetween
 import time
 
 def getEncryptedPass(term, plaintext):
-    execute_command(term, "configure")
+    executeCommand(term, "configure")
     waitForTerm(term, 1, "#")
 
-    execute_command(term, "set system login user test class super-user authentication plain-text-password")
+    executeCommand(term, "set system login user test class super-user authentication plain-text-password")
     time.sleep(1)
-    execute_command(term, plaintext)
+    executeCommand(term, plaintext)
     time.sleep(1)
-    execute_command(term, plaintext)
+    executeCommand(term, plaintext)
 
-    encryptedPass = findBetween(execute_command(term, "show system login user test"), '"')
+    encryptedPass = findBetween(executeCommand(term, "show system login user test"), '"')
     time.sleep(1)
 
-    execute_command(term, "rollback")
+    executeCommand(term, "rollback")
     waitForTerm(term, 1, "#")
 
-    execute_command(term, "quit")
+    executeCommand(term, "quit")
 
     return encryptedPass
