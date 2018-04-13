@@ -7,13 +7,13 @@
     commands: show version
     wait_for: result[0] contains Juniper
 
-- name: run multiple commands on remote nodes
+- name: run multiple fullCommand on remote nodes
   junos_command:
     commands:
       - show version
       - show interfaces
 
-- name: run multiple commands and evaluate the output
+- name: run multiple fullCommand and evaluate the output
   junos_command:
     commands:
       - show version
@@ -22,7 +22,7 @@
       - result[0] contains Juniper
       - result[1] contains Loopback0
 
-- name: run commands and specify the output format
+- name: run fullCommand and specify the output format
   junos_command:
     commands: show version
     display: json

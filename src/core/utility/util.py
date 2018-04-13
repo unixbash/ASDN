@@ -38,7 +38,7 @@ def findBetween(str, delimeter):
     return result
 
 def removeNonAlphaNum(text):
-    regex = re.compile('[^a-zA-Z0-9\-\/]')
+    regex = re.compile('[^a-zA-Z0-9\-\/\.]')
     return regex.sub(' ', text)
 
 def find(src, target, all):
@@ -46,9 +46,10 @@ def find(src, target, all):
     lines = src.split('\n')
     for line in lines:
         if (target in line):
-            result.append(removeNonAlphaNum(line).strip())
             if(not all):
                 return removeNonAlphaNum(line.replace(target, "")).strip()
+
+            result.append(' '.join(removeNonAlphaNum(line).strip().split()))
 
     return result
 

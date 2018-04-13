@@ -3,7 +3,7 @@ from net.DictionaryNester import generateStructure
 from utility.LinkedList import *
 from utility.Util import *
 
-#Command class
+#Commands class
 class Command:
     value = ""
     isExecutable = False

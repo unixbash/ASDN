@@ -6,7 +6,7 @@ from utility.Util import uploadFile
 
 
 
-def generateYaml(device, command):
+def generateYaml(device, commands):
 
     #Set timestamp
     ts = time.time()
@@ -15,16 +15,26 @@ def generateYaml(device, command):
     fileName = device.hostname + tStamp + ".yaml"
     fullFileName = path + fileName
 
-    #Load template
+    #Load templates
     env = Environment(loader = FileSystemLoader('ansible/yaml'), trim_blocks=True, lstrip_blocks=True)
-    template = env.get_template('skeleton.yaml')
+    initTemplate = env.get_template('initTemplate.yaml')
+    dataTemplate = env.get_template('commandTemplate.yaml')
 
-    file = template.render( host=device.hostname,
-                            name=command.commandName,
-                            args=command.commandArgs,
-                            commType=command.commandType)
+    initData = initTemplate.render( host=device.hostname)
+    commandData = "\n"
+
+    #Generate configuration file from all given fullCommand
+    no=1
+    for commandLIst in commands.commands:
+        for commandType, command in commandLIst.items():
+            commandData += dataTemplate.render( type=commandType,
+                                                args=command,
+                                                num=no) + "\n"
+        no+=1
+
+    finalFileData = initData + commandData
 
     #Execute YAML
-    uploadFile(file, fileName, path)
+    uploadFile(finalFileData, fileName, path)
     return executeOnServer("export ANSIBLE_HOST_KEY_CHECKING=False\n" +
                            "ansible-playbook " + "/home/asdn/" + fullFileName)

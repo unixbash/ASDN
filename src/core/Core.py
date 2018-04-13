@@ -1,12 +1,13 @@
 from ansible.AnsibleEngine import generateYaml
 from models.Device import Device
-from models.Command import Command
+from models.Commands import Commands
 
 args = ["name: ge-0/0/1", "description: interface-access"]
 device = Device("srx", "10.10.10.110")
-command = Command("generic", "show interfaces terse")
+commands = []
 
-generateYaml(device, command)
+result = device.getDeviceStatus()
+#status = device.getDeviceStatus(device)
 
 #getEncryptedPass(term, "ASDN2018")
 #scan("10.10.10.0/24", "ens32")

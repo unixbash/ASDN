@@ -1,0 +1,7 @@
+---
+- hosts: {{host}}
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+  tasks:

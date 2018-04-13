@@ -1,0 +1,13 @@
+    - name: {{ type }}{{num}}
+      {{ type }}:
+        {% if type=="junos_command" %}
+        {{ args }}
+        {% else %}
+        {% for arg in args %}
+        {{ arg }}
+        {% endfor %}
+        {% endif %}
+      register: {{ type }}{{ num }}response
+    - name: output {{ type }}{{ num }}
+      debug:
+        var: {{ type }}{{ num }}response.stdout_lines {{"\n"}}
