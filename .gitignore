@@ -45,3 +45,6 @@ yarn-error.log
 
 # ignore settings file
 settings.xml
+
+#---TMP ignore documentation---
+.docx 

@@ -63,9 +63,10 @@ def executeSql(sql, args):
         in_p = ', '.join(itertools.repeat('%s', len(args)))
         sql = sql % in_p
         response = cursor.execute(sql, args)
+        results = cursor.fetchall()
         conn.commit()
 
-        return response
+        return results
 
     except Exception as e:
         print("Error connecting to the database: " + str(e))
