@@ -37,5 +37,5 @@ def generateStructure(str):
     for dictionary in list_of_nested_commands:
         final_dictionary = dict(mergeDicts(final_dictionary, dictionary))
 
-    with open('ml/hierarchy/device-structure' + datetime.datetime.fromtimestamp(ts).strftime('%H-%M-%S_%d-%m-%Y') + '.txt', 'w') as the_file:
+    with open('assets/device-hierarchy/device-structure' + datetime.datetime.fromtimestamp(ts).strftime('%H-%M-%S_%d-%m-%Y') + '.txt', 'w') as the_file:
         the_file.write(json.dumps(final_dictionary))

@@ -1,13 +1,6 @@
 from comms.Communication import executeCommand
-from utility.Util import readTextFile
+from utility.Util import readTextFile, executeSql
 
-class StaticConfig:
-    lanInterface = ""
-    wanInterface = ""
-    tunnelInterface = ""
-    untrustZone = ""
-    trustZone = ""
-    vpnZone = ""
 
 class IKE:
     data = {"name":"", "lifetime-seconds":"", "authentication-method":"",
@@ -34,3 +27,7 @@ class IKE:
 
         for param in self.data:
             self.sendIKE(param, term)
+
+def generateVPN(netId):
+    vpnParameters = executeSql("SELECT * FROM vpn WHERE net_id=(%s)", netId)
+    return vpnParameters

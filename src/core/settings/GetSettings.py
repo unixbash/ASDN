@@ -42,6 +42,7 @@ class Server:
     __host = ""
     __uname = ""
     __pwd = ""
+    __uplink = ""
 
     def __init__(self):
         try:
@@ -51,6 +52,7 @@ class Server:
             self.__host = (settingsDict['settings']['server-details']['host'])
             self.__uname = (settingsDict['settings']['server-details']['uname'])
             self.__pwd = (settingsDict['settings']['server-details']['pwd'])
+            self.__uplink = (settingsDict['settings']['server-details']['uplink'])
 
             file.close()
         except Exception as e:
@@ -64,6 +66,9 @@ class Server:
 
     def getPwd(self):
         return self.__pwd
+
+    def getUplink(self):
+        return self.__uplink
 
 class FtpServer:
     __host = ""

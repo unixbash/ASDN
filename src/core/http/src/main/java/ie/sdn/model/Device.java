@@ -36,6 +36,9 @@ public class Device {
     @Column(name = "vendor")
     private String vendor;
 
+    @Column(name = "status")
+    private String status;
+
     public Device() {
     }
 
@@ -78,5 +81,13 @@ public class Device {
 
     public void setVendor(String vendor) {
         this.vendor = vendor;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

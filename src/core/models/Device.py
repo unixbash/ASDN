@@ -15,14 +15,10 @@ class Device:
     hostname = ""
     address = ""
     vendor="unknown"
+    status="unsupported"
 
     def __init__(self, hostname, address):
-        self.hostname = hostname
         self.address = address
-
-        #Add to DB if not already there
-        if not self.isInDB(address):
-            self.addToDB()
 
         #Add to list of hosts if not present
         self.addAnsibleHost()
@@ -39,9 +35,10 @@ class Device:
         hostname = self.hostname
         updated = timeSt
         vendor=self.vendor
+        status = self.status
 
         #Generate SQL expression
-        args = [id, address, created, customerId, hostname, updated, vendor]
+        args = [id, address, created, customerId, hostname, status, updated, vendor]
         sql = 'INSERT INTO device VALUES (%s)'
 
         executeSql(sql, args)
@@ -74,7 +71,7 @@ class Device:
 
         closeConnection(ssh)
 
-    def getDeviceStatus(device):
+    def getDeviceStatus(self, device):
 
         parameters = {"temp": "", "mem-usage": "", "cpu-usage": "", "uptime": "",
                       "alarms": "", "interfaces": []}

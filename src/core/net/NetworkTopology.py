@@ -1,8 +1,6 @@
-import time
 from scapy.all import srp, conf
 from scapy.layers.l2 import Ether, ARP
 import urllib.request
-import json
 
 #check for MAC locally
 def checkMacFile(macAddr):
@@ -34,7 +32,7 @@ def scan(net, interface):
     devices = {}
     conf.verb = 0
     ans,unans = srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst = net),
-                    timeout=2, iface=interface,inter=0.1)
+                    timeout=2, iface=interface, inter=0.1)
 
     for snd, rcv in ans:
         devices[getMacVendor(rcv.sprintf(r"%Ether.src%"))] = rcv.sprintf(r"%ARP.psrc%")
