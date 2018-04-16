@@ -3,9 +3,7 @@
         {% if type=="junos_command" %}
         {{ args }}
         {% else %}
-        {% for arg in args %}
-        {{ arg }}
-        {% endfor %}
+        {{ args }}
         {% endif %}
       register: {{ type }}{{ num }}response
     - name: output {{ type }}{{ num }}

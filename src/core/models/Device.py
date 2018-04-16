@@ -1,4 +1,4 @@
-from comms.Communication import establishConnection, establishShell, closeConnection, executeCommand
+from comms.Communication import establishConnection, establishShell, closeConnection, executeCommand, executeOnServer
 from ansible.AnsibleEngine import generateYaml
 from settings.GetSettings import Server
 from utility.Util import executeSql
@@ -19,7 +19,7 @@ class Device:
 
     def __init__(self, hostname, address):
         self.address = address
-
+        self.hostname = hostname
         #Add to list of hosts if not present
         self.addAnsibleHost()
 
@@ -63,10 +63,10 @@ class Device:
         hostToAdd = self.hostname + " ansible_port=22 ansible_host=" + self.address + " ansible_user=" \
                     + server.getUname() + " ansible_ssh_pass=" + server.getPwd()
 
-        listOfHosts = executeCommand(term, "cat /etc/ansible/hosts")
+        listOfHosts = executeOnServer("cat /etc/ansible/hosts")
         # Check if the hosts or duplicate addresses don't currently exist on the server
 
-        if self.hostname not in listOfHosts and self.address not in listOfHosts:
+        if not (self.hostname in listOfHosts and self.address in listOfHosts):
             out = executeCommand(term, 'echo \"' + hostToAdd + '\"' + ' >> /etc/ansible/hosts')
 
         closeConnection(ssh)

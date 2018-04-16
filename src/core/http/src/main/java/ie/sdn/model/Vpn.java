@@ -22,14 +22,6 @@ public class Vpn {
     @Column(name = "net_id", nullable = false, unique = true)
     private String net_id;
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
-
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
-
     @Column(name = "public_ip", nullable = false)
     private String public_ip;
 
@@ -86,14 +78,6 @@ public class Vpn {
 
     public void setNet_id(String net_id) {
         this.net_id = net_id;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
     }
 
     public String getPublic_ip() {

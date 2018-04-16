@@ -2,8 +2,7 @@ import time
 import datetime
 from jinja2 import Environment, FileSystemLoader
 from comms.Communication import executeOnServer
-from utility.Util import uploadFile
-
+from utility.Util import uploadFile, replaceTabs
 
 
 def generateYaml(device, commands):
@@ -27,6 +26,7 @@ def generateYaml(device, commands):
     no=1
     for commandLIst in commands.commands:
         for commandType, command in commandLIst.items():
+            command = replaceTabs(command)
             commandData += dataTemplate.render( type=commandType,
                                                 args=command,
                                                 num=no) + "\n"

@@ -61,7 +61,8 @@ def executeSql(sql, args):
         cursor = conn.cursor()
 
         in_p = ', '.join(itertools.repeat('%s', len(args)))
-        sql = sql % in_p
+        if len(args) > 0:
+            sql = sql % in_p
         response = cursor.execute(sql, args)
         results = cursor.fetchall()
         conn.commit()
@@ -85,3 +86,6 @@ def uploadFile(file, fileName, path):
 
     ftp.storbinary('STOR ' + fileName, io.BytesIO(file.encode('utf-8')))
     ftp.quit()
+
+def replaceTabs(string):
+    return string.replace("\t", "  ")

@@ -1,7 +1,5 @@
-from ansible.AnsibleEngine import generateYaml
 from models.Device import Device
-from models.Commands import Commands
-from net.VpnGenerator import generateVPN
+from models.Vpn import VPN
 from settings.GetSettings import Server
 from net.NetworkTopology import scan
 
@@ -9,7 +7,8 @@ from net.NetworkTopology import scan
 server = Server()
 
 #Generate VPN
-vpn = generateVPN("1")
+vpn = VPN()
+vpn.generateVPN("1")
 
 #wait for new network connection
 print("API Call")

@@ -33,15 +33,24 @@ class Commands:
         self.fullCommand[type] = args
 
     #Configuration specific fullCommand
-    def configFunc(self, zeroize, rollback, confID):
+    def configFunc(self, zeroize, rollback, confID, command):
+        fullCommand = {}
         type = "junos_config"
-        args = []
-        if zeroize:
-            args["zeroize: yes"]
+
+        if command is not None:
+            select = "lines"
+            fullCommand[type] = select + ": " + command
+
+        elif zeroize:
+            select = "zeroize"
+            fullCommand[type] = select + ": " + command
             print("WARNING - Device zeroized!")
-        elif(rollback):
-            args.append("rollback: " + confID)
-        self.fullCommand[type] = args
+
+        elif rollback:
+            select = "rollback"
+            fullCommand[type] = select + ": " + confID
+
+        self.commands.append(fullCommand)
 
     #Layer 1 interface configuration
     def interL1Func(self, interfaces, description, speed, duplex, delete, agg):

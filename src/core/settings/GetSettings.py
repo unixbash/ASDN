@@ -96,3 +96,43 @@ class FtpServer:
 
     def getPwd(self):
         return self.__pwd
+
+class Firewall:
+    __hostname = ""
+    __uname = ""
+    __pwd = ""
+
+    def __init__(self):
+        try:
+            with open("settings/settings.xml") as file:
+                settingsDict = xmltodict.parse(file.read())
+
+            self.__hostname = (settingsDict['settings']['firewall-details']['hostname'])
+            self.__address = (settingsDict['settings']['firewall-details']['address'])
+            self.__lanInterface = (settingsDict['settings']['firewall-details']['lan-interface'])
+            self.__wanInterface = (settingsDict['settings']['firewall-details']['wan-interface'])
+            self.__subnet = (settingsDict['settings']['firewall-details']['subnet'])
+            self.__publicIp = (settingsDict['settings']['firewall-details']['publicIP'])
+
+            file.close()
+        except Exception as e:
+            print(e)
+
+    def getHostname(self):
+        return self.__hostname
+
+    def getAddress(self):
+        return self.__address
+
+    def getLanInterface(self):
+        return self.__lanInterface
+
+    def getWanInterface(self):
+        return self.__wanInterface
+
+    def getSubnet(self):
+        return self.__subnet
+
+    def getPublicIp(self):
+        return self.__publicIp
+
