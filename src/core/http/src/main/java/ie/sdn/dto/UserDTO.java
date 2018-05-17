@@ -7,6 +7,9 @@ public class UserDTO {
     private String email;
     private String pwd;
     private String role;
+    private String company;
+    private String phone;
+    private String companyRole;
 
     public UserDTO() {}
 
@@ -50,4 +53,27 @@ public class UserDTO {
         this.email = email;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCompanyRole() {
+        return companyRole;
+    }
+
+    public void setCompanyRole(String companyRole) {
+        this.companyRole = companyRole;
+    }
 }

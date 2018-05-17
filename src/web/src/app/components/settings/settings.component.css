@@ -7,7 +7,7 @@ body {
     width: 100%;
 }
 
-/*--- Dashboard ---*/
+/*--- Settings ---*/
 
 .dashboard-screen {
     margin-top: 5%;
@@ -21,4 +21,16 @@ body {
 .centered-dash {
     margin: 0 auto;
     width: 75%;
+}
+
+.panel-body {
+    background-color: white; 
+}
+
+.settings-btn {
+    width: 25%;
+    height: 40px;
+    border: none;
+    background-color: #00bcd4; 
+    padding: 0px 5px;
 }

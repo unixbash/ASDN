@@ -145,3 +145,16 @@ body {
   margin: 0;
   padding: 10px 0px;
 }
+
+/*Routing Information*/
+.thead-dark {
+  background-color: darkgray;
+  color: white;
+}
+
+.avail-chart {
+  width: 50%;
+  height: 300px;
+  float: left;
+  overflow: hidden;
+}

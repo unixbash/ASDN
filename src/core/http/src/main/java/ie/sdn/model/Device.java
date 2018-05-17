@@ -39,6 +39,12 @@ public class Device {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "config")
+    private String config;
+
+    @Column(name = "configOld")
+    private String configOld;
+
     public Device() {
     }
 
@@ -89,5 +95,21 @@ public class Device {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getConfig() {
+        return config;
+    }
+
+    public void setConfig(String config) {
+        this.config = config;
+    }
+
+    public String getConfigOld() {
+        return configOld;
+    }
+
+    public void setConfigOld(String configOld) {
+        this.configOld = configOld;
     }
 }

@@ -4,6 +4,7 @@
     position: fixed;
     top: 0;
     widows: 100%;
+    box-shadow: 1px 1px 20px black;
 }
 
 .logo {

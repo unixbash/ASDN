@@ -83,12 +83,12 @@
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <select class="form-control">
+                                <select name="ikeAA" id="ikeAA" class="form-control">
                                     <option value="" selected disabled>IKE Authentication Algorithm</option>
-                                    <option>MD5</option>
-                                    <option>SHA1</option>
-                                    <option>SHA-254</option>
-                                    <option>SHA-384</option>
+                                    <option value="md5">MD5</option>
+                                    <option value="sha1">SHA1</option>
+                                    <option value="sha-254">SHA-254</option>
+                                    <option value="sha-348">SHA-384</option>
                                 </select>
                             </div>                   
                         </div>
@@ -96,13 +96,13 @@
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <select class="form-control">
+                                <select name="ipsecEA" id="ipsecEA" class="form-control">
                                     <option value="" selected disabled>IPsec Encryption Algorithm</option>
-                                    <option>3DES-cbc</option>
-                                    <option>AES-128-cbc</option>
-                                    <option>AES-192-cbc</option>
-                                    <option>AES-256-cbc</option>
-                                    <option>DES-cbc</option>
+                                    <option value="3des-cbc">3DES-cbc</option>
+                                    <option value="aes-128-cbc">AES-128-cbc</option>
+                                    <option value="aes-192-cbc">AES-192-cbc</option>
+                                    <option value="aes-256-cbc">AES-256-cbc</option>
+                                    <option value="des-cbc">DES-cbc</option>
                                 </select>
                             </div>                   
                         </div>
@@ -110,14 +110,14 @@
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <select class="form-control">
+                                <select name="dh" id="dh" class="form-control">
                                     <option value="" selected disabled>DH Group</option>
-                                    <option>Group 1</option>
-                                    <option>Group 2</option>
-                                    <option>Group 5</option>
-                                    <option>Group 19</option>
-                                    <option>Group 20</option>
-                                    <option>Group 24</option>
+                                    <option value="1">Group 1</option>
+                                    <option value="2">Group 2</option>
+                                    <option value="5">Group 5</option>
+                                    <option value="19">Group 19</option>
+                                    <option value="20">Group 20</option>
+                                    <option value="21">Group 24</option>
                                 </select>
                             </div>                   
                         </div>
@@ -125,24 +125,24 @@
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <input type="number" class="form-control" name="privateAddress" placeholder="IKE Lifetime seconds">       
+                                <input type="number" class="form-control" name="ikeLife" placeholder="IKE Lifetime seconds">         
                             </div>
                         </div>
 
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <input type="password" class="form-control" name="privateAddress" placeholder="IKE Pre-shared Secret (ASCII) ">       
+                                <input type="password" class="form-control" name="ikeSecret" placeholder="IKE Pre-shared Secret (ASCII) ">       
                             </div>
                         </div>
 
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <select class="form-control">
+                                <select name="ikeVer" id="ikeVer" class="form-control">
                                     <option value="" selected disabled>IKE Version</option>
-                                    <option>IKEv1</option>
-                                    <option>IKEv2</option>
+                                    <option value="1">IKEv1</option>
+                                    <option value="2">IKEv2</option>
                                 </select>
                             </div>                   
                         </div>
@@ -178,12 +178,12 @@
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <select class="form-control">
+                                <select name="ikeAuth" id="ikeAuth" class="form-control">
                                     <option value="" selected disabled>IKE Authentication Algorithm</option>
-                                    <option>hmac-sha1-96</option>
-                                    <option>hmac-sha-256-128</option>
-                                    <option>hmac-sha-256-96</option>
-                                    <option>hmac-md5-96</option>
+                                    <option value="hmac-sha1-96">hmac-sha1-96</option>
+                                    <option value="hmac-sha-256-128">hmac-sha-256-128</option>
+                                    <option value="hmac-sha-256-96">hmac-sha-256-96</option>
+                                    <option value="hmac-md5-96">hmac-md5-96</option>
                                 </select>
                             </div>                   
                         </div>
@@ -191,16 +191,16 @@
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <select class="form-control">
+                                <select name="ipsecAuth" id="ipsecAuth" class="form-control">
                                     <option value="" selected disabled>IPsec Encryption Algorithm</option>
-                                    <option>3-DES-cbc</option>
-                                    <option>AES-128-cbc</option>
-                                    <option>AES-192-cbc</option>
-                                    <option>AES-256-cbc</option>
-                                    <option>DES-cbc</option>
-                                    <option>AES-128-gcm</option>
-                                    <option>AES-192-gcm</option>
-                                    <option>AES-256-gcm</option>
+                                    <option value="3-des-cbc">3-DES-cbc</option>
+                                    <option value="aes-128-cbc">AES-128-cbc</option>
+                                    <option value="aes-192-cbc">AES-192-cbc</option>
+                                    <option value="aes-256-cbc">AES-256-cbc</option>
+                                    <option value="des-cbc">DES-cbc</option>
+                                    <option value="aes-128-gcm">AES-128-gcm</option>
+                                    <option value="aes-192-gcm">AES-192-gcm</option>
+                                    <option value="aes-256-gcm">AES-256-gcm</option>
                                 </select>
                             </div>                   
                         </div>
@@ -208,22 +208,22 @@
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <input type="number" class="form-control" name="privateAddress" placeholder="IPsec Lifetime seconds">       
+                                <input type="number" class="form-control" name="ipsecLife" placeholder="IPsec Lifetime seconds">       
                             </div>
                         </div>
 
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <select class="form-control">
+                                <select name="ipsecPFS" id="ipsecPFS" class="form-control">
                                     <option value="" selected disabled>IPsec Perfect Forward Secrecy</option>
-                                    <option>Group 1</option>
-                                    <option>Group 2</option>
-                                    <option>Group 5</option>
-                                    <option>Group 14</option>
-                                    <option>Group 19</option>
-                                    <option>Group 20</option>
-                                    <option>Group 24</option>
+                                    <option value="1">Group 1</option>
+                                    <option value="2">Group 2</option>
+                                    <option value="5">Group 5</option>
+                                    <option value="14">Group 14</option>
+                                    <option value="19">Group 19</option>
+                                    <option value="20">Group 20</option>
+                                    <option value="24">Group 24</option>
                                 </select>
                             </div>
                         </div>

@@ -27,9 +27,9 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingTwo">
-                        <h4 class="panel-title">
+                        <h4 class="panel    -title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                Interface Configuration
+                                Interface Status
                             </a>
                         </h4>
                     </div>
@@ -38,14 +38,14 @@
                             <div class="device">    
                                 <h3>SRX1500</h3>
 
-                                <span class="port-iter" *ngFor="let port of ports; let i = index">
+                                <span class="port-iter" *ngFor="let interface of interfaces; let i = index">
                                     <br *ngIf="i % 8 == 0">
                                     <div class="port-container">
-                                        <img class="device-port" alt="port-{{port.name}}" src="{{port.portImg}}">
-                                        <p>{{port.name}}</p>
+                                        <img class="device-port" alt="port-{{interface.name}}" src="{{interface.portImg}}">
+                                        <p>{{interface.name}}</p>
                                     </div>
                                     <div class="middle">
-                                        <div class="text">{{port.portStatus}}</div>
+                                        <div class="text">{{interface.portStatus}}</div>
                                     </div>
                                 </span>
                             </div>
@@ -57,13 +57,37 @@
                     <div class="panel-heading" role="tab" id="headingThree">
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                Device Routing
+                                Routing Status
                             </a>
                         </h4>
                     </div>
                     <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
                         <div class="panel-body">
-                            Test2
+
+                            <div class="avail-chart" name="routingStatus" id="routingStatus"></div>
+
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Route Number</th>
+                                            <th scope="col">Source</th>
+                                            <th scope="col">Destionation</th>
+                                            <th scope="col">Interface</th>
+                                            <th scope="col">Type</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let route of routes; let i = index">
+                                        <tr>
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{route.source}}</td>
+                                            <td>{{route.destination}}</td>
+                                            <td>{{route.interfaces}}</td>
+                                            <td>{{route.type}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,13 +96,37 @@
                     <div class="panel-heading" role="tab" id="headingFour">
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                                VLAN Configuration
+                                Layer 2 and VLAN Status
                             </a>
                         </h4>
                     </div>
                     <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
                         <div class="panel-body">
-                            Test1
+
+                            <div class="avail-chart" name="vlanStatus" id="vlanStatus"></div>
+                            
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Number</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Tag</th>
+                                            <th scope="col">Interfaces</th>
+                                            <th scope="col">QoS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let vlan of vlans; let i = index">
+                                        <tr>
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{vlan.name}}</td>
+                                            <td>{{vlan.tag}}</td>
+                                            <td>{{vlan.interfaces}}</td>
+                                            <td>{{vlan.qos}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,13 +135,39 @@
                     <div class="panel-heading" role="tab" id="headingFive">
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-                                Protocol Configuration
+                                Security and Services Status
                             </a>
                         </h4>
                     </div>
                     <div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">
                         <div class="panel-body">
-                            Test1
+                            <div class="avail-chart" name="securityStatus" id="securityStatus"></div>
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Number</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Traversing</th>
+                                            <th scope="col">Source Address</th>
+                                            <th scope="col">Destination Address</th>
+                                            <th scope="col">Application</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let sec of secDetails; let i = index">
+                                        <tr>
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{sec.name}}</td>
+                                            <td>{{sec.traversing}}</td>
+                                            <td>{{sec.srcAddress}}</td>
+                                            <td>{{sec.dstAddress}}</td>
+                                            <td>{{sec.application}}</td>
+                                            <td>{{sec.action}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -35,7 +34,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(POST, "/*").permitAll()
                 .antMatchers(PUT, "/*").permitAll()
                 .antMatchers(GET, "/*").permitAll()
-                .antMatchers(GET, "/user/*").access("hasAuthority('USER') or hasAuthority('ADMIN')")
+                .antMatchers(GET, "localhost:4200/user/*").access("hasAuthority('USER') or hasAuthority('ADMIN')")
+                .antMatchers(GET, "localhost:4200/dashboard").access("hasAuthority('USER') or hasAuthority('ADMIN')")
+                .antMatchers(GET, "localhost:4200/network").access("hasAuthority('USER') or hasAuthority('ADMIN')")
+                .antMatchers(GET, "localhost:4200/help").access("hasAuthority('USER') or hasAuthority('ADMIN')")
+                .antMatchers(GET, "localhost:4200/settings").access("hasAuthority('USER') or hasAuthority('ADMIN')")
                 .and().httpBasic();
     }
 

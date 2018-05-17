@@ -1,8 +1,12 @@
 from scapy.all import srp, conf
 from scapy.layers.l2 import Ether, ARP
+from models.Device import Device
 import urllib.request
 
 #check for MAC locally
+from utility.Util import getAllSql
+
+
 def checkMacFile(macAddr):
     macAddr = macAddr[:7]
     try:
@@ -35,7 +39,51 @@ def scan(net, interface):
                     timeout=2, iface=interface, inter=0.1)
 
     for snd, rcv in ans:
-        devices[getMacVendor(rcv.sprintf(r"%Ether.src%"))] = rcv.sprintf(r"%ARP.psrc%")
-        print (getMacVendor(rcv.sprintf(r"%Ether.src%")) + rcv.sprintf(r" - %Ether.src% - %ARP.psrc%"))
+        devices[rcv.sprintf(r"%ARP.psrc%")] = getMacVendor(rcv.sprintf(r"%Ether.src%"))
 
     return devices
+
+def deviceAvail(devices):
+    """ Online - can SSH and log into
+        Offline - is in the DB and was able to SSH to, but no more
+        Warning - can ssh to but has an alarm
+        Unconfigured - can ssh but pwd doesn't work
+        Unsupported - not a Juniper device
+    """
+
+    # Check if a device went down
+    allDevices = getAllSql("device", ["address"])
+    for device in allDevices:
+        if device[0] not in devices:
+            address = device[0]
+            currentDevice = Device("asdn-"+address, address)
+            currentDevice.status = "offline"
+            currentDevice.addToDB(True)
+
+    # for each Juniper device login and get device status
+    for address, vendor in devices.items():
+
+        currentDevice = Device("asdn-"+address, address)
+        currentDevice.vendor = vendor
+
+        if "Juniper" in vendor:
+            status = currentDevice.getDeviceStatus()
+            # Get the device configuration
+            currentDevice.getDeviceConfig()
+
+            #Check if login is possible
+            if not status:
+                status = "unconfigured"
+            elif len(status["alarms"]) == 0:
+                status = "warning"
+            else:
+                status= "online"
+        else:
+            status = "unsupported"
+        currentDevice.status = status
+
+        # Add to DB if already there else append
+        if currentDevice.isInDB(address):
+            currentDevice.addToDB(False)
+        else:
+            currentDevice.addToDB(True)
