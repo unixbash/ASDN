@@ -1,8 +1,8 @@
 import time
 import datetime
+from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
-from comms.Communication import executeOnServer
-from utility.Util import uploadFile, replaceTabs
+from utility.Util import uploadFile, replaceTabs, callPy
 
 
 def generateYaml(device, commands):
@@ -36,5 +36,25 @@ def generateYaml(device, commands):
 
     #Execute YAML
     uploadFile(finalFileData, fileName, path)
-    return executeOnServer("export ANSIBLE_HOST_KEY_CHECKING=False\n" +
-                           "ansible-playbook " + "/home/asdn/" + fullFileName)
+
+    command = "export ANSIBLE_HOST_KEY_CHECKING=False " + "&& ansible-playbook " + "/home/asdn/" + fullFileName
+    print('\'' + command + '\'')
+    yamlFile = Path(fullFileName)
+
+    ftpWait=0
+    fileAvail = False
+    while not yamlFile.is_file() and ftpWait < 10:
+        ftpWait+=1
+        time.sleep(1)
+        if yamlFile.is_file():
+            fileAvail = True
+
+    if fileAvail:
+        py2Command = '\'' + command + '\''# launch python2 script using bash
+        result = callPy("2.7", "py2Exec", "executeOnServer", [py2Command])
+        if "AuthenticationException" in result:
+            return False
+        else:
+            return result
+    else:
+        return False

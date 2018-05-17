@@ -3,43 +3,326 @@
   
     <div class="col-md-10 col-xs-9 dashboard-screen">
           
-      <div class="row">
-          <div class="centered-dash">
-              <div class="row main devices-container">
-                  <hr class="row col-xs-12 top-bar">
-                  <div class="row heading text-centered white">
-                      <h3>Account Settings</h3>
-                  </div>
-              </div>
-  
-              <div class="row">
-                  <hr class="row col-xs-12 top-bar">
-                  <div class="row heading text-centered white">
-                      <h3>VPN Configuration Changes</h3>
-                  </div>
-              </div>
-  
-              <div class="row main configuration-container">
-                  <hr class="row col-xs-12 top-bar">
-                  <div class="row heading text-centered white">
-                      <h3>Network Configuration</h3>
-                  </div>
-              </div>
+        <div class="centered-dash">
+            
+            <div class="row main devices-container">
+                <hr class="row col-xs-12 top-bar">
+                <div class="row heading text-centered white">
+                    <h3>Account Details</h3>
+                </div>
+                <div class="row panel-body">
+                    <form>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="name" class="control-label">First Name</label>				
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                    <input type="text" name="fName" ngModel required #fName="ngModel" class="form-control"  id="fName"  placeholder="Change your First Name"/>
+                                </div>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="name" class="control-label">Last Name</label>							
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                    <input type="text" name="lName" ngModel required #lName="ngModel" class="form-control" id="lName"  placeholder="Change your Last Name"/>
+                                </div>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="email" class="control-label">Email</label>						
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                    <input type="email" name="email" ngModel required #email="ngModel" class="form-control"  id="email"  placeholder="Change your Email"/>
+                                </div>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="password" class="control-label">Password</label>						
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input type="password" name="password" ngModel required #password="ngModel" class="form-control" id="password"  placeholder="Change your Password"/>
+                                </div>
+                            </div>
+                        </div>
 
-              <div class="row main configuration-container">
-                    <hr class="row col-xs-12 top-bar">
-                    <div class="row heading text-centered white">
-                        <h3>Alerts and Notifications</h3>
-                    </div>
-              </div>
-              
-              <div class="row main devices-container">
-                    <hr class="row col-xs-12 top-bar">
-                    <div class="row heading text-centered white">
-                        <h3>Account Details</h3>
-                    </div>
-              </div>
-          </div>
-      </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="company" class="control-label">Company Name</label>				
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-building fa" aria-hidden="true"></i></span>
+                                    <input type="text" name="company" ngModel required #company="ngModel" class="form-control"  id="company"  placeholder="Add your Company Name"/>
+                                </div>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="address" class="control-label">Company Address</label>							
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-address-book fa" aria-hidden="true"></i></span>
+                                    <input type="text" name="address" ngModel required #address="ngModel" class="form-control" id="lNaaddressme"  placeholder="Add your Company Address"/>
+                                </div>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="number" class="control-label">Contact Number</label>						
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+                                    <input type="tel" name="number" ngModel required #number="ngModel" class="form-control"  id="number"  placeholder="Add your Contact Number"/>
+                                </div>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="role" class="control-label">Role</label>						
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user-circle fa-lg" aria-hidden="true"></i></span>
+                                    <input type="text" name="role" ngModel required #role="ngModel" class="form-control" id="role"  placeholder="Add your Role in the Company"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="restrict">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block settings-btn centered">Apply Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <hr class="row col-xs-12 top-bar">
+                <div class="row heading text-centered white">
+                    <h3>VPN Configuration</h3>
+                </div>
+
+                <div class="row panel-body">
+                    <form>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="publicAddress" class="control-label">Public VPN Address</label>				
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
+                                    <input type="text" class="form-control" name="publicAddress" placeholder="Your Public VPN Address">       
+                                </div>
+                            </div>
+        
+                            <div class="form-group">	
+                                <label for="privateAddress" class="control-label">Your Private Address / (CIDR)</label>			
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
+                                    <input type="text" class="form-control" name="privateAddress" placeholder="Your Private Address / (CIDR)">       
+                                </div>
+                            </div>
+        
+                            <div class="form-group">	
+                                <label for="ikeAA" class="control-label">IKE Authentication Algorithm</label>			
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
+                                    <select name="ikeAA" id="ikeAA" class="form-control">
+                                        <option value="" selected disabled>IKE Authentication Algorithm</option>
+                                        <option value="md5">MD5</option>
+                                        <option value="sha1">SHA1</option>
+                                        <option value="sha-254">SHA-254</option>
+                                        <option value="sha-348">SHA-384</option>
+                                    </select>
+                                </div>                   
+                            </div>
+        
+                            <div class="form-group">	
+                                <label for="ipsecEA" class="control-label">IPsec Encryption Algorithm</label>			
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                    <select name="ipsecEA" id="ipsecEA" class="form-control">
+                                        <option value="" selected disabled>IPsec Encryption Algorithm</option>
+                                        <option value="3des-cbc">3DES-cbc</option>
+                                        <option value="aes-128-cbc">AES-128-cbc</option>
+                                        <option value="aes-192-cbc">AES-192-cbc</option>
+                                        <option value="aes-256-cbc">AES-256-cbc</option>
+                                        <option value="des-cbc">DES-cbc</option>
+                                    </select>
+                                </div>                   
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="dh" class="control-label">DH Group</label>				
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                    <select name="dh" id="dh" class="form-control">
+                                        <option value="" selected disabled>DH Group</option>
+                                        <option value="1">Group 1</option>
+                                        <option value="2">Group 2</option>
+                                        <option value="5">Group 5</option>
+                                        <option value="19">Group 19</option>
+                                        <option value="20">Group 20</option>
+                                        <option value="21">Group 24</option>
+                                    </select>
+                                </div>                   
+                            </div>
+        
+                            <div class="form-group">	
+                                <label for="ikeLife" class="control-label">IKE Lifetime seconds</label>			
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
+                                    <input type="number" class="form-control" name="ikeLife" placeholder="IKE Lifetime seconds">       
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="ikeSecret" class="control-label">IKE Pre-shared Secret (ASCII)</label>				
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
+                                    <input type="password" class="form-control" name="ikeSecret" placeholder="IKE Pre-shared Secret (ASCII) ">       
+                                </div>
+                            </div>
+        
+                            <div class="form-group">	
+                                <label for="ikeVer" class="control-label">IKE Version</label>			
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                    <select name="ikeVer" id="ikeVer" class="form-control">
+                                        <option value="" selected disabled>IKE Version</option>
+                                        <option value="1">IKEv1</option>
+                                        <option value="2">IKEv2</option>
+                                    </select>
+                                </div>                   
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ikeAuth" class="control-label">IKE Authentication Algorithm</label>				
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
+                                    <select name="ikeAuth" id="ikeAuth" class="form-control">
+                                        <option value="" selected disabled>IKE Authentication Algorithm</option>
+                                        <option value="hmac-sha1-96">hmac-sha1-96</option>
+                                        <option value="hmac-sha-256-128">hmac-sha-256-128</option>
+                                        <option value="hmac-sha-256-96">hmac-sha-256-96</option>
+                                        <option value="hmac-md5-96">hmac-md5-96</option>
+                                    </select>
+                                </div>                   
+                            </div>
+    
+                            <div class="form-group">	
+                                <label for="ipsecAuth" class="control-label">IPsec Encryption Algorithm</label>			
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                    <select name="ipsecAuth" id="ipsecAuth" class="form-control">
+                                        <option value="" selected disabled>IPsec Encryption Algorithm</option>
+                                        <option value="3-des-cbc">3-DES-cbc</option>
+                                        <option value="aes-128-cbc">AES-128-cbc</option>
+                                        <option value="aes-192-cbc">AES-192-cbc</option>
+                                        <option value="aes-256-cbc">AES-256-cbc</option>
+                                        <option value="des-cbc">DES-cbc</option>
+                                        <option value="aes-128-gcm">AES-128-gcm</option>
+                                        <option value="aes-192-gcm">AES-192-gcm</option>
+                                        <option value="aes-256-gcm">AES-256-gcm</option>
+                                    </select>
+                                </div>                   
+                            </div>
+    
+                            <div class="form-group">	
+                                <label for="ipsecLife" class="control-label">IPsec Lifetime seconds</label>			
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
+                                    <input type="number" class="form-control" name="ipsecLife" placeholder="IPsec Lifetime seconds">       
+                                </div>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="ipsecPFS" class="control-label">IPsec Perfect Forward Secrecy</label>				
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
+                                    <select name="ipsecPFS" id="ipsecPFS" class="form-control">
+                                        <option value="" selected disabled>IPsec Perfect Forward Secrecy</option>
+                                        <option value="1">Group 1</option>
+                                        <option value="2">Group 2</option>
+                                        <option value="5">Group 5</option>
+                                        <option value="14">Group 14</option>
+                                        <option value="19">Group 19</option>
+                                        <option value="20">Group 20</option>
+                                        <option value="24">Group 24</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="restrict">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block settings-btn centered">Apply Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <hr class="row col-xs-12 top-bar">
+                <div class="row heading text-centered white">
+                    <h3>Network Configuration</h3>
+                </div>
+
+                <div class="row panel-body">
+                    <form>
+                        <div class="col-xs-6">
+    
+                            <div class="form-group">
+                                <label for="netUname" class="control-label">Network Username</label>							
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                    <input type="text" name="netUname" ngModel required #netUname="ngModel" class="form-control" id="netUname"  placeholder="Change your Default Network Username"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="netPass" class="control-label">Network Password</label>				
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input type="password" name="netPass" ngModel required #netPass="ngModel" class="form-control"  id="netPass"  placeholder="Change your Default Network Password"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="polling" class="control-label">Network Polling Interval</label>				
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-flag"></i></span>
+                                    <select name="polling" id="polling" class="form-control">
+                                        <option value="" selected disabled>Select polling interval</option>
+                                        <option>1min</option>
+                                        <option>5min</option>
+                                        <option>10min</option>
+                                        <option>20min</option>
+                                        <option>30min</option>
+                                    </select>
+                                </div>                   
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="severity" class="control-label">Minimum Notification Severity</label>				
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-flag"></i></span>
+                                    <select name="severity" id="severity" class="form-control">
+                                        <option value="" selected disabled>Any option will append all more severe events</option>
+                                        <option>Any network Events</option>
+                                        <option>Configuration Change (ASDN)</option>
+                                        <option>Configuration Change (Manual)</option>
+                                        <option>Device Down</option>
+                                        <option>Network Down</option>
+                                        
+                                    </select>
+                                </div>                   
+                            </div>
+                        </div>
+
+                        <div class="restrict">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block settings-btn centered">Apply Changes</button>
+                        </div>
+                    </form>
+                </div>
+                <br>
+            </div>
+        </div>
     </div>
   </div>

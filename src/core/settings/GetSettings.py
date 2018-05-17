@@ -1,5 +1,27 @@
 import xmltodict
 
+#Main ASDN Configuration Details
+class Asdn:
+    __uname = ""
+    __pwd = ""
+
+    def __init__(self):
+        try:
+            with open("settings/settings.xml") as file:
+                settingsDict = xmltodict.parse(file.read())
+                self.__uname = (settingsDict['settings']['asdn-details']['mstr-uname'])
+                self.__pwd = (settingsDict['settings']['asdn-details']['mstr-pwd'])
+                file.close()
+
+        except Exception as e:
+            print(e)
+
+    def getUname(self):
+        return self.__uname
+
+    def getPwd(self):
+        return self.__pwd
+
 #Connection to the Database
 class Database:
     __host=""
@@ -43,6 +65,7 @@ class Server:
     __uname = ""
     __pwd = ""
     __uplink = ""
+    __subnet = ""
 
     def __init__(self):
         try:
@@ -69,6 +92,10 @@ class Server:
 
     def getUplink(self):
         return self.__uplink
+
+    def getSubnet(self):
+        return self.__subnet
+
 
 class FtpServer:
     __host = ""
@@ -99,6 +126,11 @@ class FtpServer:
 
 class Firewall:
     __hostname = ""
+    __address = ""
+    __lanInterface = ""
+    __wanInterface = ""
+    __subnet = ""
+    __publicIp = ""
     __uname = ""
     __pwd = ""
 
@@ -113,6 +145,8 @@ class Firewall:
             self.__wanInterface = (settingsDict['settings']['firewall-details']['wan-interface'])
             self.__subnet = (settingsDict['settings']['firewall-details']['subnet'])
             self.__publicIp = (settingsDict['settings']['firewall-details']['publicIP'])
+            self.__uname = (settingsDict['settings']['firewall-details']['uname'])
+            self.__pwd = (settingsDict['settings']['firewall-details']['pwd'])
 
             file.close()
         except Exception as e:
@@ -136,3 +170,8 @@ class Firewall:
     def getPublicIp(self):
         return self.__publicIp
 
+    def getUname(self):
+        return self.__uname
+
+    def getPwd(self):
+        return self.__pwd

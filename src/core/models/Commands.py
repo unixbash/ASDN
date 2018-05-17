@@ -75,42 +75,93 @@ class Commands:
             args.append("state: absent")
         self.fullCommand[type] = args
 
-    def interL2Func(self):
+    def interL2Func(self, interface, trunk, vlans):
+        type = "junos_l2_interface"
         args = []
 
-        self.fullCommand = args
+        args.append("name: " + interface)
+        args.append("description: ASDN")
+        if trunk:
+            args.append("mode: trunk")
+            for vlan in vlans:
+                args.append("trunk_vlans:")
+                args.append("- " + vlan)
+        else:
+            args.append("mode: access")
+            args.append("access_vlan: " + vlans[0])
 
-    def interL3Func(self):
+        self.fullCommand[type] = args
+
+    def interL3Func(self, interface, address):
+        type = "junos_l3_interface"
         args = []
 
-        self.fullCommand = args
+        args.append("name: " + interface)
+        args.append("ipv4: " + address)
 
-    def installFunc(self):
+        self.fullCommand[type] = args
+
+    def installFunc(self, junos):
+        type = "junos_package"
         args = []
 
-        self.fullCommand = args
+        args.append("src: " + junos)
+        args.append("reboot: yes")
 
-    def lldpFunc(self):
+        self.fullCommand[type] = args
+
+    def lldpFunc(self, interface, disable):
+        type = "junos_lldp_interface"
         args = []
 
-        self.fullCommand = args
+        args.append("name: " + interface)
+        if disable:
+            args.append("state: disabled")
+        else:
+            args.append("state: enabled")
 
-    def routingFunc(self):
+        self.fullCommand[type] = args
+
+    def routingFunc(self, address, nextHop, delete):
+        type = "junos_static_route"
         args = []
 
-        self.fullCommand = args
+        args.append("address: " + address)
+        args.append("next_hop: " + nextHop)
 
-    def servicesFunc(self):
+        if delete:
+            args.append("state: absent")
+
+        self.fullCommand[type] = args
+
+    def servicesFunc(self, hostname, nameServ):
+        type = "junos_system"
         args = []
 
-        self.fullCommand = args
+        if len(hostname > 0):
+            args.append("hostname: " + hostname)
+        if len(nameServ > 0):
+            args.append("name_servers: " + nameServ)
 
-    def accountFunc(self):
+        if len(args > 0):
+            self.fullCommand[type] = args
+
+    def accountFunc(self, pwd):
+        type = "junos_user"
         args = []
 
-        self.fullCommand = args
+        args.append("name: asdn")
+        args.append("role: super-user")
+        args.append("password: " + pwd)
 
-    def vlanFunc(self):
+        self.fullCommand[type] = args
+
+    def vlanFunc(self, name, id, interface):
+        type = "junos_vlan"
         args = []
 
-        self.fullCommand = args
+        args.append("vlan_name: " + name)
+        args.append("vlan_id: " + id)
+        args.append("interfaces: " + interface)
+
+        self.fullCommand[type] = args

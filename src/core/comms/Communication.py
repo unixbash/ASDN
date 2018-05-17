@@ -30,7 +30,7 @@ def getXML(xml, attr):
 
 def executeCommand(term, cmd):
     term.send(cmd + "\n")
-    time.sleep(1)
+    time.sleep(2)
     # bitsize to ensure correct buffer
     output = term.recv(188388)
     # Convert byte output to string
@@ -76,7 +76,7 @@ def waitForLogin(term,pswd):
 def establishConnection(hostname, username, password):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(hostname, 22, username, password)
+    ssh.connect(hostname, 22, username, password, look_for_keys=False)
     return ssh
 
 def establishShell(ssh, server):
@@ -95,12 +95,10 @@ def closeConnection(connection):
 def executeOnServer(command):
     result = bytes('', 'utf-8')
     server = Server()
-    ssh = SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(server.getHost(), username=server.getUname(), password=server.getPwd(), port=22, look_for_keys=False,)
+    ssh = establishConnection(server.getHost(), server.getUname(), server.getPwd())
 
-    ssh_transp = ssh.get_transport()
-    chan = ssh_transp.open_session()
+    connection = ssh.get_transport()
+    chan = connection.open_session()
     chan.exec_command(command)
 
     #Continuous reading of data output
@@ -112,6 +110,7 @@ def executeOnServer(command):
             result += chan.recv_stderr(18388)
         if chan.exit_status_ready():
             break
-    ssh_transp.close()
+
+    closeConnection(connection)
 
     return result.decode('utf-8')

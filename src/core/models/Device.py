@@ -1,7 +1,8 @@
-from comms.Communication import establishConnection, establishShell, closeConnection, executeCommand, executeOnServer
+from comms.Communication import establishConnection, establishShell, closeConnection, executeCommand, executeOnServer, \
+    checkConsoleConnection, waitForTerm
 from ansible.AnsibleEngine import generateYaml
-from settings.GetSettings import Server
-from utility.Util import executeSql
+from settings.GetSettings import Server, Asdn
+from utility.Util import executeSql, outputTrim
 from utility.Util import find
 import uuid
 import datetime
@@ -16,6 +17,8 @@ class Device:
     address = ""
     vendor="unknown"
     status="unsupported"
+    config=""
+    configOld = ""
 
     def __init__(self, hostname, address):
         self.address = address
@@ -24,7 +27,7 @@ class Device:
         self.addAnsibleHost()
 
     #Add device to the database
-    def addToDB(self):
+    def addToDB(self, update):
         #Generate device details
         ts = time.time()
         timeSt = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
@@ -36,16 +39,21 @@ class Device:
         updated = timeSt
         vendor=self.vendor
         status = self.status
+        config = self.config
+        configOld = self.configOld
 
         #Generate SQL expression
-        args = [id, address, created, customerId, hostname, status, updated, vendor]
-        sql = 'INSERT INTO device VALUES (%s)'
+        args = [id, address, config, configOld, created, customerId, hostname, status, updated, vendor]
+        if update:
+            sql = 'DELETE FROM device WHERE address=' + '\"'+ address + '\";' + 'INSERT INTO device VALUES (%s)'
+        else:
+            sql = 'INSERT INTO device VALUES (%s)'
 
         executeSql(sql, args)
 
     #Check if the device is in the database
     def isInDB(self, address):
-        sql = 'SELECT id FROM device WHERE address=%s'
+        sql = 'SELECT id FROM device WHERE address='+'\"'+address+'\"'
         isPresent = executeSql(sql, [address])
 
         if isPresent== 1:
@@ -71,7 +79,7 @@ class Device:
 
         closeConnection(ssh)
 
-    def getDeviceStatus(self, device):
+    def getDeviceStatus(self):
 
         parameters = {"temp": "", "mem-usage": "", "cpu-usage": "", "uptime": "",
                       "alarms": "", "interfaces": []}
@@ -83,27 +91,55 @@ class Device:
         commands.genericFunc("show system alarms")
         commands.genericFunc("show interfaces terse")
 
-        commandOutput = generateYaml(device, commands)
+        commandOutput = generateYaml(self, commands)
 
-        # Device Temperature
-        parameters["temp"] = find(commandOutput, "CPU temperature", False).split(" ")[0] + "C"
+        if commandOutput:
+            print("command ----->" + commandOutput)
+            # Device Temperature
+            parameters["temp"] = find(commandOutput, "CPU temperature", False).split(" ")[0] + "C"
 
-        # Memory usage
-        parameters["mem-usage"] = find(commandOutput, "Total memory", False).split(" ")[-2] + "%"
+            # Memory usage
+            parameters["mem-usage"] = find(commandOutput, "Total memory", False).split(" ")[-2] + "%"
 
-        # CPU usage
-        parameters["cpu-usage"] = str(100 - int(find(commandOutput, "Idle", False).split()[0])) + "%"
+            # CPU usage
+            parameters["cpu-usage"] = str(100 - int(find(commandOutput, "Idle", False).split()[0])) + "%"
 
-        # Uptime
-        parameters["uptime"] = find(commandOutput, "Uptime", False)
+            # Uptime
+            parameters["uptime"] = find(commandOutput, "Uptime", False)
 
-        # Alarms
-        if "No alarms" in commandOutput and "No alarms" in commandOutput:
-            parameters["alarms"] = "No alarms"
+            # Alarms
+            if "No alarms" in commandOutput and "No alarms" in commandOutput:
+                parameters["alarms"] = "No alarms"
+            else:
+                parameters["alarms"] = commandOutput
+
+            # Get interface statistics
+            parameters["interfaces"] = find(commandOutput, "ge-", True)
+
+            return parameters
+
         else:
-            parameters["alarms"] = commandOutput
+            return False
 
-        # Get interface statistics
-        parameters["interfaces"] = find(commandOutput, "ge-", True)
+    #Get current, active device configuration
+    def getDeviceConfig(self):
+        deviceDetails = Asdn()
+        deviceAvailable = checkConsoleConnection(self.address, deviceDetails.getUname(), deviceDetails.getPwd())
 
-        return parameters
+        if deviceAvailable:
+            ssh = establishConnection(self.address, deviceDetails.getUname(), deviceDetails.getPwd())
+            term = establishShell(ssh, False)
+            waitForTerm(term, 3, ">")
+            current = "show configuration"
+            prev = "show system rollback 1"
+            config = outputTrim(executeCommand(term, current), current)
+            waitForTerm(term, 1, ">")
+            prevConfig = outputTrim(executeCommand(term, prev), prev)
+
+            closeConnection(ssh)
+
+            self.config = config
+            self.configOld = prevConfig
+        else:
+            self.config = "Configuration not reachable."
+            self.configOld = "Configuration not reachable."

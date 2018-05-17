@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Device } from '../../models/device';
 
 @Component({
   selector: 'app-network',
@@ -6,38 +7,15 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./network.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class NetworkComponent implements OnInit {
-
+export class NetworkComponent {
   constructor() {}
-  portImg: string = "/assets/port.png";
-  states: string[] = [
-    "/assets/port-inactive.png",
-    "/assets/port-ok.png",
-    "/assets/port-alert.png",
-    "/assets/port-error.png"
-  ];
 
-  ports: { name:string, portStatus:string, portImg:string }[] = [
-    {"name":"ge-0/0/0", "portStatus":"Inactive", "portImg":this.states[0]},
-    {"name":"ge-0/0/1", "portStatus":"", "portImg":this.states[1]},
-    {"name":"ge-0/0/2", "portStatus":"Alert", "portImg":this.states[2]},
-    {"name":"ge-0/0/3", "portStatus":"Error", "portImg":this.states[3]},
-    {"name":"ge-0/0/4", "portStatus":"", "portImg":this.states[1]},
-    {"name":"ge-0/0/5", "portStatus":"", "portImg":this.states[1]},
-    {"name":"ge-0/0/6", "portStatus":"Alert", "portImg":this.states[2]},
-    {"name":"ge-0/0/7", "portStatus":"Alert","portImg":this.states[2]},
-    {"name":"ge-0/0/8", "portStatus":"", "portImg":this.states[1]},
-    {"name":"ge-0/0/9", "portStatus":"", "portImg":this.states[1]},
-    {"name":"ge-0/0/10", "portStatus":"Inactive", "portImg":this.states[0]},
-    {"name":"ge-0/0/11", "portStatus":"Inactive", "portImg":this.states[0]},
-    {"name":"ge-0/0/12", "portStatus":"Inactive", "portImg":this.states[0]},
-    {"name":"ge-0/0/13", "portStatus":"Inactive", "portImg":this.states[0]},
-    {"name":"ge-0/0/14", "portStatus":"", "portImg":this.states[1]},
-    {"name":"ge-0/0/15", "portStatus":"", "portImg":this.states[1]},
-];
+  device:Device = new Device();
 
-  ngOnInit() {
-  }
+  interfaces = this.device.interfaces;
+  routes = this.device.routeInfo;
+  vlans = this.device.vlanInfo;
+  secDetails = this.device.securityInfo;
 
 }
 

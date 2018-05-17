@@ -36,6 +36,15 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role;
 
+    @Column(name = "company")
+    private String company;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "companyRole")
+    private String companyRole;
+
 
     public User() {
     }
@@ -88,4 +97,27 @@ public class User {
         this.role = role;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCompanyRole() {
+        return companyRole;
+    }
+
+    public void setCompanyRole(String companyRole) {
+        this.companyRole = companyRole;
+    }
 }
