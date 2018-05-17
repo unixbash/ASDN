@@ -83,3 +83,10 @@ Furthermore these are some additional comments on my progress:
   - Further improvements the network monitoring tool have been made, allowing the system to keep track of every physical interface on the device, as well as many health parameters.
   - I have carried some basic user testing by presenting the core functionality of the platform network engineers in industry. After some testing, I received positive feedback, as well as noticing some bugs in very specific use-cases.
   - Unit tests have been done on Spring and are currently being done on the Python back-end.
+
+### VPN Automation Testing (19/04/18)
+  - I have been testing how the VPN generation tool works when deploying different types of VPN configurations. 
+  - The testing inculded a publically accessigble firewall located in a datacentre and one at my house. 
+  - Most configuration types worked woithout any issues, however I was unable to set up a plicy based (instead of a route based) configuration. After hours of testing, I decided to limit the functionality and not support this feature. This shouldn'e be an issue, as most potential customers whould use site-to-site route based VPNs instead. 
+  - The belwo is an image of a WireShark capture, detailind the level at which I was troubleshooting the issue. 
+   ![wireshark](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/shark.png)
