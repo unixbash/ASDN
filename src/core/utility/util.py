@@ -1,12 +1,16 @@
 import io
 import re
 import bs4
+import time
 import pymysql
 import execnet
 import itertools
 from ftplib import FTP
+import netifaces as ni
+from pathlib import Path
 from urllib.request import urlopen
-from settings.GetSettings import Database, FtpServer
+from settings.GetSettings import Database, FtpServer, Server
+
 
 def isAscii(text):
     return all(ord(char) < 128 for char in text)
@@ -53,12 +57,13 @@ def find(src, target, all):
 
             result.append(' '.join(removeNonAlphaNum(line).strip().split()))
 
-    return result
+    return str(result)
 
 #Execute command on the SQL server
 def executeSql(sql, args):
     try:
         db = Database()
+
         conn = pymysql.connect(
             host=db.getHost(), user=db.getUname(), passwd=db.getPwd(), db=db.getDb())
         cursor = conn.cursor()
@@ -66,10 +71,12 @@ def executeSql(sql, args):
         in_p = ', '.join(itertools.repeat('%s', len(args)))
         if len(args) > 0:
             sql = sql % in_p
-        print("SQL ---> " + sql + "\nARGS ---> ")
-        print(args)
-        cursor.execute(sql, args)
-        results = cursor.fetchall()
+            cursor.execute(sql, args)
+        else:
+            cursor.execute(sql)
+
+        results = cursor.fetchone()
+
         conn.commit()
 
         return results
@@ -117,9 +124,26 @@ def uploadFile(file, fileName, path):
     ftp = FTP(ftpConnection.getHost())
     ftp.login(ftpConnection.getUname(), ftpConnection.getPwd())
     ftp.cwd(path)
+    fullName = path + fileName
 
     ftp.storbinary('STOR ' + fileName, io.BytesIO(file.encode('utf-8')))
     ftp.quit()
+
+    ftpWait = 0
+    fileAvail = False
+    ftpConnection = FtpServer()
+    ftp = FTP(ftpConnection.getHost())
+    ftp.login(ftpConnection.getUname(), ftpConnection.getPwd())
+    ftp.cwd(path)
+
+    while not fileAvail and ftpWait < 10:
+        ftpWait += 1
+        time.sleep(1)
+
+        if fileName in ftp.nlst():
+            return True
+
+    return False
 
 def replaceTabs(string):
     return string.replace("\t", "  ")
@@ -141,7 +165,7 @@ def getLatestOS(model):
 
 #https://stackoverflow.com/questions/27863832/calling-python-2-script-from-python-3
 def callPy(Version, Module, Function, ArgumentList):
-    gw      = execnet.makegateway("popen//python=python%s" % Version)
+    gw = execnet.makegateway("popen//python=python%s" % Version)
     channel = gw.remote_exec("""
         from %s import %s as the_function
         channel.send(the_function(*channel.receive()))
@@ -151,3 +175,17 @@ def callPy(Version, Module, Function, ArgumentList):
 
 def outputTrim(string, command):
     return string.replace(command, "").replace("asdn>", "").strip()
+
+#Get the server IP
+def isExecOnServer():
+    server = Server()
+    uplink = server.getUplink()
+    try:
+        ni.ifaddresses(uplink)
+        address = ni.ifaddresses(uplink)[ni.AF_INET][0]['addr']
+        if server.getAddress()==address:
+            return True
+        else:
+            return False
+    except:
+        return False
