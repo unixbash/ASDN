@@ -7,6 +7,9 @@ class Commands:
                        "account":"junos_user", "vlan":"junos_vlan"}
     commands = [{}]
 
+    def __init__(self):
+        self.commands = [{}]
+
     #Generic comand
     def genericFunc(self, command):
         type="junos_command"

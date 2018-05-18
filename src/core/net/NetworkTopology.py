@@ -2,9 +2,11 @@ from scapy.all import srp, conf
 from scapy.layers.l2 import Ether, ARP
 from models.Device import Device
 import urllib.request
+import time
 
 #check for MAC locally
-from utility.Util import getAllSql
+from settings.GetSettings import Server
+from utility.Util import getAllSql, executeSql
 
 
 def checkMacFile(macAddr):
@@ -43,7 +45,7 @@ def scan(net, interface):
 
     return devices
 
-def deviceAvail(devices):
+def deviceAvail(subnet, interval):
     """ Online - can SSH and log into
         Offline - is in the DB and was able to SSH to, but no more
         Warning - can ssh to but has an alarm
@@ -51,39 +53,51 @@ def deviceAvail(devices):
         Unsupported - not a Juniper device
     """
 
-    # Check if a device went down
-    allDevices = getAllSql("device", ["address"])
-    for device in allDevices:
-        if device[0] not in devices:
-            address = device[0]
-            currentDevice = Device("asdn-"+address, address)
-            currentDevice.status = "offline"
-            currentDevice.addToDB(True)
+    #Constantly monitor the customer's networks
+    while True:
 
-    # for each Juniper device login and get device status
-    for address, vendor in devices.items():
+        #Get all devices found on the network:
+        server = Server()
+        allNetDevices = scan(subnet, server.getUplink())
+        allDbDevices = getAllSql("device", ["address"])
 
-        currentDevice = Device("asdn-"+address, address)
-        currentDevice.vendor = vendor
+        #Update the status of devices that went offline
+        for address in allDbDevices:
+            if(address[0] not in allNetDevices):
+                device = Device("asdn-"+address[0], address[0])
+                device.status = "offline"
+                device.addToDB(True)
 
-        if "Juniper" in vendor:
-            status = currentDevice.getDeviceStatus()
-            # Get the device configuration
-            currentDevice.getDeviceConfig()
+        #Check if a device is operational
+        for address, vendor in allNetDevices.items():
+            device = Device("asdn-"+address, address)
+            device.vendor = vendor
 
-            #Check if login is possible
-            if not status:
-                status = "unconfigured"
-            elif len(status["alarms"]) == 0:
-                status = "warning"
+            #Check if the vendor is Juniper
+            if "Juniper" in vendor:
+                status = device.getDeviceStatus()
+
+                # Get the device configuration
+                #device.getDeviceConfig()
+
+                #Check if login is possible
+                if not status:
+                    status = "unconfigured"
+                elif len(status["alarms"]) == 0:
+                    status = "warning"
+                else:
+                    status= "online"
             else:
-                status= "online"
-        else:
-            status = "unsupported"
-        currentDevice.status = status
+                status = "unsupported"
 
-        # Add to DB if already there else append
-        if currentDevice.isInDB(address):
-            currentDevice.addToDB(False)
-        else:
-            currentDevice.addToDB(True)
+            #Assign the status to the device
+            device.status = status
+
+            # Add to DB if already there else append
+            if device.isInDB():
+                device.addToDB(True)
+            else:
+                device.addToDB(False)
+
+        #Pause the polling for the desired duration
+        time.sleep(interval)

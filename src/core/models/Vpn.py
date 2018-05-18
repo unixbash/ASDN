@@ -14,7 +14,7 @@ class VPN:
     def generateVPN(self, netId):
 
         try:
-            vpnParameters = executeSql("SELECT * FROM vpn WHERE net_id=(%s)", netId)[0]
+            vpnParameters = executeSql("SELECT * FROM vpn WHERE net_id=(%s)", netId)
 
             firewall = Firewall()
             commands = Commands()
@@ -53,7 +53,7 @@ class VPN:
         ipsec= set + "security ipsec "
 
         #Set variables
-        st = str(executeSql("SELECT COUNT(id) FROM vpn", [])[0][0] + 100)
+        st = str(executeSql("SELECT COUNT(id) FROM vpn", [])[0] + 100)
 
         #Interface, routing and security changes
         commands.append(interfaces + "st0 unit " + st + " family inet address " + firewall.getSubnet() + st +"/24")

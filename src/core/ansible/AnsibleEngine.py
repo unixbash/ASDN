@@ -7,6 +7,8 @@ from utility.Util import uploadFile, replaceTabs, callPy
 
 def generateYaml(device, commands):
 
+    # Add to list of hosts if not present
+    device.addAnsibleHost()
     #Set timestamp
     ts = time.time()
     tStamp = datetime.datetime.fromtimestamp(ts).strftime('-%H-%M-%S_%d-%m-%Y')
@@ -23,7 +25,7 @@ def generateYaml(device, commands):
     commandData = "\n"
 
     #Generate configuration file from all given fullCommand
-    no=1
+    no=0
     for commandLIst in commands.commands:
         for commandType, command in commandLIst.items():
             command = replaceTabs(command)
@@ -35,26 +37,16 @@ def generateYaml(device, commands):
     finalFileData = initData + commandData
 
     #Execute YAML
-    uploadFile(finalFileData, fileName, path)
-
-    command = "export ANSIBLE_HOST_KEY_CHECKING=False " + "&& ansible-playbook " + "/home/asdn/" + fullFileName
-    print('\'' + command + '\'')
-    yamlFile = Path(fullFileName)
-
-    ftpWait=0
-    fileAvail = False
-    while not yamlFile.is_file() and ftpWait < 10:
-        ftpWait+=1
-        time.sleep(1)
-        if yamlFile.is_file():
-            fileAvail = True
+    fileAvail =  uploadFile(finalFileData, fileName, path)
+    command = "ansible-playbook " + "ansible/yaml/generated/" + fileName
 
     if fileAvail:
-        py2Command = '\'' + command + '\''# launch python2 script using bash
-        result = callPy("2.7", "py2Exec", "executeOnServer", [py2Command])
-        if "AuthenticationException" in result:
+        result = callPy("2.7", "py2Exec", "executeOnServer", [command])
+        if not result:
+            print("Python2 script AuthenticationException")
             return False
         else:
-            return result
+            return str(result)
     else:
+        print("Ansible Execution Failed")
         return False

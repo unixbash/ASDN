@@ -61,18 +61,17 @@ class Database:
         return self.__pwd
 
 class Server:
-    __host = ""
+    __address = ""
     __uname = ""
     __pwd = ""
     __uplink = ""
-    __subnet = ""
 
     def __init__(self):
         try:
             with open("settings/settings.xml") as file:
                 settingsDict = xmltodict.parse(file.read())
 
-            self.__host = (settingsDict['settings']['server-details']['host'])
+            self.__address = (settingsDict['settings']['server-details']['address'])
             self.__uname = (settingsDict['settings']['server-details']['uname'])
             self.__pwd = (settingsDict['settings']['server-details']['pwd'])
             self.__uplink = (settingsDict['settings']['server-details']['uplink'])
@@ -81,8 +80,8 @@ class Server:
         except Exception as e:
             print(e)
 
-    def getHost(self):
-        return self.__host
+    def getAddress(self):
+        return self.__address
 
     def getUname(self):
         return self.__uname
@@ -92,9 +91,6 @@ class Server:
 
     def getUplink(self):
         return self.__uplink
-
-    def getSubnet(self):
-        return self.__subnet
 
 
 class FtpServer:

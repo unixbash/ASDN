@@ -2,7 +2,7 @@ from comms.Communication import establishConnection, establishShell, closeConnec
     checkConsoleConnection, waitForTerm
 from ansible.AnsibleEngine import generateYaml
 from settings.GetSettings import Server, Asdn
-from utility.Util import executeSql, outputTrim
+from utility.Util import executeSql, outputTrim, findBetween
 from utility.Util import find
 import uuid
 import datetime
@@ -15,16 +15,14 @@ class Device:
     id=""
     hostname = ""
     address = ""
-    vendor="unknown"
-    status="unsupported"
-    config=""
-    configOld = ""
+    vendor = "unknown"
+    status = "unsupported"
+    config = "null"
+    configOld = "null"
 
     def __init__(self, hostname, address):
         self.address = address
         self.hostname = hostname
-        #Add to list of hosts if not present
-        self.addAnsibleHost()
 
     #Add device to the database
     def addToDB(self, update):
@@ -45,27 +43,34 @@ class Device:
         #Generate SQL expression
         args = [id, address, config, configOld, created, customerId, hostname, status, updated, vendor]
         if update:
-            sql = 'DELETE FROM device WHERE address=' + '\"'+ address + '\";' + 'INSERT INTO device VALUES (%s)'
+            sql = 'SELECT id FROM device WHERE address=(%s)'
+            args[0] = executeSql(sql, [address])[0]
+
+            sql = 'DELETE FROM device WHERE address=(%s)'
+            executeSql(sql, [address])
+
+            sql = 'INSERT INTO device VALUES (%s)'
+            executeSql(sql, args)
         else:
             sql = 'INSERT INTO device VALUES (%s)'
-
-        executeSql(sql, args)
+            executeSql(sql, args)
 
     #Check if the device is in the database
-    def isInDB(self, address):
-        sql = 'SELECT id FROM device WHERE address='+'\"'+address+'\"'
-        isPresent = executeSql(sql, [address])
+    def isInDB(self):
+        sql = 'SELECT id FROM device WHERE address=(%s)'
+        isPresent = executeSql(sql, [self.address])
 
-        if isPresent== 1:
-            return True
-        else:
+        #The id should be a randomly generated 36 char value
+        if isPresent is None:
             return False
+        else:
+            return True
 
     #Add the Device to the list of Ansible hosts if it doesn't exist
     def addAnsibleHost(self):
         server = Server()
 
-        ssh = establishConnection(server.getHost(), server.getUname(), server.getPwd())
+        ssh = establishConnection(server.getAddress(), server.getUname(), server.getPwd())
         term = establishShell(ssh, False)
 
         hostToAdd = self.hostname + " ansible_port=22 ansible_host=" + self.address + " ansible_user=" \
@@ -93,15 +98,20 @@ class Device:
 
         commandOutput = generateYaml(self, commands)
 
+        print(commandOutput)
+
         if commandOutput:
-            print("command ----->" + commandOutput)
             # Device Temperature
             parameters["temp"] = find(commandOutput, "CPU temperature", False).split(" ")[0] + "C"
 
             # Memory usage
-            parameters["mem-usage"] = find(commandOutput, "Total memory", False).split(" ")[-2] + "%"
+            try:
+                parameters["mem-usage"] = find(commandOutput, "Total memory", False).split(" ")[-2] + "%"
+            except:
+                parameters["mem-usage"] = find(commandOutput, "Memory utilization", False).split(" ")[0] + "%"
 
             # CPU usage
+            print(str(100 - int(find(commandOutput, "Idle", False).split()[0])) + "%")
             parameters["cpu-usage"] = str(100 - int(find(commandOutput, "Idle", False).split()[0])) + "%"
 
             # Uptime
@@ -143,3 +153,7 @@ class Device:
         else:
             self.config = "Configuration not reachable."
             self.configOld = "Configuration not reachable."
+
+    def configChangeDeltas(self):
+        result = {"cpu":"", "memory":"", "interfaces":"", "reachable-roots":"",
+                  "reachable-vlans":"", "wan-pps":"", "load":"", "wan-latency":""}

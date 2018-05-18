@@ -95,7 +95,7 @@ def closeConnection(connection):
 def executeOnServer(command):
     result = bytes('', 'utf-8')
     server = Server()
-    ssh = establishConnection(server.getHost(), server.getUname(), server.getPwd())
+    ssh = establishConnection(server.getAddress(), server.getUname(), server.getPwd())
 
     connection = ssh.get_transport()
     chan = connection.open_session()

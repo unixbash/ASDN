@@ -34,11 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(POST, "/*").permitAll()
                 .antMatchers(PUT, "/*").permitAll()
                 .antMatchers(GET, "/*").permitAll()
-                .antMatchers(GET, "localhost:4200/user/*").access("hasAuthority('USER') or hasAuthority('ADMIN')")
-                .antMatchers(GET, "localhost:4200/dashboard").access("hasAuthority('USER') or hasAuthority('ADMIN')")
-                .antMatchers(GET, "localhost:4200/network").access("hasAuthority('USER') or hasAuthority('ADMIN')")
-                .antMatchers(GET, "localhost:4200/help").access("hasAuthority('USER') or hasAuthority('ADMIN')")
-                .antMatchers(GET, "localhost:4200/settings").access("hasAuthority('USER') or hasAuthority('ADMIN')")
+                .antMatchers(GET, "localhost:4200/user/*", "localhost:4200/dashboard",
+                        "localhost:4200/network", "localhost:4200/help", "localhost:4200/settings")
+                .access("hasAuthority('USER') or hasAuthority('ADMIN')")
                 .and().httpBasic();
     }
 

@@ -35,25 +35,30 @@ public class UserController {
     @GetMapping(value = "/login")
     @ResponseBody
     public UserTokenDTO loginUser(Authentication auth) {
-        String email = auth.getName();
-        User user = userRepository.findByEmail(email);
+        if (!auth.getPrincipal().equals("")) {
+            String email = auth.getName();
+            User user = userRepository.findByEmail(email);
 
-        //TODO Generate a token and save it on the DB, give that token back to the user
-        String token = UUID.randomUUID().toString();
-        UserToken userToken = new UserToken();
-        userToken.setToken(token);
-        userToken.setUserId(user.getId());
+            //Generate a token and save it on the DB, give that token back to the user
+            String token = UUID.randomUUID().toString();
+            UserToken userToken = new UserToken();
+            userToken.setToken(token);
+            userToken.setUserId(user.getId());
 
-        //Invalidate any token currently there
-        UserToken currentToken = userTokenRepository.findFirstByUserIdOrderByCreatedAtDesc(user.getId());
-        if(currentToken != null){
-            currentToken.setStatus(TokenStatus.INACTIVE.toString());
-            userTokenRepository.save(currentToken);
+            //Invalidate any token currently there
+            UserToken currentToken = userTokenRepository.findFirstByUserIdOrderByCreatedAtDesc(user.getId());
+            if(currentToken != null){
+                currentToken.setStatus(TokenStatus.INACTIVE.toString());
+                userTokenRepository.save(currentToken);
+            }
+            //Save the new token
+            userToken = userTokenRepository.save(userToken);
+
+            return new UserTokenDTO(userToken);
+        } else {
+            return null;
         }
-        //Save the new token
-        userToken = userTokenRepository.save(userToken);
 
-        return new UserTokenDTO(userToken);
     }
 
     @GetMapping(value = "/logout")

@@ -1,21 +1,27 @@
+import threading
+import time
 from models.Device import Device
 from models.Vpn import VPN
 from settings.GetSettings import Server, Asdn
 from net.NetworkTopology import scan, deviceAvail
 from utility.AccountGenerator import getEncryptedPass
 from comms.Communication import executeOnServer
+from multiprocessing import Process, Value
+from utility.Util import executeSql, findBetween
+
+#Perform a scan of all devices every 5min
+interval = 300
+subnet = "10.10.10.0/24"
+#Init a thread that continuously scans all networks
+if __name__ == '__main__':
+    t = threading.Thread(target=deviceAvail, args=(subnet,interval,))
+    t.start()
 
 #Send master pwd and login
 #masterPwd = getEncryptedPass()
-
-#Get default server settings
-server = Server()
-subnet = "10.10.10.0/24"
-
-#scan the subnet provided
-allDevices = scan(subnet, server.getUplink())
-print(allDevices)
-deviceAvail(allDevices)
+while True:
+    print("hello")
+    time.sleep(30)
 
 #Generate VPN
 vpn = VPN()

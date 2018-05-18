@@ -26,7 +26,7 @@ class Model:
 
     def __init__(self):
         # Load dataset
-        self.file = "dataset.csv"
+        self.file = "ml/dataset.csv"
         self.names = ["cpu", "memory", "interfaces", "reachable-roots", "reachable-vlans", "wan-pps", "load", "wan-latency",
                  "class"]
         self.dataset = pandas.read_csv(self.file, names=self.names)
