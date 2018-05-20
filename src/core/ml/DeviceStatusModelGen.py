@@ -37,6 +37,9 @@ class Model:
         self.seed = 7
         self.modelSave()
 
+    def setFile(self, fileName):
+        self.file = fileName
+
     #Get dataset averages
     def dataAvg(self):
         print(self.dataset.describe())
@@ -108,7 +111,3 @@ class Model:
         model = pickle.load(open(self.modelFile, 'rb'))
         result = model.predict(networkAttr)
         return result[0]
-
-
-model = Model()
-print(model.predict([["0.27","-0.8","0","1","0","17","0.21","11"]]))

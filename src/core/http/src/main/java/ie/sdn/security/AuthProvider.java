@@ -59,15 +59,6 @@ public class AuthProvider  implements AuthenticationProvider{
                     grantedAuths.add(new Authority("USER"));
                     return new UsernamePasswordAuthenticationToken(userEmail, userPassword, grantedAuths);
                 }
-
-            /*
-            if (email.equals("filip@asdn.ie") && password.equals("system")) {
-                final List<GrantedAuthority> grantedAuths = new ArrayList<>();
-                grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
-                final UserDetails principal = new User(name, password, grantedAuths);
-                final Authentication auth = new UsernamePasswordAuthenticationToken(principal, password, grantedAuths);
-                return auth;
-            */
             }
         }
 
