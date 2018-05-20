@@ -23,7 +23,13 @@ body {
     width: 75%;
 }
 
-.help-container {
+.help-container1 {
+    background-color: white;
+    height: 850px;
+    padding: 10px 50px;
+}
+
+.help-container2 {
     background-color: white;
     height: 300px;
     padding: 10px 50px;

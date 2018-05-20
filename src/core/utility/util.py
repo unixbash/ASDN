@@ -15,7 +15,7 @@ from settings.GetSettings import Database, FtpServer, Server
 def isAscii(text):
     return all(ord(char) < 128 for char in text)
 
-def dictToList(dict):
+def dictToKeyList(dict):
     return list(dict.keys())
 
 def readTextFile(fileName):
@@ -45,7 +45,7 @@ def findBetween(str, delimeter):
 
 def removeNonAlphaNum(text):
     regex = re.compile('[^a-zA-Z0-9\-\/\.]')
-    return regex.sub(' ', text)
+    return regex.sub(' ', text).strip()
 
 def find(src, target, all):
     result=[]
@@ -145,7 +145,7 @@ def uploadFile(file, fileName, path):
 
     return False
 
-def replaceTabs(string):
+def replaceTabsWithSpaces(string):
     return string.replace("\t", "  ")
 
 def getLatestOS(model):
@@ -161,26 +161,32 @@ def getLatestOS(model):
     for line in lines:
         txtVal = ''.join(line.findAll(text=True))
         if model in txtVal:
-            return txtVal.replace(" ", "").split()[1]
+            return txtVal.replace(" ", "").split()[2]
+
+    return False
 
 #https://stackoverflow.com/questions/27863832/calling-python-2-script-from-python-3
 def callPy(Version, Module, Function, ArgumentList):
-    gw = execnet.makegateway("popen//python=python%s" % Version)
-    channel = gw.remote_exec("""
-        from %s import %s as the_function
-        channel.send(the_function(*channel.receive()))
-    """ % (Module, Function))
-    channel.send(ArgumentList)
-    return channel.receive()
+    try:
+        gw = execnet.makegateway("popen//python=python%s" % Version)
+        channel = gw.remote_exec("""
+            from %s import %s as the_function
+            channel.send(the_function(*channel.receive()))
+        """ % (Module, Function))
+        channel.send(ArgumentList)
+        return channel.receive()
+    except:
+        print("Unable to execute the Python script.")
+        return False
 
 def outputTrim(string, command):
     return string.replace(command, "").replace("asdn>", "").strip()
 
 #Get the server IP
 def isExecOnServer():
-    server = Server()
-    uplink = server.getUplink()
     try:
+        server = Server()
+        uplink = server.getUplink()
         ni.ifaddresses(uplink)
         address = ni.ifaddresses(uplink)[ni.AF_INET][0]['addr']
         if server.getAddress()==address:

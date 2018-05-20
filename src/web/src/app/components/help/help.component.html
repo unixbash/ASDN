@@ -10,33 +10,47 @@
                     <div class="row heading text-centered white">
                         <h3>Getting started</h3>
                     </div>
-                    <div class="row help-container">
+                    <div class="row help-container1">
+                        <br>
+                            <p>
+                                <i>* You must configure the VPN, allowing your network to be managed by ASDN.</i>
+                            </p>
+                            <p>
+                                <i>* Ensure that all parameters you enter into the setup wizard are already configured on your local VPN capable device.</i>
+                            </p>
                             
+                            <br>
+
+                            <ul class="list-group">
+                                <li class="list-group-item active">IKE Parameters</li>
+                                <li class="list-group-item"><b>Your Public VPN Address</b> normally assigned to you by your Internet Service Provider and can be easily determined using websites like <a href="https://www.whatismyip.com/">this</a>.</li>
+                                <li class="list-group-item"><b>Your Private Address</b> / (CIDR) This is the address assigned to your internal devices and can be determined using commands such as <i>ifconfig/ifconfig</i>.</li>
+                                <li class="list-group-item"><b>IKE Authentication Algorithm</b> – to be configured on your firewall, you can choose from the following: <i>MD5, SHA1, SHA-254, SHA-384.</i></li>
+                                <li class="list-group-item"><b>IPsec Encryption Algorithm</b> – to be configured on your firewall, you can choose from the following options: <i>3DES-cbc, AES-128-cbc, AES-192-cbc, AES-256-cbc, DES-cbc.</i></li>
+                                <li class="list-group-item"><b>DH Group</b> – to be configured on your firewall, groups 1, 2, 5, 19, 20, 24 are supported.</li>
+                                <li class="list-group-item"><b>IKE Lifetime seconds</b> – this parameter should be set to a recommended value of 28570.</li>
+                                <li class="list-group-item"><b>IKE Pre-shared Secret (ASCII)</b> – this represents the passwords for establishing the VPN connection. Please ensure that the password you apply on your firewall is the same as the one in this field.</li>
+                                <li class="list-group-item"><b>IKE Version</b> – choose between version 1 and 2, however consider using v2 as it is much more secure.</li>
+                            </ul>
+                            
+                            <br>
+
+                            <ul class="list-group">
+                            <li class="list-group-item active"><b>Authentication Algorithm</b>, the system supports these options: <i>hmac-sha1-96, hmac-sha-256-128, hmac-sha-256-96, hmac-md5-96</i>.</li>
+                            <li class="list-group-item"><b>IPsec Encryption Algorithm</b>, the following are supported: <i>3-DES-cbc, AES-128-cbc, AES-192-cbc, AES-256-cbc, DES-cbc, AES-128-gcm, AES-192-gcm, AES-256-gcm</i>.</li>
+                            <li class="list-group-item"><b>IPsec Lifetime seconds</b> – the recommended value for this parameter is <i>3363</i>.</li>
+                            <li class="list-group-item"><b>IPsec Perfect Forward Secrecy</b> – a list of groups to select, with these supported: <i>Groups 1, 2, 5, 14, 19, 20, 24</i>.</li>
+                            </ul>
+                            <br>  
                     </div>
                 </div>
-                <div class="row main devices-container">
-                    <hr class="row col-xs-12 top-bar">
-                    <div class="row heading text-centered white">
-                        <h3>VPN Configuration Guide</h3>
-                    </div>
-                    <div class="row help-container">
-                    </div>
-                </div>
-                <div class="row main devices-container">
-                    <hr class="row col-xs-12 top-bar">
-                    <div class="row heading text-centered white">
-                        <h3>Frequently Asked Questions</h3>
-                    </div>
-                    <div class="row help-container">
-                        
-                    </div>
-                </div>
+                <br>
                 <div class="row main devices-container">
                     <hr class="row col-xs-12 top-bar">
                     <div class="row heading text-centered white">
                         <h3>Log a Support Case</h3>
                     </div>
-                    <div class="row help-container">
+                    <div class="row help-container2">
                         <div>
                             <app-dynamic-form [questions]="questions"></app-dynamic-form>
                         </div>

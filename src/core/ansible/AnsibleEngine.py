@@ -1,8 +1,7 @@
 import time
 import datetime
-from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
-from utility.Util import uploadFile, replaceTabs, callPy
+from utility.Util import uploadFile, replaceTabsWithSpaces, callPy
 
 
 def generateYaml(device, commands):
@@ -28,7 +27,7 @@ def generateYaml(device, commands):
     no=0
     for commandLIst in commands.commands:
         for commandType, command in commandLIst.items():
-            command = replaceTabs(command)
+            command = replaceTabsWithSpaces(command)
             commandData += dataTemplate.render( type=commandType,
                                                 args=command,
                                                 num=no) + "\n"

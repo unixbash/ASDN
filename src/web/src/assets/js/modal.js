@@ -10,4 +10,9 @@ $(window).on('load',function(){
     $('#ipsecNext').click(function(){
         $('#ipsecModal').modal('show');
     });
+
+    //Failed VPN connection 
+    $('#vpnConfig').click(function(){
+        $('#error').modal('show');
+    });
 });

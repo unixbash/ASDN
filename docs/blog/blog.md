@@ -4,20 +4,20 @@
 
 ### Initial Project Planning (01/10/17)
 
-This is my first blog entry I wil briefly outline the progress I have made thus far:
+This is my first blog entry I will briefly outline the progress I have made thus far:
   - Researched the areas the project will most affect (Computer Networking & Assisted Machine Learning)
   - Met with my potential project supervisor Mr. Brian Stone
   - Developed and submitted my Project Proposal Form
   - Carried out further research on scripting platforms such as Ansible and Puppet
   - Crated a simple System Design Diagram
-![sytem-design](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/system-design.png)
+![system-designn](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/system-design.png)
 
 ### Functional Specification Completion (15/10/17) 
 
 I have completed most of my functional specification, with only some diagrams left to be done.
 Furthermore these are some additional comments on my progress:
-  - I have set up my virtual development environment, by depoyin a dell server running ESXi 6.5.
-  - On it I have depolyed a Windows 2016 Server running Web Services.
+  - I have set up my virtual development environment, by deploying a dell server running ESXi 6.5.
+  - On it I have deployed a Windows 2016 Server running Web Services.
   - Remote VPN access has been set up to the server over a Juniper Networks SRX300 Firewall. 
   - I have been regularly meting with my supervisor each week.
   - Currently I have migrated to using trello as a project planning and Scrum Development Platform.
@@ -29,11 +29,11 @@ Furthermore these are some additional comments on my progress:
   - I have completed the design of the responsive Web-UI.  
   - The Functional Specification has been submitted.
   - I am meeting with my supervisor on a weekly basis. 
-  - I deployed the Andular front-end platform to the web-server.
-![sytem-design](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/ui.png)
+  - I deployed the Angular front-end platform to the web-server.
+![system-designn](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/ui.png)
     
 ### Website Deployment (31/10/17)
-  - I have deployed an Angular webite on the server.
+  - I have deployed an Angular website on the server.
   - The login and registration screens have been created.
   - The site-to-site VPN connection between Agile Networks and my local network have been built.
 ![vpn](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/VPN.png)
@@ -47,7 +47,7 @@ Furthermore these are some additional comments on my progress:
 ### Reconfiguring the test network (12/12/17)
   - I have had to reconfigure the VPN connection to the test network, as it would not allow some types of traffic through.
   - I have also expanded the lab to include devices from different networks. 
-  - The automated VPN build script had to be changed to accomodate the above changes. 
+  - The automated VPN build script had to be changed to accommodate the above changes. 
 ![vpn](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/net.jpg)
 
 ### Website Testing (30/01/18)
@@ -70,9 +70,9 @@ Furthermore these are some additional comments on my progress:
 
 ### Fixing Ansible Deployment Issues (31/03/18)
   - After deploying and testing the automation library for Juniper provided by Ansible, I have encountered many know issues and had to fix them during the setup phase. Below are some examples:
-  * Deploying a Yaml template file results in "[Errno 2] No such file or directory" - this is fixable by editing the $PATH system variable.
-  * After initially connecting to a device, the following appears "unknown host key", which is resolved by changing the default Ansible configuration file, the error occurs, as no device has a local DNS record available.
-  * Netconify (a python sub library used by the Juniper Ansible modules) failed, as it was unable to detect a /dev/ttyUSB0 driver, therefore not opening an SSH connection to a device. The fix for this issue took several hours and steps such as rolling back the server VM image to a know good version and downgrading to an older Ansible version, which doesn't require the /dev/ttyUSB0 driver. The developers assumed that every device will have a USB port, however the VM I deployed does not, therefore I found there this was set in the netconify library:
+  - Deploying a Yaml template file results in "[Errno 2] No such file or directory" - this is fixable by editing the $PATH system variable.
+  - After initially connecting to a device, the following appears "unknown host key", which is resolved by changing the default Ansible configuration file, the error occurs, as no device has a local DNS record available.
+  - Netconify (a python sub library used by the Juniper Ansible modules) failed, as it was unable to detect a /dev/ttyUSB0 driver, therefore not opening an SSH connection to a device. The fix for this issue took several hours and steps such as rolling back the server VM image to a know good version and downgrading to an older Ansible version, which doesn't require the /dev/ttyUSB0 driver. The developers assumed that every device will have a USB port, however the VM I deployed does not, therefore I found there this was set in the netconify library:
   ![netconify](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/netconify.png)
   - I have encountered another peculiar error, while testing the network scanner, due to being forced to use Python 2.7 and Python 3.5 for different aspects of the system (Main Application uses 3.5, Ansible requires 2.7). This issue was that none of the pip installed dependencies were usable, therefore, after some research, I found [this](https://stackoverflow.com/questions/2812520/pip-dealing-with-multiple-python-versions) post, helping me solve the issue. 
 
@@ -86,7 +86,13 @@ Furthermore these are some additional comments on my progress:
 
 ### VPN Automation Testing (19/04/18)
   - I have been testing how the VPN generation tool works when deploying different types of VPN configurations. 
-  - The testing inculded a publically accessigble firewall located in a datacentre and one at my house. 
-  - Most configuration types worked woithout any issues, however I was unable to set up a plicy based (instead of a route based) configuration. After hours of testing, I decided to limit the functionality and not support this feature. This shouldn'e be an issue, as most potential customers whould use site-to-site route based VPNs instead. 
-  - The belwo is an image of a WireShark capture, detailind the level at which I was troubleshooting the issue. 
+  - The testing included a publicly accessible firewall located in a datacentre and one at my house. 
+  - Most configuration types worked without any issues, however I was unable to set up a policy based (instead of a route based) configuration. After hours of testing, I decided to limit the functionality and not support this feature. This shouldn't be an issue, as most potential customers would use site-to-site route based VPNs instead. 
+  - The below is an image of a WireShark capture, detailing the level at which I was troubleshooting the issue. 
    ![wireshark](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/shark.png)
+
+### Final Blog Entry (19/05/18)
+  - I have developed the project and carried out different forms of testing including user unit, integration, functional as well as user testing.
+  - During the testing phase I was able to simulate different network configurations and observer the system behavior. I found that in some extreme cases the automation module would fail to change the device's configuration. To fix this issue, I had to restructure how changes were committed as well as many communication functionality. 
+  - Most of the project documentation and the video demo is complete.
+   ![final](https://gitlab.computing.dcu.ie/nikolif2/2018-ca400-nikolif2/raw/master/docs/blog/images/final.png)

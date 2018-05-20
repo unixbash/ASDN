@@ -1,0 +1,544 @@
+## Last commit: 2018-05-02 14:57:11 IST by root
+version 15.1X49-D130.6;
+system {
+    host-name SRX300;
+    time-zone Europe/Dublin;
+    name-server {
+        8.8.8.8;
+        8.8.4.4;
+    }
+    login {
+        ## SECRET-DATA
+    }
+    services {
+        ssh {
+            connection-limit 5;
+        }
+        dhcp-local-server {
+            group local-net {
+                interface irb.10;
+            }
+            group local-vpn-net {
+                interface irb.20;
+            }
+        }
+    }
+    syslog {
+        archive size 100k files 3;
+        user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+        file kmd-logs {
+            daemon info;
+            match KMD;
+        }
+    }
+    max-configurations-on-flash 49;
+    max-configuration-rollbacks 49;
+    ntp {
+        server 85.91.1.164;
+        server 54.194.18.100;
+    }
+}
+security {
+    ike {
+        proposal ike-phase1-proposal {
+            authentication-method pre-shared-keys;
+            dh-group group2;
+            authentication-algorithm sha1;
+            encryption-algorithm aes-128-cbc;
+        }
+        policy vpn-access-polcy {
+            mode aggressive;
+            proposal-set compatible;
+            pre-shared-key ascii-text ## SECRET-DATA
+        }
+        policy ike-phase1-policy {
+            mode main;
+            proposals ike-phase1-proposal;
+            pre-shared-key ascii-text ## SECRET-DATA
+        }
+        gateway vpn-access-gw {
+            ike-policy vpn-access-polcy;
+            dynamic {
+                hostname vpn;
+                connections-limit 10;
+                ike-user-type group-ike-id;
+            }
+            local-identity inet ## SECRET-DATA
+            external-interface ge-0/0/5.0;
+            aaa {
+                access-profile vpn-access;
+            }
+        }
+        gateway gw-Test-Lab {
+            ike-policy ike-phase1-policy;
+            address 78.158.110.244;
+            external-interface ge-0/0/5;
+        }
+    }
+    ipsec {
+        proposal ipsec-phase2-proposal {
+            protocol esp;
+            authentication-algorithm hmac-sha1-96;
+            encryption-algorithm aes-128-cbc;
+        }
+        policy ipsec-vpn-policy {
+            proposal-set standard;
+        }
+        policy ipsec-phase2-policy {
+            perfect-forward-secrecy {
+                keys group2;
+            }
+            proposals ipsec-phase2-proposal;
+        }
+        vpn dyn-vpn {
+            ike {
+                gateway vpn-access-gw;
+                ipsec-policy ipsec-vpn-policy;
+            }
+        }
+        vpn VPN-Test-Network {
+            ike {
+                gateway gw-Test-Lab;
+                ipsec-policy ipsec-phase2-policy;
+            }
+            establish-tunnels immediately;
+        }
+    }
+    address-book {
+        global {
+            address net_10 10.10.10.0/24;
+            address net_20 10.10.20.0/24;
+            address 58.57.65.113 58.57.65.113/32;
+            address web-server 10.10.10.25/32;
+        }
+    }
+    dynamic-vpn {
+        access-profile vpn-access;
+        interface [ irb.10 irb.20 ];
+        clients {
+            all {
+                remote-protected-resources {
+                    0.0.0.0/0;
+                }
+                ipsec-vpn dyn-vpn;
+                user {
+                    ## SECRET-DATA
+                }
+            }
+        }
+    }
+    flow {
+        tcp-mss {
+            ipsec-vpn {
+                mss 1350;
+            }
+        }
+    }
+    screen {
+        ids-option untrust-screen {
+            icmp {
+                ping-death;
+            }
+            ip {
+                source-route-option;
+                tear-drop;
+            }
+            tcp {
+                syn-flood {
+                    alarm-threshold 1024;
+                    attack-threshold 200;
+                    source-threshold 1024;
+                    destination-threshold 2048;
+                    timeout 20;
+                }
+                land;
+            }
+        }
+    }
+    nat {
+        source {
+            rule-set internal-to-WAN {
+                from zone internal;
+                to zone WAN;
+                rule WAN-access {
+                    match {
+                        source-address [ 10.10.10.0/24 10.10.20.0/24 ];
+                        destination-address 0.0.0.0/0;
+                    }
+                    then {
+                        source-nat {
+                            interface;
+                        }
+                    }
+                }
+            }
+            rule-set WAN-to-WAN {
+                from zone WAN;
+                to zone WAN;
+                rule VPN-Access {
+                    match {
+                        source-address [ 10.10.20.0/24 10.10.10.0/24 ];
+                        destination-address 0.0.0.0/0;
+                    }
+                    then {
+                        source-nat {
+                            interface;
+                        }
+                    }
+                }
+            }
+        }
+        destination {
+            pool web-nat-pool {
+                address 10.10.10.25/32;
+            }
+            rule-set rs-web {
+                from zone WAN;
+                rule r-web {
+                    match {
+                        destination-address 192.168.0.235/32;
+                    }
+                    then {
+                        destination-nat {
+                            pool {
+                                web-nat-pool;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    policies {
+        from-zone internal to-zone WAN {
+            policy allow-internal-clients {
+                match {
+                    source-address [ net_10 net_20 ];
+                    destination-address any;
+                    application any;
+                }
+                then {
+                    permit;
+                }
+            }
+        }
+        from-zone WAN to-zone internal {
+            policy allow-web {
+                match {
+                    source-address any;
+                    destination-address web-server;
+                    application junos-https;
+                }
+                then {
+                    permit;
+                    log {
+                        session-init;
+                    }
+                }
+            }
+            policy allow_vpn {
+                match {
+                    source-address any;
+                    destination-address any;
+                    application any;
+                }
+                then {
+                    permit {
+                        tunnel {
+                            ipsec-vpn dyn-vpn;
+                        }
+                    }
+                }
+            }
+        }
+        from-zone internal to-zone internal {
+            policy inter-zone {
+                match {
+                    source-address any;
+                    destination-address any;
+                    application any;
+                }
+                then {
+                    permit;
+                }
+            }
+        }
+        from-zone WAN to-zone WAN {
+            policy Allow-VPN-Users-Out {
+                match {
+                    source-address net_20;
+                    destination-address any;
+                    application any;
+                }
+                then {
+                    permit;
+                }
+            }
+        }
+    }
+    zones {
+        security-zone internal {
+            host-inbound-traffic {
+                system-services {
+                    all;
+                }
+                protocols {
+                    all;
+                }
+            }
+            interfaces {
+                irb.10;
+                irb.20;
+            }
+        }
+        security-zone WAN {
+            interfaces {
+                ge-0/0/5.0 {
+                    host-inbound-traffic {
+                        system-services {
+                            ike;
+                            https;
+                            http;
+                            dns;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+interfaces {
+    ge-0/0/0 {
+        description SW01-10.10.10.2;
+        unit 0 {
+            family ethernet-switching {
+                vlan {
+                    members INTERNAL-VLAN;
+                }
+            }
+        }
+    }
+    ge-0/0/5 {
+        description WAN;
+        unit 0 {
+            family inet {
+                address 192.168.0.235/24;
+            }
+        }
+    }
+    irb {
+        unit 10 {
+            family inet {
+                address 10.10.10.1/24;
+            }
+        }
+        unit 20 {
+            family inet {
+                address 10.10.20.1/24;
+            }
+        }
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                filter {
+                    input INBOUND-RE;
+                }
+            }
+        }
+    }
+}
+routing-options {
+    static {
+        route 0.0.0.0/0 next-hop 192.168.0.1;
+    }
+}
+protocols {
+    l2-learning {
+        global-mode switching;
+    }
+    lldp {
+        interface ge-0/0/5;
+    }
+}
+firewall {
+    family inet {
+        filter Block-58.57.65.113 {
+            term 1 {
+                from {
+                    address {
+                        58.57.65.113/32;
+                    }
+                }
+                then {
+                    syslog;
+                    discard;
+                }
+            }
+        }
+    }
+    filter INBOUND-RE {
+        term Allow-SSH {
+            from {
+                protocol tcp;
+                port 22;
+            }
+            then accept;
+        }
+        term Allow-HTTP {
+            from {
+                port 80;
+            }
+            then {
+                log;
+                accept;
+            }
+        }
+        term Allow-HTTPS {
+            from {
+                destination-port 443;
+            }
+            then {
+                log;
+                accept;
+            }
+        }
+        term Allow-TCP-ESTABLISHED {
+            from {
+                protocol tcp;
+                tcp-established;
+            }
+            then accept;
+        }
+        term Allow-NTP {
+            from {
+                address {
+                    ## SECRET-DATA
+                }
+            }
+            then accept;
+        }
+        term Allow-IPSEC {
+            from {
+                protocol [ esp ah ];
+            }
+            then accept;
+        }
+        term Allow-IKE {
+            from {
+                protocol [ udp tcp ];
+                destination-port [ 4500 500 ];
+            }
+            then accept;
+        }
+        term Allow-DHCP-Client {
+            from {
+                source-address {
+                    0.0.0.0/32;
+                }
+                destination-address {
+                    255.255.255.255/32;
+                }
+                protocol udp;
+                source-port 68;
+                destination-port 67;
+            }
+            then accept;
+        }
+        term Allow-DHCP-Server {
+            from {
+                protocol udp;
+                source-port [ 67 68 ];
+                destination-port [ 67 68 ];
+            }
+            then accept;
+        }
+        term Allow-DNS {
+            from {
+                port domain;
+            }
+            then accept;
+        }
+        term REJECT-ALL {
+            then {
+                log;
+                discard;
+            }
+        }
+    }
+}
+access {
+    domain-name-server {
+        8.8.8.8;
+        8.8.4.4;
+    }
+    profile vpn-access {
+        ## SECRET-DATA
+        address-assignment {
+            pool local-vpn-net;
+        }
+    }
+    address-assignment {
+        pool local-net {
+            family inet {
+                network 10.10.10.0/24;
+                range net-range {
+                    low 10.10.10.30;
+                    high 10.10.10.254;
+                }
+                dhcp-attributes {
+                    name-server {
+                        8.8.8.8;
+                    }
+                    router {
+                        10.10.10.1;
+                    }
+                }
+            }
+        }
+        pool local-vpn-net {
+            family inet {
+                network 10.10.20.0/24;
+                range net-range {
+                    low 10.10.20.10;
+                    high 10.10.20.254;
+                }
+                dhcp-attributes {
+                    name-server {
+                        8.8.8.8;
+                    }
+                    router {
+                        10.10.20.1;
+                    }
+                }
+            }
+        }
+    }
+    firewall-authentication {
+        web-authentication {
+            default-profile vpn-access;
+            banner {
+                success "Authorized Users Only!";
+            }
+        }
+    }
+}
+vlans {
+    INTERNAL-VLAN {
+        vlan-id 10;
+        l3-interface irb.10;
+    }
+    VPN-VLAN {
+        vlan-id 20;
+        l3-interface irb.20;
+    }
+}

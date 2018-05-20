@@ -19,6 +19,7 @@ class Device:
     status = "unsupported"
     config = "null"
     configOld = "null"
+    latestOS = "N/A"
 
     def __init__(self, hostname, address):
         self.address = address
@@ -39,9 +40,10 @@ class Device:
         status = self.status
         config = self.config
         configOld = self.configOld
+        latestOS = self.latestOS
 
         #Generate SQL expression
-        args = [id, address, config, configOld, created, customerId, hostname, status, updated, vendor]
+        args = [id, address, config, configOld, created, customerId, hostname, latestOS, status, updated, vendor]
         if update:
             sql = 'SELECT id FROM device WHERE address=(%s)'
             args[0] = executeSql(sql, [address])[0]

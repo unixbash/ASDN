@@ -1,0 +1,39 @@
+---
+- hosts: asdn-10.10.10.224
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: junos_command1
+      junos_command:
+        commands: show chassis routing-engine
+      register: junos_command1response
+    - name: output junos_command1
+      debug:
+        var: junos_command1response.stdout_lines 
+
+    - name: junos_command2
+      junos_command:
+        commands: show chassis alarms
+      register: junos_command2response
+    - name: output junos_command2
+      debug:
+        var: junos_command2response.stdout_lines 
+
+    - name: junos_command3
+      junos_command:
+        commands: show system alarms
+      register: junos_command3response
+    - name: output junos_command3
+      debug:
+        var: junos_command3response.stdout_lines 
+
+    - name: junos_command4
+      junos_command:
+        commands: show interfaces terse
+      register: junos_command4response
+    - name: output junos_command4
+      debug:
+        var: junos_command4response.stdout_lines 
+

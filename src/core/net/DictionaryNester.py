@@ -21,7 +21,7 @@ def mergeDicts(dict1, dict2):
         else:
             yield (k, dict2[k])
 
-def generateStructure(str):
+def (str):
     d = current = {}
     list_of_nested_commands = []
 

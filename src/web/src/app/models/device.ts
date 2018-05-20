@@ -1,3 +1,7 @@
+export class DevicesStatusToken {
+    status:[string];
+}
+
 export class Device {
     id = "1";
     name: "SRX1500";

@@ -1,9 +1,10 @@
-from comms.Communication import sendCommand
+from comms.Communication import sendCommand, establishShell, establishConnection
 from net.DictionaryNester import generateStructure
 from utility.LinkedList import *
 from utility.Util import *
 
-#Commands class
+#Used to generate the device's entire syntax structure (takes a few hour to execute
+#Useful when training the ML Models
 class Command:
     value = ""
     isExecutable = False
@@ -79,9 +80,3 @@ def makeTree(term, command):
 
         commandTree.clear()
         return command
-
-
-def parseDeviceSyntax(term, initialString):
-
-    startTree(term, initialString)
-    generateStructure(dictToList(data))

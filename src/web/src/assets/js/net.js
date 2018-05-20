@@ -28,7 +28,6 @@ function netMapInit(){
         ]);
 
         
-
         // provide the data in the vis format
         var data = {
             nodes: nodes,

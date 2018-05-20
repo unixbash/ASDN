@@ -1,0 +1,1 @@
+All of the above are ample YAML files generated to run on the devices on the customer's network.

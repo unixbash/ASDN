@@ -6,7 +6,7 @@
             <div class="modal-body">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <div class="modal-head text-centered">
-                    <h1 class="white">Setup Wizzard</h1>
+                    <h1 class="white">Setup Wizard</h1>
                     <img class="col-xs-12 setup-logo" src="/assets/asdn.png" alt="logo">
                     <h3 class="white">Let's Get Started</h3>
                 </div>
@@ -39,30 +39,6 @@
                     </h2>
                 </div>
                 <div class="modal-ike-text">
-
-                    <!--Show if there is nothing in the ewquired input-->
-                    <!--
-                    <div *ngIf="!publicAddress; else formInfo">
-                        <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
-                            <div class="form-container">
-                                <div class="row columns">
-                                    <h1>FORM</h1>
-                                    <input type="text" formControlName="publicAddress" placeholder="Public Address">
-                                </div>
-                            </div>
-                            <button type="submit" class="btn" value="Next" [disabled]="!rForm.valid">Next</button>
-                        </form>
-                    </div>
-
-                    <ng-template #formInfo>
-                        <div class="form-container">
-                            <div class="row columns">
-                                {{publicAddress}}
-                            </div>
-                        </div>
-
-                    </ng-template>
-                    -->
 
                     <form class="form-horizontal" id="ike-form">
                         
@@ -179,7 +155,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
                                 <select name="ikeAuth" id="ikeAuth" class="form-control">
-                                    <option value="" selected disabled>IKE Authentication Algorithm</option>
+                                    <option value="" selected disabled>Authentication Algorithm</option>
                                     <option value="hmac-sha1-96">hmac-sha1-96</option>
                                     <option value="hmac-sha-256-128">hmac-sha-256-128</option>
                                     <option value="hmac-sha-256-96">hmac-sha-256-96</option>
@@ -232,6 +208,30 @@
                             <button id="vpnConfig" type="button" class="btn btn-primary btn-lg btn-block login-button centered" data-dismiss="modal">Finish</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Connection - Failed-->
+<div class="modal fade" id="error" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content modal-container">
+            <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-head text-centered">
+                    
+                    <h2 class="white">
+                        <i class="fa fa-globe"></i>
+                        Could not establish VPN
+                    </h2>
+                </div>
+                <div class="modal-ike-text">
+                    <div class="modal-btns text-centered">
+                        <button id="vpnConfig" type="button" class="btn btn-primary btn-lg btn-block login-button centered" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>

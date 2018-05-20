@@ -45,9 +45,11 @@ public class Device {
     @Column(name = "configOld")
     private String configOld;
 
+    @Column(name = "latestos")
+    private String latestos;
+
     public Device() {
     }
-
 
     public Date getCreatedAt() {
         return createdAt;
@@ -111,5 +113,14 @@ public class Device {
 
     public void setConfigOld(String configOld) {
         this.configOld = configOld;
+    }
+
+
+    public String getLatestos() {
+        return latestos;
+    }
+
+    public void setLatestos(String latestos) {
+        this.latestos = latestos;
     }
 }

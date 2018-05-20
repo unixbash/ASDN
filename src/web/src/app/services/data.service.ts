@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-//import { get } from 'http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import {Observable} from 'rxjs/Rx';
 import { post } from 'selenium-webdriver/http';
+import { Device } from '../models/device';
+import { DevicesStatusToken } from '../models/device';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
+  ENDPOINT = "http://localhost:8080/devstatus";
 
-  constructor() { 
-    console.log("DataService connected!");
-  }
-
-  getPosts() {
-    //return this.http.get('https://jsonplaceholder.typicode.com/posts')
-    //  .map(res => res.json());
-  }
+  constructor(private http: Http) { }
+   ngOnInit() {
+      this.http.get(this.ENDPOINT).
+      map((response) => response.json()).
+      subscribe((data) => console.log(data))
+   }
 }

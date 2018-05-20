@@ -24,7 +24,9 @@ export class DashboardComponent implements OnInit {
   ];
 
   oldConfig: String =
-  `system {
+  `
+  ## Last commit: 2018-05-02 14:57:11 IST by asdn
+  system {
     host-name SRX210;
     time-zone America/New_York;
     root-authentication {
@@ -213,7 +215,7 @@ vlans {
 
 newConfig: String = this.oldConfig;
 
-
+    
 
   constructor() {}
 
