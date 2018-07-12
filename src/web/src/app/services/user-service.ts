@@ -19,6 +19,19 @@ export class UserService{
                         .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 
+    logoutUser(username:string,token:string) : Observable<UserToken> {
+        let headers = new Headers();
+        let auth =  btoa(username + ":" + token);
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'Basic ' + auth)
+        let options       = new RequestOptions({ headers: headers }); 
+
+        return this.http.get(this.ENDPOINT + "logout",options)
+                        .map((res:Response) => res.json())                               
+                        .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+
+    }
+
     registerUser (body:Object): Observable<User> {
         let bodyString  = JSON.stringify(body);
         let headers     = new Headers({ 'Content-Type': 'application/json' }); 

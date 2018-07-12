@@ -1,0 +1,1165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mlt LC_NUMERIC="en_IE" version="6.7.0" title="Shotcut version 18.05.08" producer="main bin">
+  <profile description="HD 1080p 25 fps" width="1920" height="1080" progressive="1" sample_aspect_num="1" sample_aspect_den="1" display_aspect_num="16" display_aspect_den="9" frame_rate_num="30" frame_rate_den="1" colorspace="709"/>
+  <playlist id="main bin">
+    <property name="xml_retain">1</property>
+  </playlist>
+  <producer id="black" in="00:00:00.000" out="00:04:56.633">
+    <property name="length">00:04:56.667</property>
+    <property name="eof">pause</property>
+    <property name="resource">black</property>
+    <property name="aspect_ratio">1</property>
+    <property name="mlt_service">color</property>
+    <property name="set.test_audio">0</property>
+  </producer>
+  <playlist id="background">
+    <entry producer="black" in="00:00:00.000" out="00:04:56.633"/>
+  </playlist>
+  <producer id="producer0" title="Anonymous Submission" in="00:00:00.000" out="00:00:11.133">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">net.jpg</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="shotcut:hash">a96656f1fc29f4fa264f59a4a8814b71</property>
+    <property name="ignore_points">0</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter0" out="00:00:03.967">
+      <property name="start">1</property>
+      <property name="level">0=0;31=1</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeInBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animIn">32</property>
+    </filter>
+    <filter id="filter1" out="00:00:03.967">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">0=-60; 31=0</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">32</property>
+    </filter>
+    <filter id="filter2" out="00:00:11.133">
+      <property name="start">1</property>
+      <property name="level">318=1;334=0</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeOutBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animOut">17</property>
+    </filter>
+    <filter id="filter3" out="00:00:11.133">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">318=0; 334=-60</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">17</property>
+    </filter>
+  </producer>
+  <producer id="producer1" title="Anonymous Submission" in="00:00:00.000" out="00:00:28.667">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">fiber.jpg</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="shotcut:hash">65c8e81888178605ed6eb3fea481e60d</property>
+    <property name="ignore_points">0</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter4" out="00:00:28.667">
+      <property name="start">1</property>
+      <property name="level">812=1;860=0</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeOutBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animOut">49</property>
+    </filter>
+    <filter id="filter5" out="00:00:28.667">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">812=0; 860=-60</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">49</property>
+    </filter>
+    <filter id="filter6" out="00:00:27.767">
+      <property name="start">1</property>
+      <property name="level">0=0;21=1</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeInBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animIn">22</property>
+    </filter>
+    <filter id="filter7" out="00:00:27.767">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">0=-60; 21=0</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">22</property>
+    </filter>
+  </producer>
+  <producer id="producer2" title="Anonymous Submission" in="00:00:00.000" out="00:00:29.767">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">solution.jpg</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="shotcut:hash">fdab54d88e9b90392fa7ad50c4326603</property>
+    <property name="ignore_points">0</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter8" out="00:00:23.600">
+      <property name="start">1</property>
+      <property name="level">0=0;25=1</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeInBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animIn">26</property>
+    </filter>
+    <filter id="filter9" out="00:00:23.600">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">0=-60; 25=0</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">26</property>
+    </filter>
+    <filter id="filter10" out="00:00:29.767">
+      <property name="start">1</property>
+      <property name="level">841=1;893=0</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeOutBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animOut">53</property>
+    </filter>
+    <filter id="filter11" out="00:00:29.767">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">841=0; 893=-60</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">53</property>
+    </filter>
+  </producer>
+  <producer id="producer3" title="Anonymous Submission" in="00:00:00.000" out="00:00:01.133">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">login.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="shotcut:hash">67bc16c13ce876ece0b380b6e44da3c0</property>
+    <property name="ignore_points">0</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter12" out="00:00:03.967">
+      <property name="start">1</property>
+      <property name="level">0=0;14=1</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeInBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animIn">15</property>
+    </filter>
+    <filter id="filter13" out="00:00:03.967">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">0=-60; 14=0</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">15</property>
+    </filter>
+  </producer>
+  <producer id="producer4" title="Anonymous Submission" in="00:00:00.000" out="00:00:30.600">
+    <property name="length">00:00:30.633</property>
+    <property name="eof">pause</property>
+    <property name="resource">2:login.webm</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">2</property>
+    <property name="warp_resource">login.webm</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="shotcut:hash">92c6404b32d23cc15eca3b1a4e651c47</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <property name="shotcut:caption">login.webm (2x)</property>
+    <property name="shotcut:detail">login.webm</property>
+    <property name="shotcut:comment"></property>
+  </producer>
+  <producer id="producer5" title="Anonymous Submission" in="00:00:00.000" out="00:00:52.633">
+    <property name="length">00:00:52.667</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.5:wizzard.webm</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.5</property>
+    <property name="warp_resource">wizzard.webm</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="shotcut:hash">b4e16e47e140582c7702cba1bf2c19a4</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <property name="shotcut:caption">wizzard.webm (1.5x)</property>
+    <property name="shotcut:detail">wizzard.webm</property>
+    <property name="shotcut:comment"></property>
+  </producer>
+  <producer id="producer6" title="Anonymous Submission" in="00:00:00.000" out="00:00:12.600">
+    <property name="length">00:00:12.633</property>
+    <property name="eof">pause</property>
+    <property name="resource">error.webm</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="shotcut:hash">f557a1f9cc2ec7da8dff6071648539ca</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">error.webm</property>
+    <property name="shotcut:detail">error.webm</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer7" title="Anonymous Submission" in="00:00:00.000" out="00:01:20.433">
+    <property name="length">00:01:20.467</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.5:dashboard.webm</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.5</property>
+    <property name="warp_resource">dashboard.webm</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="shotcut:hash">0ad974e68bce2fd0516a6218ef5994b5</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">dashboard.webm (1.5x)</property>
+    <property name="shotcut:detail">dashboard.webm</property>
+    <property name="shotcut:comment"></property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter14" out="00:00:49.467">
+      <property name="start">1</property>
+      <property name="level">1475=1;1484=0</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeOutBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animOut">10</property>
+    </filter>
+    <filter id="filter15" out="00:00:49.467">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">1475=0;1484=-60</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">10</property>
+    </filter>
+    <filter id="filter16" out="00:00:49.467">
+      <property name="start">1</property>
+      <property name="level">0=0;60=1</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeInBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animIn">61</property>
+    </filter>
+    <filter id="filter17" out="00:00:49.467">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">0=-60;60=0</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">61</property>
+    </filter>
+  </producer>
+  <producer id="producer8" title="Anonymous Submission" in="00:00:00.000" out="00:00:48.100">
+    <property name="length">00:00:48.133</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.5:network.webm</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.5</property>
+    <property name="warp_resource">network.webm</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="shotcut:hash">28509fa04d5fefc7afb656d6f28300b7</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <property name="shotcut:caption">network.webm (1.5x)</property>
+    <property name="shotcut:detail">network.webm</property>
+    <property name="shotcut:comment"></property>
+    <filter id="filter18" in="00:00:00.533" out="00:00:48.100">
+      <property name="start">1</property>
+      <property name="level">0=0;8=1</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeInBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animIn">9</property>
+    </filter>
+    <filter id="filter19" in="00:00:00.533" out="00:00:48.100">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">0=-60;8=0</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">9</property>
+    </filter>
+    <filter id="filter20" in="00:00:00.533" out="00:00:48.100">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">muteVolume</property>
+      <property name="gain">0</property>
+    </filter>
+  </producer>
+  <producer id="producer9" title="Anonymous Submission" in="00:00:00.000" out="00:00:09.133">
+    <property name="length">00:00:09.167</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.5:help.webm</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.5</property>
+    <property name="warp_resource">help.webm</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="shotcut:hash">25df260b4a3aaaf960241305a01a7d77</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <property name="shotcut:caption">help.webm (1.5x)</property>
+    <property name="shotcut:detail">help.webm</property>
+    <property name="shotcut:comment"></property>
+    <filter id="filter21" out="00:00:09.133">
+      <property name="start">1</property>
+      <property name="level">212=1;274=0</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeOutBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animOut">63</property>
+    </filter>
+    <filter id="filter22" out="00:00:09.133">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">212=0;274=-60</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">63</property>
+    </filter>
+  </producer>
+  <producer id="producer10" title="Anonymous Submission" in="00:00:00.000" out="00:00:08.700">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">20180520_150739.jpg</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="shotcut:hash">6009f6724ac6f4b25651e31b71a6853c</property>
+    <property name="ignore_points">0</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter23" out="00:00:07.267">
+      <property name="start">1</property>
+      <property name="level">0=0;47=1</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeInBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animIn">48</property>
+    </filter>
+    <filter id="filter24" out="00:00:07.267">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">0=-60; 47=0</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">48</property>
+    </filter>
+    <filter id="filter25" out="00:00:08.700">
+      <property name="start">1</property>
+      <property name="level">260=1;261=0</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeOutBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animOut">2</property>
+    </filter>
+    <filter id="filter26" out="00:00:08.700">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">260=0; 261=-60</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">2</property>
+    </filter>
+  </producer>
+  <producer id="producer11" title="Anonymous Submission" in="00:00:00.000" out="00:00:08.033">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">20180520_153428.jpg</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="shotcut:hash">4fc1f8726b381521e444a985bf10b028</property>
+    <property name="ignore_points">0</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter27" out="00:00:08.033">
+      <property name="start">1</property>
+      <property name="level">0=0;2=1</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeInBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animIn">3</property>
+    </filter>
+    <filter id="filter28" out="00:00:08.033">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">0=-60; 2=0</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">3</property>
+    </filter>
+    <filter id="filter29" out="00:00:08.033">
+      <property name="start">1</property>
+      <property name="level">240=1;241=0</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeOutBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animOut">2</property>
+    </filter>
+    <filter id="filter30" out="00:00:08.033">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">240=0; 241=-60</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">2</property>
+    </filter>
+  </producer>
+  <producer id="producer12" title="Anonymous Submission" in="00:00:00.000" out="00:00:04.300">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">config.jpg</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="shotcut:hash">d725f71b63999a5f7c55908a330ff92e</property>
+    <property name="ignore_points">0</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter31" out="00:00:09.433">
+      <property name="start">1</property>
+      <property name="level">0=0;2=1</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeInBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animIn">3</property>
+    </filter>
+    <filter id="filter32" out="00:00:09.433">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">0=-60; 2=0</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">3</property>
+    </filter>
+    <filter id="filter33" out="00:00:04.300">
+      <property name="start">1</property>
+      <property name="level">128=1;129=0</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeOutBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animOut">2</property>
+    </filter>
+    <filter id="filter34" out="00:00:04.300">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">128=0; 129=-60</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">2</property>
+    </filter>
+  </producer>
+  <producer id="producer13" title="Anonymous Submission" in="00:00:00.133" out="00:00:15.767">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">summary.jpg</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="shotcut:hash">c3a4f103ad4e798c43cd239f23837e8c</property>
+    <property name="ignore_points">0</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter35" in="00:00:00.133" out="00:00:15.767">
+      <property name="start">1</property>
+      <property name="level">458=1;469=0</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeOutBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animOut">12</property>
+    </filter>
+    <filter id="filter36" in="00:00:00.133" out="00:00:15.767">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">458=0; 469=-60</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">12</property>
+    </filter>
+    <filter id="filter37" in="00:00:00.133" out="00:00:14.000">
+      <property name="start">1</property>
+      <property name="level">0=0;1=1</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeInBrightness</property>
+      <property name="alpha">1</property>
+      <property name="shotcut:animIn">2</property>
+    </filter>
+    <filter id="filter38" in="00:00:00.133" out="00:00:14.000">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">0=-60; 1=0</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">2</property>
+    </filter>
+  </producer>
+  <playlist id="playlist0">
+    <property name="shotcut:video">1</property>
+    <property name="shotcut:name">V1</property>
+    <property name="shotcut:lock">1</property>
+    <entry producer="producer0" in="00:00:00.000" out="00:00:11.133"/>
+    <entry producer="producer1" in="00:00:00.000" out="00:00:28.667"/>
+    <entry producer="producer2" in="00:00:00.000" out="00:00:29.767"/>
+    <blank length="00:00:00.033"/>
+    <entry producer="producer3" in="00:00:00.000" out="00:00:01.133"/>
+    <blank length="00:00:00.033"/>
+    <entry producer="producer4" in="00:00:00.267" out="00:00:28.000"/>
+    <entry producer="producer5" in="00:00:00.000" out="00:00:51.733"/>
+    <entry producer="producer6" in="00:00:02.467" out="00:00:05.533"/>
+    <entry producer="producer7" in="00:00:00.000" out="00:00:49.467"/>
+    <entry producer="producer8" in="00:00:00.533" out="00:00:48.100"/>
+    <entry producer="producer9" in="00:00:00.000" out="00:00:09.133"/>
+    <entry producer="producer10" in="00:00:00.000" out="00:00:08.700"/>
+    <entry producer="producer11" in="00:00:00.000" out="00:00:08.033"/>
+    <entry producer="producer12" in="00:00:00.000" out="00:00:04.300"/>
+    <entry producer="producer13" in="00:00:00.133" out="00:00:15.767"/>
+    <filter id="filter39" out="00:04:58.800">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">muteVolume</property>
+      <property name="gain">0</property>
+    </filter>
+  </playlist>
+  <producer id="producer14" title="Anonymous Submission" in="00:00:00.000" out="00:02:27.233">
+    <property name="length">00:02:27.267</property>
+    <property name="eof">pause</property>
+    <property name="resource">background.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">47de3f77f526670952f7abe882c617c3</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">background.mp3</property>
+    <property name="shotcut:detail">background.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter40" out="00:02:27.233">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">0=-60;76=0</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">77</property>
+    </filter>
+    <filter id="filter41" out="00:02:16.200">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">4059=0;4086=-60</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">28</property>
+    </filter>
+    <filter id="filter42" out="00:02:12.167">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">-30.7</property>
+      <property name="mlt_service">volume</property>
+    </filter>
+  </producer>
+  <producer id="producer15" title="Anonymous Submission" in="00:00:00.000" out="00:02:27.233">
+    <property name="length">00:02:27.267</property>
+    <property name="eof">pause</property>
+    <property name="resource">background.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">47de3f77f526670952f7abe882c617c3</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">background.mp3</property>
+    <property name="shotcut:detail">background.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter43" in="00:00:06.033" out="00:02:19.967">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">-30.7</property>
+      <property name="mlt_service">volume</property>
+    </filter>
+  </producer>
+  <tractor id="tractor0" title="Anonymous Submission" global_feed="1" in="00:00:00.000" out="00:00:06.000">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer14" in="00:02:12.200" out="00:02:18.200"/>
+    <track producer="producer15" in="00:00:00.000" out="00:00:06.000"/>
+    <transition id="transition0" out="00:00:06.000">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+    </transition>
+    <transition id="transition1" out="00:00:06.000">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+    </transition>
+    <filter id="filter44" out="00:00:06.000">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">-31.5</property>
+      <property name="mlt_service">volume</property>
+    </filter>
+  </tractor>
+  <producer id="producer16" title="Anonymous Submission" in="00:00:00.000" out="00:02:27.233">
+    <property name="length">00:02:27.267</property>
+    <property name="eof">pause</property>
+    <property name="resource">background.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">47de3f77f526670952f7abe882c617c3</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">background.mp3</property>
+    <property name="shotcut:detail">background.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter45" in="00:00:03.233" out="00:00:27.000">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">695=0;713=-60</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">19</property>
+    </filter>
+    <filter id="filter46" in="00:00:03.233" out="00:00:28.267">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">-36.9</property>
+      <property name="mlt_service">volume</property>
+    </filter>
+  </producer>
+  <tractor id="tractor1" title="Anonymous Submission" global_feed="1" in="00:00:00.000" out="00:00:00.633">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer15" in="00:02:20.000" out="00:02:20.633"/>
+    <track producer="producer16" in="00:00:02.567" out="00:00:03.200"/>
+    <transition id="transition2" out="00:00:00.633">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+    </transition>
+    <transition id="transition3" out="00:00:00.633">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+    </transition>
+    <filter id="filter47" out="00:00:00.633">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">-33.8</property>
+      <property name="mlt_service">volume</property>
+    </filter>
+  </tractor>
+  <playlist id="playlist1">
+    <property name="shotcut:audio">1</property>
+    <property name="shotcut:name">A1</property>
+    <property name="shotcut:lock">0</property>
+    <entry producer="producer14" in="00:00:00.000" out="00:02:12.167"/>
+    <entry producer="tractor0" in="00:00:00.000" out="00:00:06.000"/>
+    <entry producer="producer15" in="00:00:06.033" out="00:02:19.967"/>
+    <entry producer="tractor1" in="00:00:00.000" out="00:00:00.633"/>
+    <entry producer="producer16" in="00:00:03.233" out="00:00:27.000"/>
+    <filter id="filter48" out="00:04:54.800">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">-8.4</property>
+      <property name="mlt_service">volume</property>
+    </filter>
+  </playlist>
+  <producer id="producer17" title="Anonymous Submission" in="00:00:00.000" out="00:00:09.333">
+    <property name="length">00:00:09.367</property>
+    <property name="eof">pause</property>
+    <property name="resource">intro.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">21d3f0b6d7123ea88e384b9463563ad4</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">intro.mp3</property>
+    <property name="shotcut:detail">intro.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer18" title="Anonymous Submission" in="00:00:00.000" out="00:00:27.433">
+    <property name="length">00:00:27.467</property>
+    <property name="eof">pause</property>
+    <property name="resource">problem.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">e2bb3fcb1054401c6798aaa3a932edbd</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">problem.mp3</property>
+    <property name="shotcut:detail">problem.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer19" title="Anonymous Submission" in="00:00:00.000" out="00:00:48.933">
+    <property name="length">00:00:48.967</property>
+    <property name="eof">pause</property>
+    <property name="resource">solution.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">5af7a833aadef0c9f46fa3378ca55f0b</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">solution.mp3</property>
+    <property name="shotcut:detail">solution.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer20" title="Anonymous Submission" in="00:00:00.000" out="00:00:48.933">
+    <property name="length">00:00:48.967</property>
+    <property name="eof">pause</property>
+    <property name="resource">solution.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">5af7a833aadef0c9f46fa3378ca55f0b</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">solution.mp3</property>
+    <property name="shotcut:detail">solution.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer21" title="Anonymous Submission" in="00:00:00.000" out="00:00:48.933">
+    <property name="length">00:00:48.967</property>
+    <property name="eof">pause</property>
+    <property name="resource">solution.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">5af7a833aadef0c9f46fa3378ca55f0b</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">solution.mp3</property>
+    <property name="shotcut:detail">solution.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer22" title="Anonymous Submission" in="00:00:00.000" out="00:00:26.967">
+    <property name="length">00:00:27.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">login.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">68150fe11aef7f630875d6d98ddc6324</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">login.mp3</property>
+    <property name="shotcut:detail">login.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer23" title="Anonymous Submission" in="00:00:00.000" out="00:00:26.967">
+    <property name="length">00:00:27.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">login.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">68150fe11aef7f630875d6d98ddc6324</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">login.mp3</property>
+    <property name="shotcut:detail">login.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer24" title="Anonymous Submission" in="00:00:00.000" out="00:01:21.600">
+    <property name="length">00:01:21.633</property>
+    <property name="eof">pause</property>
+    <property name="resource">wizard.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">027b5f5cfad3ca76b95da4729fa265ed</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">wizard.mp3</property>
+    <property name="shotcut:detail">wizard.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer25" title="Anonymous Submission" in="00:00:00.000" out="00:01:21.600">
+    <property name="length">00:01:21.633</property>
+    <property name="eof">pause</property>
+    <property name="resource">wizard.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">027b5f5cfad3ca76b95da4729fa265ed</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">wizard.mp3</property>
+    <property name="shotcut:detail">wizard.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer26" title="Anonymous Submission" in="00:00:00.000" out="00:00:09.700">
+    <property name="length">00:00:09.733</property>
+    <property name="eof">pause</property>
+    <property name="resource">support.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">61d5a1a7f3ac1259dc22ae60ca57351f</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">support.mp3</property>
+    <property name="shotcut:detail">support.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer27" title="Anonymous Submission" in="00:00:00.000" out="00:01:21.600">
+    <property name="length">00:01:21.633</property>
+    <property name="eof">pause</property>
+    <property name="resource">wizard.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">027b5f5cfad3ca76b95da4729fa265ed</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">wizard.mp3</property>
+    <property name="shotcut:detail">wizard.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer28" title="Anonymous Submission" in="00:00:00.000" out="00:01:21.600">
+    <property name="length">00:01:21.633</property>
+    <property name="eof">pause</property>
+    <property name="resource">wizard.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">027b5f5cfad3ca76b95da4729fa265ed</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">wizard.mp3</property>
+    <property name="shotcut:detail">wizard.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer29" title="Anonymous Submission" in="00:00:00.000" out="00:00:48.800">
+    <property name="length">00:00:48.833</property>
+    <property name="eof">pause</property>
+    <property name="resource">dashboard.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">84bf39a844e5b8acd7401df4a47d2401</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">dashboard.mp3</property>
+    <property name="shotcut:detail">dashboard.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer30" title="Anonymous Submission" in="00:00:00.000" out="00:00:58.333">
+    <property name="length">00:00:58.367</property>
+    <property name="eof">pause</property>
+    <property name="resource">network.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">e023a3df3d4b2aa4f4db80a34afdc5a9</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">network.mp3</property>
+    <property name="shotcut:detail">network.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter49" out="00:00:30.733">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">903=0;922=-60</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">20</property>
+    </filter>
+  </producer>
+  <producer id="producer31" title="Anonymous Submission" in="00:00:00.000" out="00:00:58.333">
+    <property name="length">00:00:58.367</property>
+    <property name="eof">pause</property>
+    <property name="resource">network.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">e023a3df3d4b2aa4f4db80a34afdc5a9</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">network.mp3</property>
+    <property name="shotcut:detail">network.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter50" in="00:00:32.667" out="00:00:56.633">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">0=-60;5=0</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">6</property>
+    </filter>
+  </producer>
+  <producer id="producer32" title="Anonymous Submission" in="00:00:00.000" out="00:00:46.033">
+    <property name="length">00:00:46.067</property>
+    <property name="eof">pause</property>
+    <property name="resource">final.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">3e7077cc9e3dc72ab15e56ce50c4bf2d</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">final.mp3</property>
+    <property name="shotcut:detail">final.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer33" title="Anonymous Submission" in="00:00:00.000" out="00:00:46.033">
+    <property name="length">00:00:46.067</property>
+    <property name="eof">pause</property>
+    <property name="resource">final.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">3e7077cc9e3dc72ab15e56ce50c4bf2d</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">final.mp3</property>
+    <property name="shotcut:detail">final.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer34" title="Anonymous Submission" in="00:00:00.000" out="00:00:46.033">
+    <property name="length">00:00:46.067</property>
+    <property name="eof">pause</property>
+    <property name="resource">final.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="shotcut:hash">3e7077cc9e3dc72ab15e56ce50c4bf2d</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">final.mp3</property>
+    <property name="shotcut:detail">final.mp3</property>
+    <property name="shotcut:comment"></property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <playlist id="playlist2">
+    <property name="shotcut:audio">1</property>
+    <property name="shotcut:name">A2</property>
+    <property name="shotcut:lock">0</property>
+    <blank length="00:00:01.800"/>
+    <entry producer="producer17" in="00:00:00.000" out="00:00:09.333"/>
+    <entry producer="producer18" in="00:00:00.000" out="00:00:27.433"/>
+    <blank length="00:00:01.233"/>
+    <entry producer="producer19" in="00:00:00.000" out="00:00:12.700"/>
+    <entry producer="producer20" in="00:00:31.133" out="00:00:45.200"/>
+    <entry producer="producer21" in="00:00:46.033" out="00:00:48.933"/>
+    <blank length="00:00:01.267"/>
+    <entry producer="producer22" in="00:00:00.000" out="00:00:19.800"/>
+    <entry producer="producer23" in="00:00:20.967" out="00:00:26.967"/>
+    <blank length="00:00:01.900"/>
+    <entry producer="producer24" in="00:00:00.000" out="00:00:20.900"/>
+    <entry producer="producer25" in="00:01:04.900" out="00:01:17.333"/>
+    <entry producer="producer26" in="00:00:00.300" out="00:00:09.567"/>
+    <entry producer="producer27" in="00:00:21.300" out="00:00:30.867"/>
+    <entry producer="producer28" in="00:00:31.300" out="00:00:33.833"/>
+    <blank length="00:00:00.800"/>
+    <entry producer="producer29" in="00:00:00.000" out="00:00:48.800"/>
+    <entry producer="producer30" in="00:00:00.000" out="00:00:30.733"/>
+    <blank length="00:00:00.867"/>
+    <entry producer="producer31" in="00:00:32.667" out="00:00:56.633"/>
+    <entry producer="producer32" in="00:00:00.000" out="00:00:21.800"/>
+    <entry producer="producer33" in="00:00:29.800" out="00:00:39.967"/>
+    <entry producer="producer34" in="00:00:40.267" out="00:00:46.033"/>
+  </playlist>
+  <tractor id="tractor2" title="Shotcut version 18.05.08" global_feed="1" in="00:00:00.000" out="00:04:56.633">
+    <property name="shotcut">1</property>
+    <property name="shotcut:projectAudioChannels">2</property>
+    <property name="shotcut:scaleFactor">2.06413</property>
+    <track producer="background"/>
+    <track producer="playlist0"/>
+    <track producer="playlist1" hide="video"/>
+    <track producer="playlist2" hide="video"/>
+    <transition id="transition4">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition5">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="version">0.9</property>
+      <property name="mlt_service">frei0r.cairoblend</property>
+      <property name="disable">1</property>
+    </transition>
+    <transition id="transition6">
+      <property name="a_track">0</property>
+      <property name="b_track">2</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition7">
+      <property name="a_track">0</property>
+      <property name="b_track">3</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+  </tractor>
+</mlt>

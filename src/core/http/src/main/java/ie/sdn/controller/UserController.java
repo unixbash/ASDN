@@ -74,7 +74,7 @@ public class UserController {
             userTokenRepository.save(currentToken);
             return new UserTokenDTO(currentToken);
         }
-        return null;
+        return new UserTokenDTO(currentToken);
     }
 
     @GetMapping(value = "/{id}")

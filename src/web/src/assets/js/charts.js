@@ -162,7 +162,7 @@ function initCharts() {
   }
 
   //Check if elements exist
-  var check = document.getElementsByName("routingStatus");
+  var check = document.getElementsByName("routingStatuss");
 
   if(check.length != 0) {
 

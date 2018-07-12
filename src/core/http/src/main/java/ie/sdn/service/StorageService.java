@@ -1,0 +1,87 @@
+package ie.sdn.service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+
+@Service
+public class StorageService {
+
+    private String uploadPathString = "/uploads/";
+    private boolean eraseOnInit = true;
+
+    private Path uploadPath;
+    private Logger logger = LoggerFactory.getLogger(StorageService.class);
+
+    @Autowired
+    public StorageService() {
+        this.uploadPath = Paths.get(uploadPathString);
+    }
+
+    private List<File> getFileList() {
+        File f = new File(uploadPathString);
+        if (f.exists())
+            return new ArrayList<>(Arrays.asList(f.listFiles()));
+        else
+            return Collections.emptyList();
+    }
+
+    public String saveData(String data) {
+        String name = getUUID();
+        String path = uploadPathString + name;
+        logger.debug("Saving data to file " + uploadPathString);
+
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(path), "utf-8"))) {
+            writer.write(data);
+        } catch (IOException e) {
+            logger.error("Error saving data " + data + " to file " + uploadPathString);
+            return null;
+        }
+        return path;
+    }
+
+    private String getUUID() {
+        return UUID.randomUUID().toString();
+    }
+
+    public String loadData(String filePath) {
+        logger.debug("Loading data from file " + filePath);
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br
+                     = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            logger.error("Error loading data from file " + filePath);
+            return null;
+        }
+        return resultStringBuilder.toString();
+    }
+
+    public void deleteAll() {
+        if (eraseOnInit) {
+            logger.debug("UPLOADED FILES ERASED");
+            FileSystemUtils.deleteRecursively(uploadPath.toFile());
+        }
+    }
+
+    public void init() {
+        try {
+            Files.createDirectories(uploadPath);
+        } catch (IOException e) {
+            logger.error("Could not initialise storeage at path " + uploadPath);
+        }
+    }
+}
+

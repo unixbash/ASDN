@@ -25,7 +25,7 @@ public class Device {
     private Date updatedAt;
 
     @Column(name = "customer_id", nullable = false)
-    private String customer_id;
+    private String customerId;
 
     @Column(name = "hostname", nullable = false)
     private String hostname;
@@ -51,6 +51,22 @@ public class Device {
     public Device() {
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -59,12 +75,12 @@ public class Device {
         return updatedAt;
     }
 
-    public String getCustomer_id() {
-        return customer_id;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer_id(String customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public String getHostname() {

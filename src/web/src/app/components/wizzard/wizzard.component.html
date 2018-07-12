@@ -40,19 +40,19 @@
                 </div>
                 <div class="modal-ike-text">
 
-                    <form class="form-horizontal" id="ike-form">
+                    <form [formGroup]="vpn1Form" class="form-horizontal" id="ike-form"  novalidate>
                         
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <input type="text" class="form-control" name="publicAddress" placeholder="Your Public VPN Address">       
+                                <input type="text" class="form-control" name="publicAddress" formControlName="publicAddress" placeholder="Your Public VPN Address">       
                             </div>
                         </div>
 
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <input type="text" class="form-control" name="privateAddress" placeholder="Your Private Address / (CIDR)">       
+                                <input type="text" class="form-control" name="privateAddress"  formControlName="privateAddress" placeholder="Your Private Address / (CIDR)">       
                             </div>
                         </div>
 
@@ -72,7 +72,7 @@
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <select name="ipsecEA" id="ipsecEA" class="form-control">
+                                <select name="ipsecEA" id="ipsecEA" class="form-control" formControlName="ipsecEA">
                                     <option value="" selected disabled>IPsec Encryption Algorithm</option>
                                     <option value="3des-cbc">3DES-cbc</option>
                                     <option value="aes-128-cbc">AES-128-cbc</option>
@@ -86,7 +86,7 @@
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <select name="dh" id="dh" class="form-control">
+                                <select name="dh" id="dh" class="form-control" formControlName="dh">
                                     <option value="" selected disabled>DH Group</option>
                                     <option value="1">Group 1</option>
                                     <option value="2">Group 2</option>
@@ -101,21 +101,21 @@
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <input type="number" class="form-control" name="ikeLife" placeholder="IKE Lifetime seconds">         
+                                <input type="number" class="form-control" name="ikeLife" placeholder="IKE Lifetime seconds"  formControlName="ikeLife">         
                             </div>
                         </div>
 
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <input type="password" class="form-control" name="ikeSecret" placeholder="IKE Pre-shared Secret (ASCII) ">       
+                                <input type="password" class="form-control" name="ikeSecret" placeholder="IKE Pre-shared Secret (ASCII) " formControlName="ikeSecret">       
                             </div>
                         </div>
 
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <select name="ikeVer" id="ikeVer" class="form-control">
+                                <select name="ikeVer" id="ikeVer" class="form-control" formControlName="ikeVer">
                                     <option value="" selected disabled>IKE Version</option>
                                     <option value="1">IKEv1</option>
                                     <option value="2">IKEv2</option>
@@ -124,7 +124,7 @@
                         </div>
 
                         <div class="modal-btns text-centered">
-                            <button id="ipsecNext" type="button" class="btn btn-primary btn-lg btn-block login-button centered" data-dismiss="modal">Next</button>
+                            <button id="ipsecNext" type="button" class="btn btn-primary btn-lg btn-block login-button centered" data-dismiss="modal" (click)="save1(vpn1Form.value, vpn1Form.valid)">Next</button>
                         </div>
                     </form>
                 </div>
@@ -149,12 +149,12 @@
                 </div>
                 <div class="modal-ike-text">
 
-                    <form class="form-horizontal" id="ipsec-form">                
+                    <form class="form-horizontal" id="ipsec-form" [formGroup]="vpn2Form">                
 
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <select name="ikeAuth" id="ikeAuth" class="form-control">
+                                <select name="ikeAuth" id="ikeAuth" class="form-control" formControlName="ikeAuth">
                                     <option value="" selected disabled>Authentication Algorithm</option>
                                     <option value="hmac-sha1-96">hmac-sha1-96</option>
                                     <option value="hmac-sha-256-128">hmac-sha-256-128</option>
@@ -167,7 +167,7 @@
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <select name="ipsecAuth" id="ipsecAuth" class="form-control">
+                                <select name="ipsecAuth" id="ipsecAuth" class="form-control" formControlName="ipsecAuth">
                                     <option value="" selected disabled>IPsec Encryption Algorithm</option>
                                     <option value="3-des-cbc">3-DES-cbc</option>
                                     <option value="aes-128-cbc">AES-128-cbc</option>
@@ -184,14 +184,14 @@
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <input type="number" class="form-control" name="ipsecLife" placeholder="IPsec Lifetime seconds">       
+                                <input type="number" class="form-control" name="ipsecLife" placeholder="IPsec Lifetime seconds" formControlName="ipsecLife">       
                             </div>
                         </div>
 
                         <div class="form-group">				
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-                                <select name="ipsecPFS" id="ipsecPFS" class="form-control">
+                                <select name="ipsecPFS" id="ipsecPFS" class="form-control" formControlName="ipsecPFS">
                                     <option value="" selected disabled>IPsec Perfect Forward Secrecy</option>
                                     <option value="1">Group 1</option>
                                     <option value="2">Group 2</option>
@@ -205,7 +205,7 @@
                         </div>
 
                         <div class="modal-btns text-centered">
-                            <button id="vpnConfig" type="button" class="btn btn-primary btn-lg btn-block login-button centered" data-dismiss="modal">Finish</button>
+                            <button id="vpnConfig" type="button" class="btn btn-primary btn-lg btn-block login-button centered" data-dismiss="modal" (click)="save2(vpn2Form.value)" >Finish</button>
                         </div>
                     </form>
                 </div>

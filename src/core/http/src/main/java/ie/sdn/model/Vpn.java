@@ -16,47 +16,52 @@ public class Vpn {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private String id;
 
-    @Column(name = "customer_id", nullable = false)
-    private String customer_id;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
-    @Column(name = "net_id", nullable = false, unique = true)
-    private String net_id;
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+
+    @Column(name = "customer_id", nullable = false)
+    private String customerId;
 
     @Column(name = "public_ip", nullable = false)
-    private String public_ip;
+    private String publicIp;
 
     @Column(name = "private_subnet", nullable = false)
-    private String private_subnet;
+    private String privateSubnet;
 
     @Column(name = "ike_auth", nullable = false)
-    private String ike_auth;
+    private String ikeAuth;
 
     @Column(name = "ipsec_enc", nullable = false)
-    private String ipsec_enc;
+    private String ipsecEnc;
 
     @Column(name = "dh_group", nullable = false)
-    private String dh_group;
+    private String dhGroup;
 
     @Column(name = "ike_life", nullable = false)
-    private String ike_life;
+    private String ikeLife;
 
     @Column(name = "ike_secret", nullable = false)
-    private String ike_secret;
+    private String ikeSecret;
 
     @Column(name = "ike_version", nullable = false)
-    private String ike_version;
+    private String ikeVersion;
 
     @Column(name = "ike_al", nullable = false)
-    private String ike_al;
+    private String ikeAl;
 
     @Column(name = "ipsec_al", nullable = false)
-    private String ipsec_al;
+    private String ipsecAl;
 
     @Column(name = "ipsec_life", nullable = false)
-    private String ipsec_life;
+    private String ipsecLife;
 
     @Column(name = "ipsec_secret", nullable = false)
-    private String ipsec_secret;
+    private String ipsecSecret;
 
 
 
@@ -64,115 +69,131 @@ public class Vpn {
     }
 
 
-    public String getCustomer_id() {
-        return customer_id;
+    public String getId() {
+        return id;
     }
 
-    public void setCustomer_id(String customer_id) {
-        this.customer_id = customer_id;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getNet_id() {
-        return net_id;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setNet_id(String net_id) {
-        this.net_id = net_id;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
-    public String getPublic_ip() {
-        return public_ip;
+    public String getPublicIp() {
+        return publicIp;
     }
 
-    public void setPublic_ip(String public_ip) {
-        this.public_ip = public_ip;
+    public void setPublicIp(String publicIp) {
+        this.publicIp = publicIp;
     }
 
-    public String getPrivate_subnet() {
-        return private_subnet;
+    public String getPrivateSubnet() {
+        return privateSubnet;
     }
 
-    public void setPrivate_subnet(String private_subnet) {
-        this.private_subnet = private_subnet;
+    public void setPrivateSubnet(String privateSubnet) {
+        this.privateSubnet = privateSubnet;
     }
 
-    public String getIke_auth() {
-        return ike_auth;
+    public String getIkeAuth() {
+        return ikeAuth;
     }
 
-    public void setIke_auth(String ike_auth) {
-        this.ike_auth = ike_auth;
+    public void setIkeAuth(String ikeAuth) {
+        this.ikeAuth = ikeAuth;
     }
 
-    public String getIpsec_enc() {
-        return ipsec_enc;
+    public String getIpsecEnc() {
+        return ipsecEnc;
     }
 
-    public void setIpsec_enc(String ipsec_enc) {
-        this.ipsec_enc = ipsec_enc;
+    public void setIpsecEnc(String ipsecEnc) {
+        this.ipsecEnc = ipsecEnc;
     }
 
-    public String getDh_group() {
-        return dh_group;
+    public String getDhGroup() {
+        return dhGroup;
     }
 
-    public void setDh_group(String dh_group) {
-        this.dh_group = dh_group;
+    public void setDhGroup(String dhGroup) {
+        this.dhGroup = dhGroup;
     }
 
-    public String getIke_life() {
-        return ike_life;
+    public String getIkeLife() {
+        return ikeLife;
     }
 
-    public void setIke_life(String ike_life) {
-        this.ike_life = ike_life;
+    public void setIkeLife(String ikeLife) {
+        this.ikeLife = ikeLife;
     }
 
-    public String getIke_secret() {
-        return ike_secret;
+    public String getIkeSecret() {
+        return ikeSecret;
     }
 
-    public void setIke_secret(String ike_secret) {
-        this.ike_secret = ike_secret;
+    public void setIkeSecret(String ikeSecret) {
+        this.ikeSecret = ikeSecret;
     }
 
-    public String getIke_version() {
-        return ike_version;
+    public String getIkeVersion() {
+        return ikeVersion;
     }
 
-    public void setIke_version(String ike_version) {
-        this.ike_version = ike_version;
+    public void setIkeVersion(String ikeVersion) {
+        this.ikeVersion = ikeVersion;
     }
 
-    public String getIke_al() {
-        return ike_al;
+    public String getIkeAl() {
+        return ikeAl;
     }
 
-    public void setIke_al(String ike_al) {
-        this.ike_al = ike_al;
+    public void setIkeAl(String ikeAl) {
+        this.ikeAl = ikeAl;
     }
 
-    public String getIpsec_al() {
-        return ipsec_al;
+    public String getIpsecAl() {
+        return ipsecAl;
     }
 
-    public void setIpsec_al(String ipsec_al) {
-        this.ipsec_al = ipsec_al;
+    public void setIpsecAl(String ipsecAl) {
+        this.ipsecAl = ipsecAl;
     }
 
-    public String getIpsec_life() {
-        return ipsec_life;
+    public String getIpsecLife() {
+        return ipsecLife;
     }
 
-    public void setIpsec_life(String ipsec_life) {
-        this.ipsec_life = ipsec_life;
+    public void setIpsecLife(String ipsecLife) {
+        this.ipsecLife = ipsecLife;
     }
 
-    public String getIpsec_secret() {
-        return ipsec_secret;
+    public String getIpsecSecret() {
+        return ipsecSecret;
     }
 
-    public void setIpsec_secret(String ipsec_secret) {
-        this.ipsec_secret = ipsec_secret;
+    public void setIpsecSecret(String ipsecSecret) {
+        this.ipsecSecret = ipsecSecret;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

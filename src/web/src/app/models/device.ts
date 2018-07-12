@@ -2,6 +2,72 @@ export class DevicesStatusToken {
     status:[string];
 }
 
+export class ServerDevice {
+
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    customerId: string;
+    hostname: string;
+    address: string;
+    vendor: string;
+    status: string;
+    config: string;
+    configOld: string;
+    latestos: string;
+}
+
+export class Lan{
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    deviceId: string;
+    name: string;
+    tag: string;
+    interfaces: string;
+    qos: string;
+}
+
+export class Interface{
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    deviceId: string;
+    interfaces: string;
+}
+
+export class Service{
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    deviceId: string;
+    name: string;
+    traversing: string;
+    source: string;
+    destination: string;
+    application: string;
+    action: string;
+}
+
+export class Routing{
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    deviceId: string;
+    source: string;
+    destination: string;
+    interfaces: string;
+    type: string;
+}
+
+export class ServerActivity {
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    customerId: string;
+    activity: string;
+}
+
 export class Device {
     id = "1";
     name: "SRX1500";

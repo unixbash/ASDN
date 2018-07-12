@@ -33,7 +33,7 @@ class Device:
         id = str(uuid.uuid4())
         address = self.address
         created = timeSt
-        customerId = "TMP"
+        customerId = "1"
         hostname = self.hostname
         updated = timeSt
         vendor=self.vendor

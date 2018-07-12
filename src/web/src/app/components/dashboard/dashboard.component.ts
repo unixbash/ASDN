@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
+import { LocalStorageService } from 'angular-2-local-storage';
+import { Data } from '../../models/data';
+import { DeviceService } from '../../services/device-service';
+import { ServerDevice } from '../../models/device';
+import { ActivityService } from '../../services/activity-service';
+declare function testJs(): any;
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -8,219 +13,141 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 
 export class DashboardComponent implements OnInit {
-  
-  devices: Object[] = [
-    {"name":"EX2200"},
-    {"name":"SRX1500"},
-    {"name":"SRX640"},
-    {"name":"EX4600"},
-    {"name":"SRX240"},
-    {"name":"SRX640"},
-    {"name":"SRX4600"},
-    {"name":"SRX240"},
-    {"name":"SRX640"},
-    {"name":"QFX5100"},
-    {"name":"ACX2200"}
-  ];
+    lineDataSource = {
+        "chart": {
+            "caption": "Network Activity",
+            "subCaption": "Over Last week",
+            "xAxisName": "Day",
+            "yAxisName": "Mbps",
+            "lineThickness": "2",
+            "paletteColors": "#0075c2",
+            "baseFontColor": "#333333",
+            "baseFont": "Helvetica Neue,Arial",
+            "captionFontSize": "14",
+            "subcaptionFontSize": "14",
+            "subcaptionFontBold": "0",
+            "showBorder": "0",
+            "bgColor": "#ffffff",
+            "showShadow": "0",
+            "canvasBgColor": "#ffffff",
+            "canvasBorderAlpha": "0",
+            "divlineAlpha": "100",
+            "divlineColor": "#999999",
+            "divlineThickness": "1",
+            "divLineIsDashed": "1",
+            "divLineDashLen": "1",
+            "divLineGapLen": "1",
+            "showXAxisLine": "1",
+            "xAxisLineThickness": "1",
+            "xAxisLineColor": "#999999",
+            "showAlternateHGridColor": "0"
+        },
+        "data": []
+    }
+    dataSource = {
+        "chart": {
+        "caption": "Network Location",
+        "palettecolors":"#607d8b, #8b6e60, #8b8460, #f3b49f, #7d608b",
+        "showLegend": "1"
+        },
+        "data": []
+    }
+    devices: Object[];
+    deviceList: ServerDevice[];
 
-  oldConfig: String =
-  `
-  ## Last commit: 2018-05-02 14:57:11 IST by asdn
-  system {
-    host-name SRX210;
-    time-zone America/New_York;
-    root-authentication {
-        encrypted-password "$1$9kBlrO.i$zyroxBDDGRBAYu4Pap27k0"; ## SECRET-DATA
-    }
-    name-server {
-        208.67.222.222;
-        208.67.220.220;
-    }
-    login {
-        user eric {
-            uid 2002;
-            class super-user;
-            authentication {
-                encrypted-password "$1$gQkHMOTL$UDXH432yZIKKlw6P8Qtzo."; ## SECRET-DATA
-            }
-        }
-    }
-    services {
-        ssh;
-        telnet;
-        web-management {
-            http {
-                interface vlan.0;
-            }
-            https {
-                system-generated-certificate;
-                interface vlan.0;
-            }
-        }
-        dhcp {
-            router {
-                192.168.1.1;
-            }
-            pool 192.168.1.0/24 {
-                address-range low 192.168.1.10 high 192.168.1.99;
-            }
-            propagate-settings fe-0/0/7;
-        }
-    }
-    syslog {
-        archive size 100k files 3;
-        user * {
-            any emergency;
-        }
-        file messages {
-            any critical;
-            authorization info;
-        }
-        file interactive-commands {
-            interactive-commands error;
-        }
-    }
-    max-configurations-on-flash 5;
-    max-configuration-rollbacks 5;
-    license {
-        autoupdate {
-            url https://ae1.juniper.net/junos/key_retrieval;
-        }
-    }
-}
-interfaces {
-    interface-range interfaces-trust {
-        member ge-0/0/0;
-        member ge-0/0/1;
-        member fe-0/0/2;
-        member fe-0/0/3;
-        member fe-0/0/4;
-        member fe-0/0/5;
-        member fe-0/0/6;
-        unit 0 {
-            family ethernet-switching {
-                vlan {
-                    members vlan-trust;
-                }
-            }
-        }
-    }
-    fe-0/0/7 {
-        unit 0 {
-            family inet {
-                dhcp;
-            }
-        }
-    }
-    vlan {
-        unit 0 {
-            family inet {
-                address 192.168.1.1/24;
-            }
-        }
-    }
-}
-security {
-    nat {
-        source {
-            rule-set trust-to-untrust {
-                from zone trust;
-                to zone untrust;
-                rule source-nat-rule {
-                    match {
-                        source-address 0.0.0.0/0;
-                    }
-                    then {
-                        source-nat {
-                            interface;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    screen {
-        ids-option untrust-screen {
-            icmp {
-                ping-death;
-            }
-            ip {
-                source-route-option;
-                tear-drop;
-            }
-            tcp {
-                syn-flood {
-                    alarm-threshold 1024;
-                    attack-threshold 200;
-                    source-threshold 1024;
-                    destination-threshold 2048;
-                    timeout 20;
-                }
-                land;
-            }
-        }
-    }
-    zones {
-        security-zone trust {
-            host-inbound-traffic {
-                system-services {
-                    all;
-                }
-                protocols {
-                    all;
-                }
-            }
-            interfaces {
-                vlan.0;
-            }
-        }
-        security-zone untrust {
-            screen untrust-screen;
-            interfaces {
-                ge-0/0/0.0 {
-                    host-inbound-traffic {
-                        system-services {
-                            dhcp;
-                            tftp;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    policies {
-        from-zone trust to-zone untrust {
-            policy trust-to-untrust {
-                match {
-                    source-address any;
-                    destination-address any;
-                    application any;
-                }
-                then {
-                    permit;
-                }
-            }
-        }
-    }
-}
-poe {
-    interface all;
-}
-vlans {
-    vlan-trust {
-        vlan-id 3;
-        l3-interface vlan.0;
-    }
-}`;
+    oldConfig: String =
+    `
+   `;
 
-newConfig: String = this.oldConfig;
+    newConfig: String = this.oldConfig;
+ 
+    constructor(
+        private localStorageService: LocalStorageService,
+        private activityService: ActivityService,
+        private deviceService: DeviceService
+    ) {}
 
-    
+    ngOnInit() {
+        if(this.localStorageService.get("token") == null){
+            window.location.href='http://localhost:4200/login';
+        }
+        this.devices = new Array();
+        this.deviceList = new Array();
+        this.getDevices();
+        this.getActivity();
+    }
 
-  constructor() {}
+    showConfig(index: number){
+        this.oldConfig = this.deviceList[index].configOld;
+        this.newConfig = this.deviceList[index].config;
 
-  ngOnInit() {
-    
-  }
+    }
+
+    getDevices(){
+        this.deviceService.getCustomerDevice(this.localStorageService.get("user"), this.localStorageService.get("token"))
+      .subscribe(
+        deviceList => {
+            let unsupported = 0;
+            let online = 0;
+            let offline = 0;
+            let unconfigured = 0;
+            let warning = 0;
+            for(let i = 0; i < deviceList.length; i++){
+                if(deviceList[i].status == "unsupported"){
+                    unsupported++;
+                }
+                else if(deviceList[i].status == "online"){
+                    this.devices.push({"name": deviceList[i].hostname + ""});
+                    this.deviceList.push(deviceList[i])
+                    online++;
+                }
+                else if(deviceList[i].status == "offline"){
+                    this.devices.push({"name": deviceList[i].hostname + ""});
+                    this.deviceList.push(deviceList[i])
+                    offline++;
+                }
+                else if(deviceList[i].status == "unconfigured"){
+                    this.devices.push({"name": deviceList[i].hostname + ""});
+                    this.deviceList.push(deviceList[i])
+                    unconfigured++;
+                }
+                else if(deviceList[i].status == "warning"){
+                    this.devices.push({"name": deviceList[i].hostname + ""});
+                    this.deviceList.push(deviceList[i])
+                    warning++;
+                }
+                
+            }
+            this.dataSource.data.push( {"label": "unsupported", "value":unsupported + ""});
+            this.dataSource.data.push( {"label": "online", "value":online + ""});
+            this.dataSource.data.push( {"label": "offline", "value":offline + ""});
+            this.dataSource.data.push( {"label": "unconfigured", "value":unconfigured + ""});
+            this.dataSource.data.push( {"label": "warning", "value":warning + ""});
+            console.log(this.dataSource);
+            this.oldConfig = this.deviceList[0].configOld;
+            this.newConfig = this.deviceList[0].config;
+
+        });
+    err => console.log(err);
+
+    }
+
+    getActivity(){
+        this.activityService.getCustomerActivity(this.localStorageService.get("user"), this.localStorageService.get("token"))
+      .subscribe(
+        activity => {
+            console.log(activity);
+            let activityArray = activity.activity.split(",");
+            for(let i = 0; i < activityArray.length; i++){
+                let currentActivity = activityArray[0].split(":")
+                this.lineDataSource.data.push( {"label": currentActivity[0], "value":currentActivity[1]});
+            }
+
+            console.log(this.dataSource);
+
+        });
+    err => console.log(err);
+
+    }
 
 }

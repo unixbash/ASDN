@@ -16,6 +16,9 @@ firewall = Firewall()
 interval = 300 #5min scan interval
 subnet = firewall.getSubnet() + "0/24"
 
+deviceAvail(subnet, interval)
+
+"""
 #Init a thread that continuously scans all networks
 if __name__ == '__main__':
     t = threading.Thread(target=deviceAvail, args=(subnet,interval,))
@@ -38,3 +41,4 @@ if __name__ == '__main__':
     vpn = VPN()
     t = threading.Thread(target=vpn.generateVPN, args=("1"))
     t.start()
+"""

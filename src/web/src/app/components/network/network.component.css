@@ -30,6 +30,10 @@ body {
     border: 0;
 }
 
+.raphael-group-8-creditgroup, .raphael-group-3-creditgroup, .raphael-group-18-creditgroup, .raphael-group-13-creditgroup, .raphael-group-23-creditgroup  {
+  display: none !important;
+}
+
 /*--- NEW TEST ---*/
 .panel-default>.panel-heading {
     color: #333;

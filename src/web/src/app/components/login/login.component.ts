@@ -3,6 +3,7 @@ import { UserService } from '../../services/user-service';
 import { User } from '../../models/user';
 import {NgForm} from '@angular/forms';
 import { UserToken } from '../../models/usertoken';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,10 @@ export class LoginComponent {
   public user:User;
   public userToken:UserToken;
 
-  constructor(private userService:UserService) {}
+  constructor(
+    private localStorageService: LocalStorageService,
+    private userService:UserService
+  ) {}
 
   ngOnInit() {
     this.user = new User();
@@ -33,6 +37,8 @@ export class LoginComponent {
     .subscribe(
       userToken => {
         this.userToken = userToken;
+        this.localStorageService.set("token",userToken.token);
+        this.localStorageService.set("user",this.user.email);
         console.log(userToken);
         if(userToken != null){
           window.location.href='http://localhost:4200/dashboard';

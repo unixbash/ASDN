@@ -15,12 +15,36 @@
                         <h3>Device Availability</h3>
                     </div>
                     <div class="row">
-                        <div class="avail-chart" name="siteOne" id="siteOne"></div>
-                        <div class="avail-chart" id="siteTwo"></div>
+                        <fusioncharts class="avail-chart"
+                            width="100%"
+                            height="300"
+                            type="pie2d"
+                            dataFormat="JSON"
+                            [dataSource]="dataSource"
+                        ></fusioncharts>
+                        <fusioncharts class="avail-chart"
+                            width="100%"
+                            height="300"
+                            type="pie2d"
+                            dataFormat="JSON"
+                            [dataSource]="dataSource"
+                        ></fusioncharts>
                     </div>
                     <div class="row">
-                        <div class="avail-chart" id="siteThree"></div>
-                        <div class="avail-chart" id="siteFour"></div>
+                        <fusioncharts class="avail-chart"
+                            width="100%"
+                            height="300"
+                            type="pie2d"
+                            dataFormat="JSON"
+                            [dataSource]="dataSource"
+                        ></fusioncharts>
+                        <fusioncharts class="avail-chart"
+                            width="100%"
+                            height="300"
+                            type="pie2d"
+                            dataFormat="JSON"
+                            [dataSource]="dataSource"
+                        ></fusioncharts>
                     </div>
                 </div>
 
@@ -30,8 +54,13 @@
                         <h3>Network Activity</h3>
                     </div>
                     <div class="row">
-                        <div class="activ-chart" id="deviceOne"></div>
-                        <div class="activ-chart" id="deviceTwo"></div>
+                        <fusioncharts class="activ-chart"
+                            width="100%"
+                            height="300"
+                            type="line"
+                            dataFormat="JSON"
+                            [dataSource]="lineDataSource"
+                        ></fusioncharts>
                     </div>
                 </div>
 
@@ -47,7 +76,7 @@
                             </div>
                             <div class="row config-container">
                                 <div *ngFor="let device of devices; let i = index">
-                                    <button class="btn btn-primary btn-lg btn-block btn-device">{{ device.name }}</button> 
+                                    <button class="btn btn-primary btn-lg btn-block btn-device" (click)="showConfig(i)" >{{ device.name }}</button> 
                                 </div>
                             </div>
                         </div>
